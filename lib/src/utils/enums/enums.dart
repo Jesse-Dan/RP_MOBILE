@@ -14,8 +14,3 @@ enum ButtonType{
   LONG_BTN,
   SHORT_BTN
 }
-
-enum AppbarRouteSource{
-  ONBOARD_1,
-  UNDIFINED
-}
