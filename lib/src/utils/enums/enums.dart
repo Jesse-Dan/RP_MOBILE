@@ -9,3 +9,13 @@ enum Tag{
   SERVICE_ACTION,
   BLOC_EVENT,
 }
+
+enum ButtonType{
+  LONG_BTN,
+  SHORT_BTN
+}
+
+enum AppbarRouteSource{
+  ONBOARD_1,
+  UNDIFINED
+}
