@@ -1,26 +1,27 @@
-mixin ClientInterface {
-  
-  /// DIO GET
-  get() {}
+import 'package:recenth_posts/src/logic/models/service/base_response.dart';
 
-  /// DIO POST
-  post() {}
+ mixin ClientInterface {
+  /// Perform a GET request.
+  Future<BaseResponse> get(String endpoint, {Map<String, dynamic>? queryParameters});
 
-  /// DIO DELETE
-  delete() {}
+  /// Perform a POST request.
+  Future<BaseResponse> post(String endpoint, {Map<String, dynamic>? data});
 
-  /// DIO PATCH
-  patch() {}
+  /// Perform a DELETE request.
+  Future<BaseResponse> delete(String endpoint);
 
-  /// DIO PUT
-  put() {}
+  /// Perform a PATCH request.
+  Future<BaseResponse> patch(String endpoint, {Map<String, dynamic>? data});
 
-  /// DIO DOWNLOAD
-  download() {}
+  /// Perform a PUT request.
+  Future<BaseResponse> put(String endpoint, {Map<String, dynamic>? data});
 
-  /// DIO UPLOAD
-  uploadFiles({required List<dynamic> files}) {}
+  /// Download a file.
+  Future<BaseResponse> download(String url);
 
-  /// LISTEN TO STREAM DIO
-  listenToAStream() {}
+  /// Upload files.
+  Future<BaseResponse> uploadFiles(String endpoint, {required List<dynamic> files});
+
+  /// Listen to a stream.
+  Future<BaseResponse> listenToAStream(String endpoint);
 }
