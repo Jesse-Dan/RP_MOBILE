@@ -1,17 +1,24 @@
-import 'package:recenth_posts/src/logic/core/client/client.dart';
 import 'package:recenth_posts/src/logic/interfaces/post_interface.dart';
 import 'package:recenth_posts/src/logic/models/app/post/res/get_all_post_response.dart';
 import 'package:recenth_posts/src/logic/models/service/base_response.dart';
 
-class PostRepository implements PostInterface  {
-  AppClient appClient = AppClient();
-  String urlPrefix = 'app/posts';
+import '../../../utils/constants/global_constants.dart';
+import '../../core/client.dart';
+
+class PostRepository implements PostInterface {
+  ApiClient appClient = ApiClient();
 
   @override
   Future<BaseResponse<PostResponse>> getAllPosts(
       {Map<String, dynamic>? queryParams}) async {
-    BaseResponse<PostResponse> res =
-        await appClient.get(urlPrefix) as BaseResponse<PostResponse>;
+    var call = await appClient.sendRequest(
+      endpoint: GlobalConstants.POSTS_ENDPOINT,
+    );
+
+    var res = BaseResponse<PostResponse>.fromJson(
+      call.$1!,
+      (dynamic json) => PostResponse.fromJson(json),
+    );
     return res;
   }
 

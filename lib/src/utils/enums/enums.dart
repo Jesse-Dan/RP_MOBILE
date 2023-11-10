@@ -14,3 +14,14 @@ enum ButtonType{
   LONG_BTN,
   SHORT_BTN
 }
+
+enum ResponseType {
+  Success,
+  Error,
+  NotFound,
+  TIME_OUT,
+  SESSION_ENDED,
+  CSFR_ERROR}
+
+  enum HttpMethod { get, post, put, patch, delete }
+

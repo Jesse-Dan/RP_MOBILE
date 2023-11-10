@@ -9,4 +9,7 @@ class GlobalConstants {
   /// STORAGE KEYS
   static const String CSRF_TOKEN = 'CSRF-TOKEN';
   static const String CSRF_TOKEN_KEY = 'X-CSRF-TOKEN';
+
+  /// ENDPOINTS
+  static const String POSTS_ENDPOINT = 'app/posts';
 }

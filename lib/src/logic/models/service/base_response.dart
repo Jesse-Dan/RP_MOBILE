@@ -14,11 +14,11 @@ class BaseResponse<T> {
   final String? message;
   final List<T>? data;
 
-  BaseResponse({
-    this.status,
-    this.statusCode,
-    this.message,
-    this.data,
+   BaseResponse({
+    this.status = true,
+    this.statusCode = 200,
+    this.message = 'OK',
+    this.data = null,
   });
 
   BaseResponse<T> copyWith({
