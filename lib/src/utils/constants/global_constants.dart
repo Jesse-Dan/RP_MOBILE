@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: constant_identifier_names
 
 class GlobalConstants {
@@ -8,7 +6,7 @@ class GlobalConstants {
   static const kMidiText = 14.0;
   static const kZeroText = 0.0;
 
-
   /// STORAGE KEYS
-  static const String CSRF_TOKEN ='CSRF-TOKEN';
+  static const String CSRF_TOKEN = 'CSRF-TOKEN';
+  static const String CSRF_TOKEN_KEY = 'X-CSRF-TOKEN';
 }
