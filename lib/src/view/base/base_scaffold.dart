@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
-import 'package:recenth_posts/src/view/base/base_utils.dart';
 
 class BaseScaffold extends StatefulWidget {
   const BaseScaffold(

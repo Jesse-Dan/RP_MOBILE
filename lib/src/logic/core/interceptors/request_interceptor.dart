@@ -5,5 +5,7 @@ class RequestInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     print('REQUEST[${options.method}] => PATH: ${options.path}');
     super.onRequest(options, handler);
+        return handler.next(options);
+
   }
 }

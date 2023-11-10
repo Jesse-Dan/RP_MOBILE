@@ -1,6 +1,6 @@
 import 'dart:developer' as developer;
 
-import '../enums/enums.dart';
+import '../../../utils/enums/enums.dart';
 
 class Logger {
   final Tag tag;

@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
+import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../logic/models/auth/onboarding_view_page.dart';
@@ -198,10 +200,16 @@ class _OnboardingViewState extends State<OnboardingView> {
                                       applyInternalPadding: true,
                                       width: 80.w,
                                       onTap: () {
-                                        pageController.nextPage(
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.easeIn);
+                                        if (currentIndex == 2) {
+                                          Go(context,
+                                                  routeName: PostView.routeName)
+                                              .to();
+                                        } else {
+                                          pageController.nextPage(
+                                              duration: const Duration(
+                                                  milliseconds: 500),
+                                              curve: Curves.easeIn);
+                                        }
                                       },
                                     ),
                                   ],

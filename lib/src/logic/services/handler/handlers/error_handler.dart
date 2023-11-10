@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 
-import '../../enums/enums.dart';
+import '../../../../utils/enums/enums.dart';
 import '../base_handler.dart';
 
-class LoadingHandler {
+class ErrorHandler {
   final String message;
   final StackTrace? stackTrace;
   final BuildContext context;
   final dynamic callBack;
   final String btnText;
   final bool barrierDismissible;
-  LoadingHandler({
+  final Tag tag;
+  ErrorHandler({
     required this.context,
-    this.message = 'Done',
+    this.message = 'an unexpected error occured !',
     this.stackTrace,
     this.callBack,
     this.btnText = '',
     this.barrierDismissible = false,
+    this.tag = Tag.ERROR,
   }) {
     BaseHandler(
       context: context,
       message: message,
-      tag: Tag.LOADING,
+      tag: tag,
       stackTrace: stackTrace,
       callBack: callBack,
       btnText: btnText,

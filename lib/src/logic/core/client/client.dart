@@ -1,11 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:recenth_posts/src/logic/core/client/client_options/client_options.dart';
 import 'package:recenth_posts/src/logic/core/interceptors/error_interceptor.dart';
+import 'package:recenth_posts/src/logic/core/interceptors/request_interceptor.dart';
+import 'package:recenth_posts/src/logic/core/interceptors/response_interceptor.dart';
+import 'package:recenth_posts/src/logic/models/service/base_response.dart';
 
 import '../../../utils/enums/enums.dart';
-import '../../../utils/logger/logger.dart';
 import '../../interfaces/client_interface.dart';
-import 'package:dio/dio.dart';
-import 'package:recenth_posts/src/logic/models/service/base_response.dart';
+import '../../services/logger/logger.dart';
 
 class AppClient implements ClientInterface {
   late Dio _dio;
@@ -15,8 +17,8 @@ class AppClient implements ClientInterface {
     _dio.options = ClientOptions.getOptions();
     // Initialize Dio
     _dio.interceptors.add(ErrorInterceptor());
-    _dio.interceptors.add(ErrorInterceptor());
-    _dio.interceptors.add(ErrorInterceptor());
+    _dio.interceptors.add(RequestInterceptor());
+    _dio.interceptors.add(ResponseInterceptor());
   }
 
   @override

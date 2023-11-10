@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../enums/enums.dart';
+import '../../../../utils/enums/enums.dart';
 import '../base_handler.dart';
 
-class SuccessHandler {
+class LoadingHandler {
   final String message;
   final StackTrace? stackTrace;
   final BuildContext context;
   final dynamic callBack;
   final String btnText;
   final bool barrierDismissible;
-  SuccessHandler({
+  LoadingHandler({
     required this.context,
     this.message = 'Done',
     this.stackTrace,
@@ -21,7 +21,7 @@ class SuccessHandler {
     BaseHandler(
       context: context,
       message: message,
-      tag: Tag.SUCCESS,
+      tag: Tag.LOADING,
       stackTrace: stackTrace,
       callBack: callBack,
       btnText: btnText,
