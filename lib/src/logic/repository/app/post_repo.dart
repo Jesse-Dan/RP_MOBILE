@@ -9,17 +9,18 @@ class PostRepository implements PostInterface {
   ApiClient appClient = ApiClient();
 
   @override
-  Future<BaseResponse<PostResponse>> getAllPosts(
+  Future<BaseResponse<PostResponse>?> getAllPosts(
       {Map<String, dynamic>? queryParams}) async {
     var call = await appClient.sendRequest(
-      endpoint: GlobalConstants.POSTS_ENDPOINT,
-    );
-
-    var res = BaseResponse<PostResponse>.fromJson(
-      call.$1!,
-      (dynamic json) => PostResponse.fromJson(json),
-    );
-    return res;
+        endpoint: GlobalConstants.POSTS_ENDPOINT, isCSRFProtected: true);
+    if (call.$1 != null) {
+      var res = BaseResponse<PostResponse>.fromJson(
+        call.$1!,
+        (dynamic json) => PostResponse.fromJson(json),
+      );
+      return res;
+    }
+    return null;
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
+import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../logic/models/auth/onboarding_view_page.dart';
@@ -57,19 +58,6 @@ class _OnboardingViewState extends State<OnboardingView> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // AnimatedOpacity(
-            //     opacity: currentIndex == 0 ? previousPageOpacity : 1.0,
-            //     duration: const Duration(milliseconds: 500),
-            //     child: currentIndex == 0
-            //         ? const SizedBox.shrink()
-            //         : Align(
-            //             alignment: Alignment.topLeft,
-            //             child: Icon(
-            //               Icons.arrow_back_ios_new_rounded,
-            //               size: 28,
-            //               color: AppColors.kWhiteColor,
-            //             ),
-            //           )),
             SizedBox(
               height: currentIndex == 0 ? 43.h : 23.5.h,
             ),
@@ -98,7 +86,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                         SizedBox(
                           width: 314.w,
                           height: 250.h,
-                          // clipBehavior: Clip.antiAlias,
                           child:
                               OnboardingViewModel.pages[currentIndex].imgWiget,
                         ),
@@ -202,7 +189,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                                       onTap: () {
                                         if (currentIndex == 2) {
                                           Go(context,
-                                                  routeName: PostView.routeName)
+                                                  routeName: LoginScreen.routeName)
                                               .to();
                                         } else {
                                           pageController.nextPage(

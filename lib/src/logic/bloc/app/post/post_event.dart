@@ -20,7 +20,7 @@ class GetAllPostEvent extends PostEvent {
     try {
       yield PostLoadingState();
       var res = await postRepository.getAllPosts();
-      yield PostLoadedState(postResponses: res.data!);
+      yield PostLoadedState(postResponses: res?.data ?? []);
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadPostEvent', error: _, stackTrace: stackTrace);

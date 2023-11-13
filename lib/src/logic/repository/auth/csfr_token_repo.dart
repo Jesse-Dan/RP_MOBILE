@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:recenth_posts/src/logic/services/logger/logger.dart';
 import 'package:recenth_posts/src/logic/services/storage_service/local_storage_service.dart';
 
@@ -6,6 +8,7 @@ import '../../../utils/enums/enums.dart';
 
 import '../../core/client.dart';
 import '../../models/auth/csfr/response.dart';
+import 'package:http/http.dart' as h;
 
 import '../../models/service/base_response.dart';
 
@@ -17,17 +20,16 @@ class CSFRTokenRepo extends ApiClient {
       var call = await sendRequest(
         endpoint: 'auth/token',
       );
-
-      var res = BaseResponse<CsfrResponse>.fromJson(
-        call.$1!,
-        (dynamic json) => CsfrResponse.fromJson(json),
-      );
-
-      await localStgService.saveData(GlobalConstants.CSRF_TOKEN, '');
+      var res = CsfrResponse.fromJson(call.$1 ?? {});
+      await localStgService.saveData(GlobalConstants.CSRF_TOKEN, res.data?.csrfToken);
       Logger.log(tag: Tag.SUCCESS, message: 'CSRF_TOKEN saved');
       return true;
-    } catch (e) {
-      Logger.log(tag: Tag.SUCCESS, message: 'CSRF_TOKEN could not be saved');
+    } catch (e, s) {
+      Logger.log(
+          tag: Tag.SUCCESS,
+          message: 'CSRF_TOKEN could not be saved',
+          error: e,
+          stackTrace: s);
       return false;
     }
   }

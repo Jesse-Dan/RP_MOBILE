@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:recenth_posts/src/logic/models/service/un_auth_response.dart';
 import 'package:recenth_posts/src/logic/services/logger/logger.dart';
 
 import '../../utils/enums/enums.dart';
@@ -12,16 +13,23 @@ import 'client_options/client_options.dart';
 class ApiClient with ClientInterface, ClientUtils {
   ApiClient();
 
-  Future<(Map<String, dynamic>, ResponseType)> handleResponse(
+  Future<(Map<String, dynamic>?, ResponseType)> handleResponse(
       http.Response response) async {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return (
         json.decode(response.body) as Map<String, dynamic>,
         ResponseType.Success
       );
+    }
+    if (response.statusCode == 400 ||
+        response.statusCode == 405 ||
+        response.statusCode == 419 ||
+        response.statusCode == 404) {
+      var res = UnAuthResponse.fromJson(
+          json.decode(response.body) as Map<String, dynamic>);
+      return (res.toJson(), ResponseType.Success);
     } else {
-      throw ClientException(
-          'Request failed with status: ${response.statusCode}\nError Message: ${response.reasonPhrase}');
+      return (null, ResponseType.Success);
     }
   }
 
@@ -30,21 +38,19 @@ class ApiClient with ClientInterface, ClientUtils {
     HttpMethod method = HttpMethod.get,
     Map<String, dynamic>? queryParams,
     bool isAuth = false,
-    bool isCSRFProtected = true,
+    bool isCSRFProtected = false,
     dynamic body,
   }) async {
     try {
       final response = await makeRequest(
-              ClientUtils.getOptions(
-                          isAuth: isAuth, isCSRFProtected: isCSRFProtected)
-                      .baseUrl! +
-                  endpoint,
+              '${ClientUtils.getOptions(isAuth: isAuth, isCSRFProtected: isCSRFProtected).baseUrl!}'
+              '$endpoint',
               method: method,
               queryParams: queryParams,
               headers: ClientUtils.getOptions(
                       isAuth: isAuth, isCSRFProtected: isCSRFProtected)
                   .headers,
-              body: body)
+              body: json.encode(body))
           .timeout(const Duration(seconds: 50000), onTimeout: () {
         throw TimeoutException('Request timed out after 50000 seconds');
       });
