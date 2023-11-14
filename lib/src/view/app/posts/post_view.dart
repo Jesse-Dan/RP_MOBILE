@@ -20,9 +20,9 @@ class PostView extends StatefulWidget {
 class _PostViewState extends State<PostView> {
   @override
   void initState() {
-    context
-        .read<PostBloc>()
-        .add(GetAllPostEvent(context.read<PostRepository>()));
+    // context
+    //     .read<PostBloc>()
+    //     .add(GetAllPostEvent(context.read<PostRepository>()));
     super.initState();
   }
 

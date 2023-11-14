@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:navigation_system/navigation_system.dart';
 import 'package:recenth_posts/src/logic/bloc/app/post/index.dart';
 import 'package:recenth_posts/src/logic/bloc/auth/login/login_bloc.dart';
@@ -11,9 +12,10 @@ import 'package:recenth_posts/src/logic/repository/auth/auth_repo.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
+
 import 'view/auth/onboarding_view/onboarding_view.dart';
+import 'view/auth/otp_view/otp_view.dart';
 import 'view/auth/splash_view/splash_screen_view.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
@@ -35,7 +37,7 @@ class _MainAppState extends State<MainApp> {
               RepositoryProvider(
                 create: (context) => PostRepository(),
               ),
-               RepositoryProvider(
+              RepositoryProvider(
                 create: (context) => AuthRepository(),
               ),
             ],
@@ -44,10 +46,12 @@ class _MainAppState extends State<MainApp> {
                 BlocProvider(
                   create: (context) => PostBloc(PostInitialState()),
                 ),
-                 BlocProvider(
+                BlocProvider(
                   create: (context) => LoginBloc(LoginInitialState()),
-                ), BlocProvider(
-                  create: (context) => RegistrationBloc(RegistrationInitialState()),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      RegistrationBloc(RegistrationInitialState()),
                 ),
               ],
               child: MaterialApp(
@@ -61,10 +65,11 @@ class _MainAppState extends State<MainApp> {
                               const OnboardingView(),
                           PostView.routeName: (context, args) =>
                               const PostView(),
-                          RegisterScreen.routeName: (context, args) =>
-                              RegisterScreen(),
-                          LoginScreen.routeName: (context, args) =>
-                              LoginScreen(),
+                          RegistrationView.routeName: (context, args) =>
+                              const RegistrationView(),
+                          LoginView.routeName: (context, args) =>
+                              const LoginView(),
+                          OtpView.routeName: (context, args) => const OtpView(),
                         },
                       ).generateRoute(routeSettings)),
             ),

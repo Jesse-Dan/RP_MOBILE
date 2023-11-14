@@ -17,7 +17,7 @@ dependencies:
   google_fonts: ^6.1.0
   http: ^1.1.0
   loading_progress_indicator: ^0.1.6
-  navigation_system: ^0.0.3
+  navigation_system: ^0.0.4
   smooth_page_indicator: ^1.1.0
   url_launcher: ^6.2.1
 
@@ -36,13 +36,13 @@ flutter:
     - assets/fonts/
 
 
-  # fonts:
-  #   - family: Satoshi
-  #     fonts:
-  #       - asset: asset/fonts/Satoshi-Regular.otf
-  #       - asset: asset/fonts/Satoshi-Light.otf
-  #         weight:  500
-  #       - asset: asset/fonts/Satoshi-Regular.otf
-  #         weight:  600
-  #       - asset: asset/fonts/Satoshi-Bold.otf
-  #         weight:  700
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+          weight:  500
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+          weight:  600
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight:  700

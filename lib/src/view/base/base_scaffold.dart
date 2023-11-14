@@ -9,11 +9,16 @@ class BaseScaffold extends StatefulWidget {
       this.body,
       this.floatingActionButton,
       this.addBackgroundColor = true,
-      this.appbar});
+      this.appbar,
+      this.addbodyPadding = false,
+      this.addSafeArea = false});
 
   final Color? backgroundColor;
   final bool addBackgroundColor;
   final PreferredSizeWidget? appbar;
+
+  final bool addbodyPadding;
+  final bool addSafeArea;
 
   final Widget? bottomNavigationBar;
   final Widget? body;
@@ -26,11 +31,24 @@ class BaseScaffold extends StatefulWidget {
 class _BaseScaffoldState extends State<BaseScaffold> {
   @override
   Widget build(BuildContext context) {
+    return widget.addSafeArea
+        ? SafeArea(
+            child: _buildBody(),
+          )
+        : _buildBody();
+  }
+
+  Scaffold _buildBody() {
     return Scaffold(
       appBar: widget.appbar,
       backgroundColor: widget.backgroundColor ??
           (widget.addBackgroundColor ? AppColors.kWhiteColor : null),
-      body: widget.body,
+      body: SingleChildScrollView(
+          child: widget.addbodyPadding
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: widget.body)
+              : widget.body),
       bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
     );

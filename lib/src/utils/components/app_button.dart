@@ -8,7 +8,7 @@ import '../enums/enums.dart';
 class AppButton extends StatelessWidget {
   AppButton(
       {Key? key,
-      required this.btnText,
+      this.btnText,
       this.btntTextAlign,
       this.onDoubleTap,
       this.onTap,
@@ -22,9 +22,23 @@ class AppButton extends StatelessWidget {
       this.btnTextColor,
       this.applyInternalPadding,
       this.width = 100,
-      this.height = 48})
-      : super(key: key);
-  final String btnText;
+      this.height = 48,
+      this.boxShadow,
+      this.addboxShadow = false,
+      this.btnContentType = BtnContentType.TEXT,
+      this.btnContent,
+      this.boxShadowColor})
+      : super(key: key) {
+    // if ((btnContentType != BtnContentType.TEXT && btnContent == null) ||
+    //     (btnContentType != BtnContentType.TEXT &&
+    //         (btnText == '' || btnText == null))) {
+    //   throw Exception(
+    //       'if btnContentType == BtnContentType.TEXT, btnContent == null  ||  btnText == null or '
+    //       '');
+    // }
+  }
+
+  final String? btnText;
   final TextAlign? btntTextAlign;
   final void Function()? onDoubleTap;
   final void Function()? onTap;
@@ -37,8 +51,13 @@ class AppButton extends StatelessWidget {
   final double? btnTxtFontSize;
   final bool? addBorder;
   final bool? applyInternalPadding;
-  final double width;
+  final double? width;
   final double height;
+  final List<BoxShadow>? boxShadow;
+  final bool addboxShadow;
+  final BtnContentType btnContentType;
+  final Widget? btnContent;
+  final Color? boxShadowColor;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +69,7 @@ class AppButton extends StatelessWidget {
         margin: (applyInternalPadding ?? false)
             ? const EdgeInsets.all(5)
             : const EdgeInsets.all(0),
-        height: 48,
+        height: 60,
         width: (buttonType ?? ButtonType.SHORT_BTN) == ButtonType.LONG_BTN
             ? double.infinity
             : width,
@@ -60,21 +79,37 @@ class AppButton extends StatelessWidget {
               : null,
           borderRadius: BorderRadius.circular(9.sp),
           color: btnColor ?? AppColors.kwineColor,
+          boxShadow: !addboxShadow
+              ? null
+              : boxShadow ??
+                  [
+                    BoxShadow(
+                      color: boxShadowColor ??
+                          AppColors.kblackColor.withOpacity(0.1),
+                      offset: const Offset(2,
+                          2), // Increase the offset for a more visible shadow
+                      blurStyle: BlurStyle.outer,
+                      blurRadius:
+                          7, // Increase the blur radius for a softer shadow
+                    )
+                  ],
         ),
         child: Align(
           alignment: Alignment.center,
-          child: Text(
-            btnText,
-            style: btnTxtFontStyle ??
-                TextStyle(
-                  fontFamily: 'Satoshi',
-                  color: btnTextColor ?? AppColors.kWhiteColor,
-                  fontSize: btnTxtFontSize ?? 14.sp,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.36.sp,
+          child: btnContentType == BtnContentType.IMG
+              ? btnContent
+              : Text(
+                  btnText ?? '',
+                  style: btnTxtFontStyle ??
+                      TextStyle(
+                        fontFamily: 'Satoshi',
+                        color: btnTextColor ?? AppColors.kWhiteColor,
+                        fontSize: btnTxtFontSize ?? 14.sp,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.36.sp,
+                      ),
+                  textAlign: btntTextAlign ?? TextAlign.start,
                 ),
-            textAlign: btntTextAlign ?? TextAlign.start,
-          ),
         ),
       ),
     );

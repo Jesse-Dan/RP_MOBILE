@@ -86,6 +86,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         SizedBox(
                           width: 314.w,
                           height: 250.h,
+                          // clipBehavior: Clip.antiAlias,
                           child:
                               OnboardingViewModel.pages[currentIndex].imgWiget,
                         ),
@@ -137,7 +138,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                                 style: const TextStyle(
                                   color: Color(0xFF975B64),
                                   fontSize: 20,
-                                  fontFamily: 'Noto Sans',
+                                  fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: -0.41,
                                 ),
@@ -157,7 +158,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16.sp,
-                                      fontFamily: 'Noto Sans',
+                                      fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400,
                                       letterSpacing: -0.41,
                                     ),
@@ -189,7 +190,8 @@ class _OnboardingViewState extends State<OnboardingView> {
                                       onTap: () {
                                         if (currentIndex == 2) {
                                           Go(context,
-                                                  routeName: LoginScreen.routeName)
+                                                  routeName:
+                                                      LoginView.routeName)
                                               .to();
                                         } else {
                                           pageController.nextPage(

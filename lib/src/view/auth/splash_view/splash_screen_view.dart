@@ -21,25 +21,26 @@ class SplashScreenView extends StatefulWidget {
 class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
-    _initialize();
-    super.initState();
+Timer(const Duration(seconds: 4), () {
+          Go(context, routeName: OnboardingView.routeName).toAndClearAll();
+        });    super.initState();
   }
 
-  Future<void> _initialize() async {
-    try {
-      CSFRTokenRepo csfrTokenRepo = CSFRTokenRepo();
-      if (await csfrTokenRepo.getToken()) {
-        Timer(const Duration(seconds: 4), () {
-          Go(context, routeName: OnboardingView.routeName).toAndClearAll();
-        });
-      } else {
-        Go(context).pop();
-      }
-    } catch (e) {
-      ErrorHandler(context: context,message: e.toString());
-      Go(context).pop();
-    }
-  }
+  // Future<void> _initialize() async {
+    // try {
+    //   CSFRTokenRepo csfrTokenRepo = CSFRTokenRepo();
+    //   if (await csfrTokenRepo.getToken()) {
+    //     Timer(const Duration(seconds: 4), () {
+    //       Go(context, routeName: OnboardingView.routeName).toAndClearAll();
+    //     });
+    //   } else {
+    //     Go(context).pop();
+    //   }
+    // } catch (e) {
+    //   ErrorHandler(context: context,message: e.toString());
+    //   Go(context).pop();
+    // }
+  // }
 
   @override
   Widget build(BuildContext context) {

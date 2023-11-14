@@ -8,4 +8,5 @@ class AppColors extends HexColor {
   static final kwineColor = HexColor('#B76E79');
   static final klightBlackColor = HexColor('#263238');
   static final kdotGrey = HexColor('#D9D9D9');
+  static final kpouchBlue = HexColor('#00C4CC');
 }

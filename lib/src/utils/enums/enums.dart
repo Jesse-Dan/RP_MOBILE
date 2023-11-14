@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-enum Tag{
+enum Tag {
   ERROR,
   SUCCESS,
   LOADING,
@@ -10,10 +10,7 @@ enum Tag{
   BLOC_EVENT,
 }
 
-enum ButtonType{
-  LONG_BTN,
-  SHORT_BTN
-}
+enum ButtonType { LONG_BTN, SHORT_BTN }
 
 enum ResponseType {
   Success,
@@ -21,7 +18,17 @@ enum ResponseType {
   NotFound,
   TIME_OUT,
   SESSION_ENDED,
-  CSFR_ERROR}
+  CSFR_ERROR
+}
 
-  enum HttpMethod { get, post, put, patch, delete }
+enum HttpMethod { get, post, put, patch, delete }
 
+enum CheckBoxTextPosition {
+  left,
+  right,
+  both,
+}
+
+enum BtnContentType { IMG, TEXT }
+
+enum TextFieldType {PHONE,TEXT,PASSWORD,OTP,}

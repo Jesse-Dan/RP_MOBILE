@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/components/app_dialogue.dart';
-import '../../../utils/components/custom_loader.dart';
+import '../../../utils/components/app_custom_loader.dart';
 import '../../../utils/enums/enums.dart';
 import '../logger/logger.dart';
 
