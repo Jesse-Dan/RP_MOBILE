@@ -10,18 +10,16 @@ mixin ClientUtils {
     bool isAuth = false,
     bool isCSRFProtected = false,
   }) {
-    String? csrfToken = _localStgService.getData(GlobalConstants.CSRF_TOKEN);
+    String? bearerToken =
+        _localStgService.getData(GlobalConstants.BEARER_TOKEN);
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
+      'Accept': 'application/json'
     };
 
-    if (isCSRFProtected) {
-      headers[GlobalConstants.CSRF_TOKEN_KEY] = csrfToken ?? '';
-    }
-
-    if (isCSRFProtected && isAuth) {
-      headers['Authorization'] = 'Bearer 977779797979';
+    if (isAuth) {
+      headers['Authorization'] = 'Bearer $bearerToken';
     }
 
     return BaseOptions(
@@ -56,3 +54,12 @@ class BaseOptions {
     this.validateStatus,
   });
 }
+
+
+ // if (isCSRFProtected && isAuth) {
+    //   headers['Authorization'] = 'Bearer $bearerToken';
+    // }
+    // if (isCSRFProtected) {
+    //   headers[GlobalConstants.CSRF_TOKEN_KEY] = csrfToken ?? '';
+    // }
+    // String? csrfToken = _localStgService.getData(GlobalConstants.CSRF_TOKEN);
