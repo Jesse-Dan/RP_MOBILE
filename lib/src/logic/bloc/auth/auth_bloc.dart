@@ -4,19 +4,19 @@ import 'dart:developer' as developer;
 
 import 'package:bloc/bloc.dart';
 
-import 'login_event.dart';
-import 'login_state.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc(LoginState initialState) : super(initialState) {
-    on<LoginEvent>((event, emit) {
-      return emit.forEach<LoginState>(
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  AuthBloc(AuthState initialState) : super(initialState) {
+    on<AuthEvent>((event, emit) {
+      return emit.forEach<AuthState>(
         event.applyAsync(currentState: state, bloc: this),
         onData: (state) => state,
         onError: (error, stackTrace) {
           developer.log('$error',
               name: 'LoginBloc', error: error, stackTrace: stackTrace);
-          return LoginErrorState(error.toString());
+          return AuthErrorState(error.toString());
         },
       );
     });
