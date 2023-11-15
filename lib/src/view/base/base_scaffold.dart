@@ -11,11 +11,13 @@ class BaseScaffold extends StatefulWidget {
       this.addBackgroundColor = true,
       this.appbar,
       this.addbodyPadding = false,
-      this.addSafeArea = false});
+      this.addSafeArea = false,
+      this.addAppBar});
 
   final Color? backgroundColor;
   final bool addBackgroundColor;
   final PreferredSizeWidget? appbar;
+  final bool? addAppBar;
 
   final bool addbodyPadding;
   final bool addSafeArea;
@@ -40,7 +42,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
 
   Scaffold _buildBody() {
     return Scaffold(
-      appBar: widget.appbar,
+      appBar: (widget.addAppBar ?? false) ? (widget.appbar ?? AppBar()) : null,
       backgroundColor: widget.backgroundColor ??
           (widget.addBackgroundColor ? AppColors.kWhiteColor : null),
       body: SingleChildScrollView(

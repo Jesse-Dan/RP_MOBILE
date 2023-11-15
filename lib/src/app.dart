@@ -10,9 +10,11 @@ import 'package:recenth_posts/src/logic/bloc/auth/reg/reg_state.dart';
 import 'package:recenth_posts/src/logic/repository/app/post_repo.dart';
 import 'package:recenth_posts/src/logic/repository/auth/auth_repo.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
+import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
 
+import 'view/auth/forgot_password_fill_email_view/forget_password_view.dart';
 import 'view/auth/onboarding_view/onboarding_view.dart';
 import 'view/auth/otp_view/otp_view.dart';
 import 'view/auth/splash_view/splash_screen_view.dart';
@@ -70,6 +72,10 @@ class _MainAppState extends State<MainApp> {
                           LoginView.routeName: (context, args) =>
                               const LoginView(),
                           OtpView.routeName: (context, args) => const OtpView(),
+                          ForgotPasswordView.routeName: (context, args) =>
+                              const ForgotPasswordView(),
+                          ResetPasswordView.routeName: (context, args) =>
+                              const ResetPasswordView(),
                         },
                       ).generateRoute(routeSettings)),
             ),

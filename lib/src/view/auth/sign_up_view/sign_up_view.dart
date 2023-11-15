@@ -81,7 +81,7 @@ class _RegistrationViewState extends State<RegistrationView>
               AppTextField(
                 controller: _firstNameController,
                 labelText: 'First Name',
-                HintText: 'Enter your first name',
+                hintText: 'Enter your first name',
                 textFieldType: TextFieldType.TEXT,
                 keyboardType: TextInputType.name,
                 validator: (_) => validateTextField(_!),
@@ -90,7 +90,7 @@ class _RegistrationViewState extends State<RegistrationView>
               AppTextField(
                 controller: _lastNameController,
                 labelText: 'Last Name',
-                HintText: 'Enter your last name',
+                hintText: 'Enter your last name',
                 textFieldType: TextFieldType.TEXT,
                 keyboardType: TextInputType.name,
                 validator: (_) => validateTextField(_!),
@@ -99,7 +99,7 @@ class _RegistrationViewState extends State<RegistrationView>
               AppTextField(
                 controller: _emailController,
                 labelText: 'Email',
-                HintText: 'Enter your email',
+                hintText: 'Enter your email',
                 textFieldType: TextFieldType.TEXT,
                 keyboardType: TextInputType.emailAddress,
                 validator: (_) => validateEmail(_!),
@@ -108,7 +108,7 @@ class _RegistrationViewState extends State<RegistrationView>
               AppTextField(
                 controller: _passwordController,
                 labelText: 'Password',
-                HintText: 'Enter your password',
+                hintText: 'Enter your password',
                 textFieldType: TextFieldType.PASSWORD,
                 obscureText: hide,
                 keyboardType: TextInputType.visiblePassword,
@@ -123,7 +123,7 @@ class _RegistrationViewState extends State<RegistrationView>
               AppTextField(
                 controller: _confirmPasswordController,
                 labelText: 'Confirm Password',
-                HintText: 'Confirm your password',
+                hintText: 'Confirm your password',
                 textFieldType: TextFieldType.PASSWORD,
                 obscureText: hide2,
                 keyboardType: TextInputType.visiblePassword,
@@ -327,20 +327,20 @@ class _RegistrationViewState extends State<RegistrationView>
           ),
         ),
         const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
-        AppTextField(controller: _firstNameController, HintText: 'First Name'),
+        AppTextField(controller: _firstNameController, hintText: 'First Name'),
         const SizedBox(height: GlobalConstants.k16),
-        AppTextField(controller: _lastNameController, HintText: 'Last Name'),
+        AppTextField(controller: _lastNameController, hintText: 'Last Name'),
         const SizedBox(height: GlobalConstants.k16),
-        AppTextField(controller: _emailController, HintText: 'Email'),
+        AppTextField(controller: _emailController, hintText: 'Email'),
         const SizedBox(height: GlobalConstants.k16),
         AppTextField(
             controller: _passwordController,
-            HintText: 'Password',
+            hintText: 'Password',
             obscureText: true),
         const SizedBox(height: GlobalConstants.k16),
         AppTextField(
             controller: _confirmPasswordController,
-            HintText: 'Confirm Password',
+            hintText: 'Confirm Password',
             obscureText: true),
         const SizedBox(height: GlobalConstants.k16 + 4),
         // Align(

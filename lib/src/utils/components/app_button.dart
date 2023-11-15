@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recenth_posts/src/utils/components/app_custom_loader.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 
 import '../enums/enums.dart';
@@ -27,7 +28,9 @@ class AppButton extends StatelessWidget {
       this.addboxShadow = false,
       this.btnContentType = BtnContentType.TEXT,
       this.btnContent,
-      this.boxShadowColor})
+      this.boxShadowColor,
+      this.loading = false,
+      this.loadingText = 'loading'})
       : super(key: key) {
     // if ((btnContentType != BtnContentType.TEXT && btnContent == null) ||
     //     (btnContentType != BtnContentType.TEXT &&
@@ -58,13 +61,15 @@ class AppButton extends StatelessWidget {
   final BtnContentType btnContentType;
   final Widget? btnContent;
   final Color? boxShadowColor;
+  final bool loading;
+  final String loadingText;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onDoubleTap: onDoubleTap,
-      onTap: onTap,
-      onLongPress: onLongPress,
+      onDoubleTap: loading ? null : onDoubleTap,
+      onTap: loading ? null : onTap,
+      onLongPress: loading ? null : onLongPress,
       child: Container(
         margin: (applyInternalPadding ?? false)
             ? const EdgeInsets.all(5)
@@ -98,20 +103,39 @@ class AppButton extends StatelessWidget {
           alignment: Alignment.center,
           child: btnContentType == BtnContentType.IMG
               ? btnContent
-              : Text(
-                  btnText ?? '',
-                  style: btnTxtFontStyle ??
-                      TextStyle(
-                        fontFamily: 'Satoshi',
-                        color: btnTextColor ?? AppColors.kWhiteColor,
-                        fontSize: btnTxtFontSize ?? 14.sp,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.36.sp,
-                      ),
-                  textAlign: btntTextAlign ?? TextAlign.start,
-                ),
+              : _loaderByText(),
         ),
       ),
+    );
+  }
+
+  Widget _loaderByText() {
+    return loading
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppLoadingIndicator(color: Colors.transparent),
+              const SizedBox(width: 5),
+              _text(text: '$loadingText...'),
+            ],
+          )
+        : _text();
+  }
+
+  Text _text({text}) {
+    return Text(
+      loading ? text : btnText ?? '',
+      style: btnTxtFontStyle ??
+          TextStyle(
+            fontFamily: 'Satoshi',
+            color: btnTextColor ?? AppColors.kWhiteColor,
+            fontSize: btnTxtFontSize ?? 14.sp,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.36.sp,
+          ),
+      textAlign: btntTextAlign ?? TextAlign.start,
     );
   }
 }

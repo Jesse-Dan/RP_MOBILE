@@ -4,7 +4,7 @@ import 'package:loading_progress_indicator/progress_indicator/ball_spin_fade_loa
 
 import '../style/app_colors.dart';
 
-LoadingProgressIndicator CustomSpinner(
+LoadingProgressIndicator AppCustomSpinner(
     {dynamic loaderColor,
     height,
     width,
@@ -13,22 +13,22 @@ LoadingProgressIndicator CustomSpinner(
   return LoadingProgressIndicator(
     size: (size) ?? 24,
     indicator: BallSpinFadeLoaderProgressIndicator(),
-    color: loaderColor ?? AppColors.kblackColor,
+    color: loaderColor ?? AppColors.kWhiteColor,
   );
 }
 
 /// [OVERLAY LOAD]
-Widget AppLoadingIndicator({Color? color}) => Center(
+Widget AppLoadingIndicator({Color? color,loaderColor}) => Center(
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: color ?? AppColors.kblackColor,
+          color: color ?? AppColors.kWhiteColor,
         ),
         height: 50,
         width: 50,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: CustomSpinner(),
+          child: AppCustomSpinner(loaderColor: loaderColor),
         ),
       ),
     );
