@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -36,7 +37,7 @@ class _RegistrationViewState extends State<RegistrationView>
   bool hide = true;
   bool hide2 = true;
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +160,9 @@ class _RegistrationViewState extends State<RegistrationView>
                 boxShadowColor: AppColors.kwineColor.withOpacity(.07),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    print('validated');
+                    if (kDebugMode) {
+                      print('validated');
+                    }
                   }
                 },
               ),
@@ -266,6 +269,8 @@ class _RegistrationViewState extends State<RegistrationView>
     );
   }
 
+
+  // ignore: unused_element, non_constant_identifier_names
   Column _CField(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -410,9 +415,9 @@ class _RegistrationViewState extends State<RegistrationView>
           ],
         ),
         const SizedBox(height: GlobalConstants.k16 * 2),
-        Padding(
+        const Padding(
           padding:
-              const EdgeInsets.symmetric(horizontal: GlobalConstants.k12 - 2),
+              EdgeInsets.symmetric(horizontal: GlobalConstants.k12 - 2),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,

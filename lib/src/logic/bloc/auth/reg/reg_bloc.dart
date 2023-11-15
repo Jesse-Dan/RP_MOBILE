@@ -1,10 +1,11 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:developer' as developer;
 
 import 'package:bloc/bloc.dart';
 import 'package:recenth_posts/src/logic/bloc/auth/reg/reg_event.dart';
 import 'package:recenth_posts/src/logic/bloc/auth/reg/reg_state.dart';
 
-import 'index.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   RegistrationBloc(RegistrationState initialState) : super(initialState) {

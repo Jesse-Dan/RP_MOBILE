@@ -22,7 +22,7 @@ class ForgotPasswordView extends StatefulWidget {
 
 class _ForgotPasswordViewState extends State<ForgotPasswordView>
     with ValidatorMixin {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
   @override
@@ -32,67 +32,70 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView>
       body: Stack(
         children: [
           Image.asset('assets/images/TopBg.png'),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 100.h),
-              SizedBox(height: (GlobalConstants.k20 + 10).h),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  'Forgotten password',
-                  style: TextStyle(
-                    color: AppColors.kwineColor,
-                    fontSize: 32,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+          Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 100.h),
+                SizedBox(height: (GlobalConstants.k20 + 10).h),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    'Forgotten password',
+                    style: TextStyle(
+                      color: AppColors.kwineColor,
+                      fontSize: 32,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: GlobalConstants.k16.h),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Text.rich(
-                  textAlign: TextAlign.center,
-                  TextSpan(children: [
-                    const TextSpan(
-                        text:
-                            'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem Ipsum.'),
-                    TextSpan(
-                      text: '',
-                      style: TextStyle(
-                        color: AppColors.kpouchBlue.withOpacity(0.5),
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )
-                  ]),
-                  style: TextStyle(
-                    color: AppColors.klightBlackColor.withOpacity(0.7),
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
+                SizedBox(height: GlobalConstants.k16.h),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Text.rich(
+                    textAlign: TextAlign.center,
+                    TextSpan(children: [
+                      const TextSpan(
+                          text:
+                              'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem Ipsum.'),
+                      TextSpan(
+                        text: '',
+                        style: TextStyle(
+                          color: AppColors.kpouchBlue.withOpacity(0.5),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ]),
+                    style: TextStyle(
+                      color: AppColors.klightBlackColor.withOpacity(0.7),
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: ((GlobalConstants.k20 + 4) * 3).h),
-              AppTextField(
-                  controller: _emailController,
-                  labelText: 'Email I’D/ Mobile Number',
-                  hintText: 'Enter email linked to your account'),
-              SizedBox(height: (GlobalConstants.k20 + 4).h),
-              AppButton(
-                btnText: 'Continue',
-                buttonType: ButtonType.LONG_BTN,
-                addboxShadow: true,
-                onTap: () {
-                  Go(context, routeName: OtpView.routeName).to();
-                },
-              )
-            ],
+                SizedBox(height: ((GlobalConstants.k20 + 4) * 3).h),
+                AppTextField(
+                    controller: _emailController,
+                    labelText: 'Email I’D/ Mobile Number',
+                    hintText: 'Enter email linked to your account'),
+                SizedBox(height: (GlobalConstants.k20 + 4).h),
+                AppButton(
+                  btnText: 'Continue',
+                  buttonType: ButtonType.LONG_BTN,
+                  addboxShadow: true,
+                  onTap: () {
+                    Go(context, routeName: OtpView.routeName).to();
+                  },
+                )
+              ],
+            ),
           ),
         ],
       ),

@@ -27,7 +27,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> with ValidatorMixin {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool check = false;
   bool isNewUser = false;
@@ -268,6 +268,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
     );
   }
 
+  // ignore: unused_element, non_constant_identifier_names
   Column _Cfield(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,

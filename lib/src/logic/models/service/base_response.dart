@@ -18,7 +18,7 @@ class BaseResponse<T> {
     this.status = true,
     this.statusCode = 200,
     this.message = 'OK',
-    this.data = null,
+    this.data,
   });
 
   BaseResponse<T> copyWith({

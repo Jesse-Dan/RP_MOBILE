@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/logic/bloc/app/post/index.dart';
-import 'package:recenth_posts/src/logic/repository/app/post_repo.dart';
 import 'package:recenth_posts/src/logic/services/handler/handlers/error_handler.dart';
 import 'package:recenth_posts/src/logic/services/handler/handlers/loading_handler.dart';
 

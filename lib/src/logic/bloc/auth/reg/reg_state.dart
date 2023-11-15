@@ -4,34 +4,36 @@ import 'package:recenth_posts/src/logic/models/auth/auth/reg/reg_response.dart';
 abstract class RegistrationState extends Equatable {
   const RegistrationState();
 
+  @override
   List<Object> get props => [];
 }
 
 class RegistrationLoadedState extends RegistrationState {
   final RegResponse regResponses;
-  RegistrationLoadedState({required this.regResponses});
+  const RegistrationLoadedState({required this.regResponses});
 
   @override
   String toString() => 'UnRegistrationState';
+  @override
   List<Object> get props => [regResponses];
 }
 
 class RegistrationInitialState extends RegistrationState {
-  RegistrationInitialState();
+  const RegistrationInitialState();
 
   @override
   List<Object> get props => [];
 }
 
 class RegistrationLoadingState extends RegistrationState {
-  RegistrationLoadingState();
+  const RegistrationLoadingState();
 
   @override
   List<Object> get props => [];
 }
 
 class RegistrationErrorState extends RegistrationState {
-  RegistrationErrorState(this.errorMessage);
+  const RegistrationErrorState(this.errorMessage);
 
   final String errorMessage;
 

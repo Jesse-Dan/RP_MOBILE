@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
-import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 import 'dart:developer' as developer;
 
@@ -18,7 +20,7 @@ class GetAllPostEvent extends PostEvent {
   Stream<PostState> applyAsync(
       {PostState? currentState, PostBloc? bloc}) async* {
     try {
-      yield PostLoadingState();
+      yield const PostLoadingState();
       var res = await postRepository.getAllPosts();
       yield PostLoadedState(postResponses: res?.data ?? []);
     } catch (_, stackTrace) {
@@ -36,9 +38,9 @@ class ReactToPostEvent extends PostEvent {
   Stream<PostState> applyAsync(
       {PostState? currentState, PostBloc? bloc}) async* {
     try {
-      yield PostLoadingState();
+      yield const PostLoadingState();
       await Future.delayed(const Duration(seconds: 1));
-      yield PostInitialState();
+      yield const PostInitialState();
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadPostEvent', error: _, stackTrace: stackTrace);
@@ -54,9 +56,9 @@ class CommentOnPostEvent extends PostEvent {
   Stream<PostState> applyAsync(
       {PostState? currentState, PostBloc? bloc}) async* {
     try {
-      yield PostLoadingState();
+      yield const PostLoadingState();
       await Future.delayed(const Duration(seconds: 1));
-      yield PostInitialState();
+      yield const PostInitialState();
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadPostEvent', error: _, stackTrace: stackTrace);
@@ -72,9 +74,9 @@ class ViewPostEvent extends PostEvent {
   Stream<PostState> applyAsync(
       {PostState? currentState, PostBloc? bloc}) async* {
     try {
-      yield PostLoadingState();
+      yield const PostLoadingState();
       await Future.delayed(const Duration(seconds: 1));
-      yield PostInitialState();
+      yield const PostInitialState();
     } catch (_, stackTrace) {
       developer.log('$_',
           name: 'LoadPostEvent', error: _, stackTrace: stackTrace);

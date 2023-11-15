@@ -3,10 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/logic/services/handler/handlers/error_handler.dart';
 import 'package:recenth_posts/src/view/auth/onboarding_view/onboarding_view.dart';
-
-import '../../../logic/repository/auth/csfr_token_repo.dart';
 import '../../base/base_scaffold.dart';
 
 class SplashScreenView extends StatefulWidget {

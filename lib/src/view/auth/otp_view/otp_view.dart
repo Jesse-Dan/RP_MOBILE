@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:navigation_system/go/go.dart';
@@ -22,7 +23,7 @@ class OtpView extends StatefulWidget {
 
 class _OtpViewState extends State<OtpView> with ValidatorMixin {
   final TextEditingController _otpController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool hide = true;
   bool hide2 = true;
@@ -105,7 +106,9 @@ class _OtpViewState extends State<OtpView> with ValidatorMixin {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       Go(context, routeName: ResetPasswordView.routeName).to();
-                      print('validated');
+                      if (kDebugMode) {
+                        print('validated');
+                      }
                     }
                   },
                 ),

@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 import 'dart:developer' as developer;
 
@@ -22,7 +24,7 @@ class UserRegEvent extends RegistrationEvent {
   Stream<RegistrationState> applyAsync(
       {RegistrationState? currentState, RegistrationBloc? bloc}) async* {
     try {
-      yield RegistrationLoadingState();
+      yield const RegistrationLoadingState();
       var res = await authRepository.register(regPayload: regPayload);
       yield RegistrationLoadedState(regResponses: res!);
     } catch (_, stackTrace) {

@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 import 'dart:developer' as developer;
 
@@ -21,7 +23,7 @@ class UserLoginEvent extends LoginEvent {
   Stream<LoginState> applyAsync(
       {LoginState? currentState, LoginBloc? bloc}) async* {
     try {
-      yield LoginLoadingState();
+      yield const LoginLoadingState();
       var res = await postRepository.login(loginPayload: loginPayload);
       yield LoginLoadedState(postResponses: res!);
     } catch (_, stackTrace) {

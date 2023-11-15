@@ -46,14 +46,14 @@ class _MainAppState extends State<MainApp> {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (context) => PostBloc(PostInitialState()),
+                  create: (context) => PostBloc(const PostInitialState()),
                 ),
                 BlocProvider(
-                  create: (context) => LoginBloc(LoginInitialState()),
+                  create: (context) => LoginBloc(const LoginInitialState()),
                 ),
                 BlocProvider(
                   create: (context) =>
-                      RegistrationBloc(RegistrationInitialState()),
+                      RegistrationBloc(const RegistrationInitialState()),
                 ),
               ],
               child: MaterialApp(

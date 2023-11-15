@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:recenth_posts/src/logic/services/logger/logger.dart';
 import 'package:recenth_posts/src/logic/services/storage_service/local_storage_service.dart';
@@ -8,9 +7,7 @@ import '../../../utils/enums/enums.dart';
 
 import '../../core/client.dart';
 import '../../models/auth/csfr/response.dart';
-import 'package:http/http.dart' as h;
 
-import '../../models/service/base_response.dart';
 
 class CSFRTokenRepo extends ApiClient {
   LocalStgService localStgService = LocalStgService();
