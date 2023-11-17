@@ -12,7 +12,10 @@ class BaseScaffold extends StatefulWidget {
       this.appbar,
       this.addbodyPadding = false,
       this.addSafeArea = false,
-      this.addAppBar});
+      this.addAppBar,
+      this.refreshable = false,
+      this.physics,
+       this.onRefresh});
 
   final Color? backgroundColor;
   final bool addBackgroundColor;
@@ -21,10 +24,14 @@ class BaseScaffold extends StatefulWidget {
 
   final bool addbodyPadding;
   final bool addSafeArea;
+  final bool refreshable;
+
+  final ScrollPhysics? physics;
 
   final Widget? bottomNavigationBar;
   final Widget? body;
   final Widget? floatingActionButton;
+  final Future<void> Function()? onRefresh;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -45,14 +52,22 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       appBar: (widget.addAppBar ?? false) ? (widget.appbar ?? AppBar()) : null,
       backgroundColor: widget.backgroundColor ??
           (widget.addBackgroundColor ? AppColors.kWhiteColor : null),
-      body: SingleChildScrollView(
-          child: widget.addbodyPadding
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: widget.body)
-              : widget.body),
+      body: widget.refreshable
+          ? RefreshIndicator.adaptive(
+              child: _body(), onRefresh: widget.onRefresh ?? () async {})
+          : _body(),
       bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
     );
+  }
+
+  SingleChildScrollView _body() {
+    return SingleChildScrollView(
+        physics: widget.physics ?? const BouncingScrollPhysics(),
+        child: widget.addbodyPadding
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: widget.body)
+            : widget.body);
   }
 }

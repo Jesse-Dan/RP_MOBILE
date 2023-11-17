@@ -18,7 +18,9 @@ enum ResponseType {
   NotFound,
   TIME_OUT,
   SESSION_ENDED,
-  CSFR_ERROR
+  CSFR_ERROR,
+  CLIENT_ERROR,
+  UNKNOWN_ERROR
 }
 
 enum HttpMethod { get, post, put, patch, delete }
@@ -31,4 +33,4 @@ enum CheckBoxTextPosition {
 
 enum BtnContentType { IMG, TEXT }
 
-enum TextFieldType {PHONE,TEXT,PASSWORD,OTP,}
+enum TextFieldType {PHONE,TEXT,PASSWORD,OTP,DROPDOWN}

@@ -4,41 +4,44 @@
 
 import 'dart:convert';
 
-UnAuthResponse unAuthResponseFromJson(String str) => UnAuthResponse.fromJson(json.decode(str));
+GeneralErrorResponse unAuthResponseFromJson(String str) =>
+    GeneralErrorResponse.fromJson(json.decode(str));
 
-String unAuthResponseToJson(UnAuthResponse data) => json.encode(data.toJson());
+String unAuthResponseToJson(GeneralErrorResponse data) =>
+    json.encode(data.toJson());
 
-class UnAuthResponse {
-    final bool? status;
-    final int? statusCode;
-    final String? message;
+class GeneralErrorResponse {
+  final bool? status;
+  final int? statusCode;
+  final String? message;
 
-    UnAuthResponse({
-        this.status,
-        this.statusCode,
-        this.message,
-    });
+  GeneralErrorResponse({
+    this.status,
+    this.statusCode,
+    this.message,
+  });
 
-    UnAuthResponse copyWith({
-        bool? status,
-        int? statusCode,
-        String? message,
-    }) => 
-        UnAuthResponse(
-            status: status ?? this.status,
-            statusCode: statusCode ?? this.statusCode,
-            message: message ?? this.message,
-        );
+  GeneralErrorResponse copyWith({
+    bool? status,
+    int? statusCode,
+    String? message,
+  }) =>
+      GeneralErrorResponse(
+        status: status ?? this.status,
+        statusCode: statusCode ?? this.statusCode,
+        message: message ?? this.message,
+      );
 
-    factory UnAuthResponse.fromJson(Map<String, dynamic> json) => UnAuthResponse(
+  factory GeneralErrorResponse.fromJson(Map<String, dynamic> json) =>
+      GeneralErrorResponse(
         status: json["status"],
         statusCode: json["status_code"],
         message: json["message"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "status": status,
         "status_code": statusCode,
         "message": message,
-    };
+      };
 }

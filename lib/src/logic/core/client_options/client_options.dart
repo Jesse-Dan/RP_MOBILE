@@ -6,10 +6,7 @@ import '../../services/storage_service/local_storage_service.dart';
 mixin ClientUtils {
   static final LocalStgService _localStgService = LocalStgService();
 
-  static BaseOptions getOptions({
-    bool isAuth = false,
-    bool isCSRFProtected = false,
-  }) {
+  static BaseOptions getOptions({bool isAuth = false}) {
     String? bearerToken =
         _localStgService.getData(GlobalConstants.BEARER_TOKEN);
 
@@ -54,12 +51,3 @@ class BaseOptions {
     this.validateStatus,
   });
 }
-
-
- // if (isCSRFProtected && isAuth) {
-    //   headers['Authorization'] = 'Bearer $bearerToken';
-    // }
-    // if (isCSRFProtected) {
-    //   headers[GlobalConstants.CSRF_TOKEN_KEY] = csrfToken ?? '';
-    // }
-    // String? csrfToken = _localStgService.getData(GlobalConstants.CSRF_TOKEN);

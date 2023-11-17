@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:navigation_system/navigation_system.dart';
+import 'package:recenth_posts/src/logic/bloc/app/countries/country_state.dart';
 import 'package:recenth_posts/src/logic/bloc/app/post/index.dart';
-import 'package:recenth_posts/src/logic/repository/app/post_repo.dart';
 import 'package:recenth_posts/src/logic/repository/auth/auth_repo.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
 
+import 'logic/bloc/app/countries/country_bloc.dart';
 import 'logic/bloc/auth/auth_bloc.dart';
 import 'logic/bloc/auth/auth_state.dart';
+import 'logic/repository/app/app_repo.dart';
 import 'view/auth/forgot_password_fill_email_view/forget_password_view.dart';
 import 'view/auth/onboarding_view/onboarding_view.dart';
 import 'view/auth/otp_view/otp_view.dart';
@@ -35,7 +37,7 @@ class _MainAppState extends State<MainApp> {
           return MultiRepositoryProvider(
             providers: [
               RepositoryProvider(
-                create: (context) => PostRepository(),
+                create: (context) => AppRepository(),
               ),
               RepositoryProvider(
                 create: (context) => AuthRepository(),
@@ -47,9 +49,11 @@ class _MainAppState extends State<MainApp> {
                   create: (context) => PostBloc(const PostInitialState()),
                 ),
                 BlocProvider(
+                  create: (context) => CountryBloc(const CountryInitialState()),
+                ),
+                BlocProvider(
                   create: (context) => AuthBloc(const AuthInitialState()),
                 ),
-               
               ],
               child: MaterialApp(
                   onGenerateRoute: (RouteSettings routeSettings) =>

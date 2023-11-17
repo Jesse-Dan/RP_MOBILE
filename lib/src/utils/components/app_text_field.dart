@@ -1,10 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:recenth_posts/src/utils/components/dropdown_button.dart';
 import 'package:recenth_posts/src/utils/constants/global_constants.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 
-class AppTextField extends StatelessWidget {
+class AppTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
@@ -15,8 +18,10 @@ class AppTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final void Function()? onSufficIconClicked;
   final String? Function(String?)? validator;
-
-  const AppTextField({
+  final void Function()? onTap;
+  final List<String> items;
+  String? value;
+  AppTextField({
     Key? key,
     required this.controller,
     this.hintText = 'Enter Text',
@@ -28,31 +33,39 @@ class AppTextField extends StatelessWidget {
     this.keyboardType,
     this.onSufficIconClicked,
     this.validator,
+    this.onTap,
+    this.items = const [],
+    this.value,
   }) : super(key: key);
 
   @override
+  State<AppTextField> createState() => _AppTextFieldState();
+}
+
+class _AppTextFieldState<T> extends State<AppTextField> {
+  @override
   Widget build(BuildContext context) {
-    return textFieldType == TextFieldType.PASSWORD
+    return widget.textFieldType == TextFieldType.PASSWORD
         ? SizedBox(
             // height: 60,
             child: TextFormField(
               style: myTextFieldStyle(),
               keyboardType: TextInputType.visiblePassword,
-              controller: controller,
-              validator: validator,
+              controller: widget.controller,
+              validator: widget.validator,
               decoration: InputDecoration(
                   labelStyle:
                       TextStyle(color: AppColors.kwineColor.withOpacity(0.8)),
-                  labelText: labelText,
+                  labelText: widget.labelText,
                   filled: true,
-                  hintText: hintText,
+                  hintText: widget.hintText,
                   contentPadding: const EdgeInsets.all(GlobalConstants.k20 + 3),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   fillColor: AppColors.kwineColor.withOpacity(0.07),
                   suffixIcon: IconButton(
-                    onPressed: onSufficIconClicked,
+                    onPressed: widget.onSufficIconClicked,
                     icon: Icon(
-                      obscureText
+                      widget.obscureText
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
                       color: AppColors.kwineColor.withOpacity(0.5),
@@ -67,18 +80,60 @@ class AppTextField extends StatelessWidget {
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: AppColors.kwineColor),
                       borderRadius: BorderRadius.circular(14))),
-              obscureText: obscureText,
-              enabled: isEnabled,
-              onChanged: onChanged,
+              obscureText: widget.obscureText,
+              enabled: widget.isEnabled,
+              onChanged: widget.onChanged,
               cursorColor: AppColors.kwineColor,
             ),
           )
-        : textFieldType == TextFieldType.PHONE
-            ? const SizedBox(height: 0, width: 0)
-            : textFieldType == TextFieldType.OTP
+        : widget.textFieldType == TextFieldType.DROPDOWN
+            ? Container(
+                height: 70,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: AppColors.kwineColor.withOpacity(0.09),
+                    borderRadius: BorderRadius.circular(14)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                          child: SizedBox(
+                              child: Text(
+                        widget.controller.text.isEmpty
+                            ? 'Country'
+                            : widget.controller.text,
+                        style: myTextFieldStyle(),
+                      ))),
+                      SizedBox(
+                        width: 100,
+                        height: 60,
+                        child: appDropdownButton(
+                          controller: widget.controller,
+                          items: widget.items,
+                          value: widget.value,
+                          onChanged: (String? val) {
+                            if (val != 'Loading...' ||
+                                val != 'Error fetching countries') {
+                              setState(() {
+                                widget.value = val;
+                                widget.controller.text = val!;
+                              });
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : widget.textFieldType == TextFieldType.OTP
                 ? PinCodeTextField(
                     autofocus: true,
-                    controller: controller,
+                    controller: widget.controller,
                     hideCharacter: false,
                     maxLength: 5,
                     hasError: false,
@@ -106,16 +161,16 @@ class AppTextField extends StatelessWidget {
                 : SizedBox(
                     // height: 60,
                     child: TextFormField(
-                      keyboardType: keyboardType,
-                      controller: controller,
-                      validator: validator,
+                      keyboardType: widget.keyboardType,
+                      controller: widget.controller,
+                      validator: widget.validator,
                       style: myTextFieldStyle(),
                       decoration: InputDecoration(
                           labelStyle: TextStyle(
                               color: AppColors.kwineColor.withOpacity(0.8)),
-                          labelText: labelText,
+                          labelText: widget.labelText,
                           filled: true,
-                          hintText: hintText,
+                          hintText: widget.hintText,
                           contentPadding:
                               const EdgeInsets.all(GlobalConstants.k20 + 3),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -132,9 +187,9 @@ class AppTextField extends StatelessWidget {
                               borderSide:
                                   BorderSide(color: AppColors.kwineColor),
                               borderRadius: BorderRadius.circular(14))),
-                      obscureText: obscureText,
-                      enabled: isEnabled,
-                      onChanged: onChanged,
+                      obscureText: widget.obscureText,
+                      enabled: widget.isEnabled,
+                      onChanged: widget.onChanged,
                       cursorColor: AppColors.kwineColor,
                     ),
                   );
@@ -153,9 +208,9 @@ class AppTextField extends StatelessWidget {
     );
   }
 
-  TextStyle myTextFieldStyle() {
+  TextStyle myTextFieldStyle({color}) {
     return TextStyle(
-      color: AppColors.kwineColor.withOpacity(0.9),
+      color: color ?? AppColors.kwineColor.withOpacity(0.9),
       fontSize: 16,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.w500,

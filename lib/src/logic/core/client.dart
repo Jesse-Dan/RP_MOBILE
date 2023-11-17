@@ -26,11 +26,14 @@ class ApiClient with ClientInterface, ClientUtils {
         response.statusCode == 405 ||
         response.statusCode == 419 ||
         response.statusCode == 404) {
-      var res = UnAuthResponse.fromJson(
+      var res = GeneralErrorResponse.fromJson(
           json.decode(response.body) as Map<String, dynamic>);
-      return (res.toJson(), ResponseType.Success);
+      return (res.toJson(), ResponseType.Error);
     } else {
-      return (null, ResponseType.Success);
+      return (
+        json.decode(response.body) as Map<String, dynamic>,
+        ResponseType.Error
+      );
     }
   }
 
@@ -39,18 +42,19 @@ class ApiClient with ClientInterface, ClientUtils {
     HttpMethod method = HttpMethod.get,
     Map<String, dynamic>? queryParams,
     bool isAuth = false,
-    bool isCSRFProtected = false,
     dynamic body,
   }) async {
     try {
       final response = await makeRequest(
-              '${ClientUtils.getOptions(isAuth: isAuth, isCSRFProtected: isCSRFProtected).baseUrl!}'
+              '${ClientUtils.getOptions(
+                isAuth: isAuth,
+              ).baseUrl!}'
               '$endpoint',
               method: method,
               queryParams: queryParams,
               headers: ClientUtils.getOptions(
-                      isAuth: isAuth, isCSRFProtected: isCSRFProtected)
-                  .headers,
+                isAuth: isAuth,
+              ).headers,
               body: json.encode(body))
           .timeout(const Duration(seconds: 50000), onTimeout: () {
         throw TimeoutException('Request timed out after 50000 seconds');
@@ -69,14 +73,14 @@ class ApiClient with ClientInterface, ClientUtils {
           tag: Tag.ERROR,
           error: error,
           stackTrace: s);
-      return (null, ResponseType.Error);
+      return (null, ResponseType.CLIENT_ERROR);
     } catch (error, s) {
       Logger.log(
           message: 'Error: ${error.toString()}',
           tag: Tag.ERROR,
           error: error,
           stackTrace: s);
-      return (null, ResponseType.Error);
+      return (null, ResponseType.UNKNOWN_ERROR);
     }
   }
 }

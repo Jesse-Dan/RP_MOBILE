@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recenth_posts/src/utils/style/app_colors.dart';
 
 import '../enums/enums.dart';
 
@@ -30,27 +30,27 @@ class AppDialogue extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16)),
-                color: Colors.blue),
+                color: AppColors.kwineColor.withOpacity(0.2)),
             width: double.infinity,
             height: 50,
           ),
-          Positioned(
+          const Positioned(
             top: 30,
             left: 342 / 4,
             right: 342 / 4,
             child: Align(
               alignment: Alignment.topCenter,
-              child: SvgPicture.asset(
-                tag == Tag.ERROR
-                    ? 'assets/images/error.svg'
-                    : 'assets/images/success.svg',
-                height: 42,
-                width: 50,
-              ),
+              // child: SvgPicture.asset(
+              //   tag == Tag.ERROR
+              //       ? 'assets/images/error.svg'
+              //       : 'assets/images/success.svg',
+              //   height: 42,
+              //   width: 50,
+              // ),
             ),
           ),
         ],
@@ -63,7 +63,7 @@ class AppDialogue extends StatelessWidget {
                 left: 342 / 8, right: 342 / 8, top: 30, bottom: 10),
             child: Center(
               child: Text(
-                message ?? 'Hello! \n Contact support@Vigilant.ng',
+                message ?? 'Hello! \n Contact support@bakkaz.com',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.w400,
@@ -87,7 +87,8 @@ class AppDialogue extends StatelessWidget {
         onTap: callBack ?? () => Navigator.pop(context),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4), color: Colors.blue),
+              borderRadius: BorderRadius.circular(4),
+              color: AppColors.kwineColor.withOpacity(0.2)),
           height: 42,
           width: 115,
           child: Center(
@@ -95,10 +96,10 @@ class AppDialogue extends StatelessWidget {
               btnText == ''
                   ? tag == Tag.ERROR
                       ? 'Okay'
-                      : 'Thank you'
+                      : 'Proceed'
                   : btnText,
               style: GoogleFonts.dmSans(
-                color: Colors.blue,
+                color: AppColors.kwineColor.withOpacity(0.9),
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
               ),
