@@ -6,7 +6,7 @@ import '../../services/storage_service/local_storage_service.dart';
 mixin ClientUtils {
   static final LocalStgService _localStgService = LocalStgService();
 
-  static BaseOptions getOptions({bool isAuth = false}) {
+  static BaseOptions getOptions({bool isAuth = true}) {
     String? bearerToken =
         _localStgService.getData(GlobalConstants.BEARER_TOKEN);
 

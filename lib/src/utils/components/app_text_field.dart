@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:recenth_posts/src/utils/components/dropdown_button.dart';
-import 'package:recenth_posts/src/utils/constants/global_constants.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
+
+import '../style/app_dimentions.dart';
 
 class AppTextField extends StatefulWidget {
   final TextEditingController controller;
@@ -59,7 +60,7 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                   labelText: widget.labelText,
                   filled: true,
                   hintText: widget.hintText,
-                  contentPadding: const EdgeInsets.all(GlobalConstants.k20 + 3),
+                  contentPadding: const EdgeInsets.all(AppDimentions.k20 + 3),
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   fillColor: AppColors.kwineColor.withOpacity(0.07),
                   suffixIcon: IconButton(
@@ -172,7 +173,7 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                           filled: true,
                           hintText: widget.hintText,
                           contentPadding:
-                              const EdgeInsets.all(GlobalConstants.k20 + 3),
+                              const EdgeInsets.all(AppDimentions.k20 + 3),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           fillColor: AppColors.kwineColor.withOpacity(0.07),
                           border: OutlineInputBorder(
@@ -207,13 +208,13 @@ class _AppTextFieldState<T> extends State<AppTextField> {
           BorderRadius.circular(12.0), // Default radius if not provided
     );
   }
+}
 
-  TextStyle myTextFieldStyle({color}) {
-    return TextStyle(
-      color: color ?? AppColors.kwineColor.withOpacity(0.9),
-      fontSize: 16,
-      fontFamily: 'Poppins',
-      fontWeight: FontWeight.w500,
-    );
-  }
+TextStyle myTextFieldStyle({color}) {
+  return TextStyle(
+    color: color ?? AppColors.kwineColor.withOpacity(0.9),
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w500,
+  );
 }

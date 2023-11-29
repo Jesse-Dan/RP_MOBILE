@@ -9,6 +9,7 @@ import '../../../utils/components/app_text_field.dart';
 import '../../../utils/constants/global_constants.dart';
 import '../../../utils/enums/enums.dart';
 import '../../../utils/style/app_colors.dart';
+import '../../../utils/style/app_dimentions.dart';
 
 class ResetPasswordView extends StatefulWidget {
   static const routeName = '/reset.password.view';
@@ -45,7 +46,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView>
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 100.h),
-                SizedBox(height: (GlobalConstants.k20 + 10).h),
+                SizedBox(height: (AppDimentions.k20 + 10).h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
@@ -58,7 +59,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView>
                     ),
                   ),
                 ),
-                SizedBox(height: GlobalConstants.k16.h),
+                SizedBox(height: AppDimentions.k16.h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text.rich(
@@ -85,7 +86,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView>
                     ),
                   ),
                 ),
-                SizedBox(height: (GlobalConstants.k20 + 4).h),
+                SizedBox(height: (AppDimentions.k20 + 4).h),
                 AppTextField(
                   controller: _passwordController,
                   labelText: 'Password',
@@ -100,7 +101,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView>
                   },
                   validator: (_) => validatePassword(_!),
                 ),
-                const SizedBox(height: GlobalConstants.k14),
+                const SizedBox(height: AppDimentions.k14),
                 AppTextField(
                   controller: _confirmPasswordController,
                   labelText: 'Confirm Password',
@@ -117,7 +118,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView>
                       _passwordController.text,
                       _confirmPasswordController.text),
                 ),
-                SizedBox(height: GlobalConstants.k20.h),
+                SizedBox(height: AppDimentions.k20.h),
                 AppButton(
                   btnText: 'Reset Password',
                   buttonType: ButtonType.LONG_BTN,
@@ -128,7 +129,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView>
                     Go(context, routeName: ResetPasswordView.routeName).to();
                   },
                 ),
-                const SizedBox(height: (GlobalConstants.k12 - 2) * 2),
+                const SizedBox(height: (AppDimentions.k12 - 2) * 2),
               ],
             ),
           ),

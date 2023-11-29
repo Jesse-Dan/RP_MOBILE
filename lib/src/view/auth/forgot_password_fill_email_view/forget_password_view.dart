@@ -10,6 +10,7 @@ import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 import '../../../utils/constants/global_constants.dart';
 import '../../../utils/enums/enums.dart';
 import '../../../utils/style/app_colors.dart';
+import '../../../utils/style/app_dimentions.dart';
 
 class ForgotPasswordView extends StatefulWidget {
   static const routeName = '/forgot.password.view';
@@ -40,7 +41,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView>
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 100.h),
-                SizedBox(height: (GlobalConstants.k20 + 10).h),
+                SizedBox(height: (AppDimentions.k20 + 10).h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
@@ -53,7 +54,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView>
                     ),
                   ),
                 ),
-                SizedBox(height: GlobalConstants.k16.h),
+                SizedBox(height: AppDimentions.k16.h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text.rich(
@@ -80,12 +81,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView>
                     ),
                   ),
                 ),
-                SizedBox(height: ((GlobalConstants.k20 + 4) * 3).h),
+                SizedBox(height: ((AppDimentions.k20 + 4) * 3).h),
                 AppTextField(
                     controller: _emailController,
                     labelText: 'Email I’D/ Mobile Number',
                     hintText: 'Enter email linked to your account'),
-                SizedBox(height: (GlobalConstants.k20 + 4).h),
+                SizedBox(height: (AppDimentions.k20 + 4).h),
                 AppButton(
                   btnText: 'Continue',
                   buttonType: ButtonType.LONG_BTN,

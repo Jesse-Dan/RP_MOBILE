@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:navigation_system/navigation_system.dart';
+import 'package:recenth_posts/src/logic/bloc/app/comments/comment_bloc.dart';
+import 'package:recenth_posts/src/logic/bloc/app/comments/comment_state.dart';
 import 'package:recenth_posts/src/logic/bloc/app/countries/country_state.dart';
 import 'package:recenth_posts/src/logic/bloc/app/post/index.dart';
+import 'package:recenth_posts/src/logic/bloc/app/reactions/reaction_bloc.dart';
+import 'package:recenth_posts/src/logic/bloc/app/reactions/reaction_state.dart';
+import 'package:recenth_posts/src/logic/bloc/app/views/view_bloc.dart';
+import 'package:recenth_posts/src/logic/bloc/app/views/view_state.dart';
 import 'package:recenth_posts/src/logic/repository/auth/auth_repo.dart';
+import 'package:recenth_posts/src/utils/style/app_theme.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
@@ -54,8 +61,19 @@ class _MainAppState extends State<MainApp> {
                 BlocProvider(
                   create: (context) => AuthBloc(const AuthInitialState()),
                 ),
+                BlocProvider(
+                  create: (context) => CommentBloc(const CommentInitialState()),
+                ),
+                BlocProvider(
+                  create: (context) =>
+                      ReactionBloc(const ReactionInitialState()),
+                ),
+                BlocProvider(
+                  create: (context) => ViewBloc(const ViewInitialState()),
+                ),
               ],
               child: MaterialApp(
+                  theme: AppTheme.lightThemeData(context),
                   onGenerateRoute: (RouteSettings routeSettings) =>
                       NavigationSystem(
                         initialRoute: const SplashScreenView(),

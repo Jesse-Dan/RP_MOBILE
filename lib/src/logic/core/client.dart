@@ -84,23 +84,3 @@ class ApiClient with ClientInterface, ClientUtils {
     }
   }
 }
-
-void main() async {
-  final httpService = ApiClient();
-
-  try {
-    final response = await httpService.sendRequest(
-      endpoint: 'https://jsonplaceholder.typicode.com/posts/1',
-      method: HttpMethod.get,
-    );
-
-    if (kDebugMode) {
-      print(response);
-    }
-  } catch (error) {
-    // Handle errors specific to this use case or log them
-    if (kDebugMode) {
-      print('Main Error: $error');
-    }
-  }
-}

@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 
@@ -15,7 +17,7 @@ class BaseScaffold extends StatefulWidget {
       this.addAppBar,
       this.refreshable = false,
       this.physics,
-       this.onRefresh});
+      this.onRefresh,});
 
   final Color? backgroundColor;
   final bool addBackgroundColor;
@@ -67,7 +69,11 @@ class _BaseScaffoldState extends State<BaseScaffold> {
         child: widget.addbodyPadding
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: widget.body)
-            : widget.body);
+                child: _wBody())
+            : _wBody());
+  }
+
+  _wBody() {
+    return (widget.body);
   }
 }

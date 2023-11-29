@@ -30,7 +30,8 @@ class AppButton extends StatelessWidget {
       this.btnContent,
       this.boxShadowColor,
       this.loading = false,
-      this.loadingText = 'loading'})
+      this.loadingText = 'loading',
+      this.borderRadius})
       : super(key: key) {
     // if ((btnContentType != BtnContentType.TEXT && btnContent == null) ||
     //     (btnContentType != BtnContentType.TEXT &&
@@ -63,47 +64,50 @@ class AppButton extends StatelessWidget {
   final Color? boxShadowColor;
   final bool loading;
   final String loadingText;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onDoubleTap: loading ? null : onDoubleTap,
-      onTap: loading ? null : onTap,
-      onLongPress: loading ? null : onLongPress,
-      child: Container(
-        margin: (applyInternalPadding ?? false)
-            ? const EdgeInsets.all(5)
-            : const EdgeInsets.all(0),
-        height: 60,
-        width: (buttonType ?? ButtonType.SHORT_BTN) == ButtonType.LONG_BTN
-            ? double.infinity
-            : width,
-        decoration: BoxDecoration(
-          border: addBorder ?? false
-              ? Border.all(color: borderColor ?? Colors.white)
-              : null,
-          borderRadius: BorderRadius.circular(9.sp),
-          color: btnColor ?? AppColors.kwineColor,
-          boxShadow: !addboxShadow
+    return Flexible(
+            child:GestureDetector(
+        onDoubleTap: loading ? null : onDoubleTap,
+        onTap: loading ? null : onTap,
+        onLongPress: loading ? null : onLongPress,
+        child: Container(
+          margin: (applyInternalPadding ?? false)
+              ? const EdgeInsets.all(5)
+              : const EdgeInsets.all(0),
+          height: 60,
+          width: (buttonType ?? ButtonType.SHORT_BTN) == ButtonType.LONG_BTN
               ? null
-              : boxShadow ??
-                  [
-                    BoxShadow(
-                      color: boxShadowColor ??
-                          AppColors.kblackColor.withOpacity(0.1),
-                      offset: const Offset(2,
-                          2), // Increase the offset for a more visible shadow
-                      blurStyle: BlurStyle.outer,
-                      blurRadius:
-                          7, // Increase the blur radius for a softer shadow
-                    )
-                  ],
-        ),
-        child: Align(
-          alignment: Alignment.center,
-          child: btnContentType == BtnContentType.IMG
-              ? btnContent
-              : _loaderByText(),
+              : width,
+          decoration: BoxDecoration(
+            border: addBorder ?? false
+                ? Border.all(color: borderColor ?? Colors.white)
+                : null,
+            borderRadius: BorderRadius.circular(borderRadius ?? 28.sp),
+            color: btnColor ?? AppColors.kprimaryColor500,
+            boxShadow: !addboxShadow
+                ? null
+                : boxShadow ??
+                    [
+                      BoxShadow(
+                        color: boxShadowColor ??
+                            AppColors.kblackColor.withOpacity(0.1),
+                        offset: const Offset(2,
+                            2), // Increase the offset for a more visible shadow
+                        blurStyle: BlurStyle.outer,
+                        blurRadius:
+                            7, // Increase the blur radius for a softer shadow
+                      )
+                    ],
+          ),
+          child: Align(
+            alignment: Alignment.center,
+            child: btnContentType == BtnContentType.IMG
+                ? btnContent
+                : _loaderByText(),
+          ),
         ),
       ),
     );

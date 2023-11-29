@@ -10,6 +10,7 @@ import '../../../utils/components/app_text_field.dart';
 import '../../../utils/constants/global_constants.dart';
 import '../../../utils/enums/enums.dart';
 import '../../../utils/style/app_colors.dart';
+import '../../../utils/style/app_dimentions.dart';
 import '../reset_password_view/reset_password_view.dart';
 
 class OtpView extends StatefulWidget {
@@ -43,7 +44,7 @@ class _OtpViewState extends State<OtpView> with ValidatorMixin {
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 100.h),
-                SizedBox(height: (GlobalConstants.k20 + 10).h),
+                SizedBox(height: (AppDimentions.k20 + 10).h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
@@ -56,7 +57,7 @@ class _OtpViewState extends State<OtpView> with ValidatorMixin {
                     ),
                   ),
                 ),
-                SizedBox(height: GlobalConstants.k16.h),
+                SizedBox(height: AppDimentions.k16.h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text.rich(
@@ -83,7 +84,7 @@ class _OtpViewState extends State<OtpView> with ValidatorMixin {
                     ),
                   ),
                 ),
-                SizedBox(height: (GlobalConstants.k20 + 10).h),
+                SizedBox(height: (AppDimentions.k20 + 10).h),
                 AppTextField(
                   controller: _otpController,
                   labelText: 'One time Password',
@@ -98,7 +99,7 @@ class _OtpViewState extends State<OtpView> with ValidatorMixin {
                   },
                   validator: (_) => validateTextField(_ ?? ''),
                 ),
-                SizedBox(height: (GlobalConstants.k20 + 10).h),
+                SizedBox(height: (AppDimentions.k20 + 10).h),
                 AppButton(
                   btnText: 'Continue',
                   buttonType: ButtonType.LONG_BTN,
@@ -112,7 +113,7 @@ class _OtpViewState extends State<OtpView> with ValidatorMixin {
                     }
                   },
                 ),
-                const SizedBox(height: (GlobalConstants.k12 - 2) * 2),
+                const SizedBox(height: (AppDimentions.k12 - 2) * 2),
               ],
             ),
           ),

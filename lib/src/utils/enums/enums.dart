@@ -12,6 +12,7 @@ enum Tag {
 
 enum ButtonType { LONG_BTN, SHORT_BTN }
 
+
 enum ResponseType {
   Success,
   Error,

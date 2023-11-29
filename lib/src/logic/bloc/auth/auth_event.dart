@@ -36,10 +36,14 @@ class UserLoginEvent extends AuthEvent {
     try {
       yield const AuthLoadingState();
       var res = await authRepository.login(loginPayload: loginPayload);
+      Logger(tag: Tag.CALLBACK, message: res.$1.toString());
       if (res.$2 == ResponseType.Success) {
         var data = LoginResponse.fromJson(res.$1!);
-        _localStgService.saveData(
-            GlobalConstants.BEARER_TOKEN, data.data?.bearerToken);
+        await _localStgService.saveData(
+            GlobalConstants.BEARER_TOKEN, data.data?.token);
+        Logger(
+            tag: Tag.CALLBACK,
+            message: _localStgService.getData(GlobalConstants.BEARER_TOKEN));
         yield LoginLoadedState(postResponses: data);
       }
 

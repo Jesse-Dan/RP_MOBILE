@@ -19,6 +19,7 @@ import '../../../utils/components/app_check_box.dart';
 import '../../../utils/components/app_text_field.dart';
 import '../../../utils/constants/global_constants.dart';
 import '../../../utils/style/app_colors.dart';
+import '../../../utils/style/app_dimentions.dart';
 import '../../app/posts/post_view.dart';
 import '../../base/base_scaffold.dart';
 import '../forgot_password_fill_email_view/forget_password_view.dart';
@@ -90,7 +91,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 100.h),
-                  SizedBox(height: (GlobalConstants.k20 + 10).h),
+                  SizedBox(height: (AppDimentions.k20 + 10).h),
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
@@ -103,7 +104,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                       ),
                     ),
                   ),
-                  SizedBox(height: GlobalConstants.k16.h),
+                  SizedBox(height: AppDimentions.k16.h),
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text.rich(
@@ -128,7 +129,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                       ),
                     ),
                   ),
-                  const SizedBox(height: GlobalConstants.k20 * 1.5),
+                  const SizedBox(height: AppDimentions.k20 * 1.5),
                   AppTextField(
                     controller: _emailController,
                     labelText: 'Email',
@@ -137,7 +138,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                     validator: (_) => validateEmail(_ ?? ''),
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  const SizedBox(height: GlobalConstants.k16),
+                  const SizedBox(height: AppDimentions.k16),
                   AppTextField(
                     controller: _passwordController,
                     labelText: 'Password',
@@ -152,7 +153,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                       });
                     },
                   ),
-                  const SizedBox(height: GlobalConstants.k16 + 4),
+                  const SizedBox(height: AppDimentions.k16 + 4),
                   Align(
                     alignment: Alignment.topRight,
                     child: InkWell(
@@ -171,7 +172,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                       ),
                     ),
                   ),
-                  const SizedBox(height: (GlobalConstants.k12 - 2) * 5),
+                  const SizedBox(height: (AppDimentions.k12 - 2) * 5),
                   // isNewUser
                   //     ? const SizedBox.shrink()
                   //     :
@@ -189,7 +190,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                     emptyColor: AppColors.kdotGrey,
                     textColor: AppColors.kblackColor,
                   ),
-                  const SizedBox(height: GlobalConstants.k16),
+                  const SizedBox(height: AppDimentions.k16),
                   AppButton(
                     btnText: 'Sign in',
                     buttonType: ButtonType.LONG_BTN,
@@ -209,7 +210,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                       }
                     },
                   ),
-                  const SizedBox(height: GlobalConstants.k20),
+                  const SizedBox(height: AppDimentions.k20),
 
                   Align(
                     alignment: Alignment.center,
@@ -244,7 +245,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                       ],
                     ),
                   ),
-                  const SizedBox(height: GlobalConstants.k20),
+                  const SizedBox(height: AppDimentions.k20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,14 +255,14 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                           imageWidget:
                               SvgPicture.asset('assets/images/_Facebook.svg'),
                           buttonText: 'Facebook'),
-                      const SizedBox(height: GlobalConstants.k16),
+                      const SizedBox(height: AppDimentions.k16),
                       SocialButton(
                           imageWidget:
                               SvgPicture.asset('assets/images/google.svg'),
                           buttonText: 'Google')
                     ],
                   ),
-                  const SizedBox(height: GlobalConstants.k20 + 40),
+                  const SizedBox(height: AppDimentions.k20 + 40),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Text.rich(
@@ -307,7 +308,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                       ),
                     ),
                   ),
-                  const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+                  const SizedBox(height: (AppDimentions.k16 * 2) + 7),
                 ],
               ),
             ),
@@ -345,7 +346,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             )
           ],
         ),
-        const SizedBox(height: GlobalConstants.k16 + 2),
+        const SizedBox(height: AppDimentions.k16 + 2),
         Align(
           alignment: Alignment.topCenter,
           child: Image.asset(
@@ -354,7 +355,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             height: 38,
           ),
         ),
-        const SizedBox(height: GlobalConstants.k16 * 2.5),
+        const SizedBox(height: AppDimentions.k16 * 2.5),
         const Text(
           'Sign in',
           style: TextStyle(
@@ -365,7 +366,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             height: 0,
           ),
         ),
-        const SizedBox(height: GlobalConstants.k12 - 2),
+        const SizedBox(height: AppDimentions.k12 - 2),
         const Text(
           'Welcome back!',
           textAlign: TextAlign.center,
@@ -377,14 +378,14 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             height: 0,
           ),
         ),
-        const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+        const SizedBox(height: (AppDimentions.k16 * 2) + 7),
         AppTextField(controller: _emailController, hintText: 'Email'),
-        const SizedBox(height: GlobalConstants.k20),
+        const SizedBox(height: AppDimentions.k20),
         AppTextField(
             controller: _passwordController,
             hintText: 'Password',
             obscureText: true),
-        const SizedBox(height: GlobalConstants.k16 + 4),
+        const SizedBox(height: AppDimentions.k16 + 4),
         const Align(
           alignment: Alignment.topRight,
           child: Text(
@@ -398,7 +399,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             ),
           ),
         ),
-        const SizedBox(height: (GlobalConstants.k12 - 2) * 3),
+        const SizedBox(height: (AppDimentions.k12 - 2) * 3),
         AppCheckBox(
           isChecked: check,
           onChanged: (bool value) {
@@ -412,12 +413,12 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
           disabledColor: AppColors.kdotGrey,
           emptyColor: AppColors.kdotGrey,
         ),
-        const SizedBox(height: GlobalConstants.k12 - 2),
+        const SizedBox(height: AppDimentions.k12 - 2),
         AppButton(
           btnText: 'Sign in',
           buttonType: ButtonType.LONG_BTN,
         ),
-        const SizedBox(height: GlobalConstants.k16 * 3),
+        const SizedBox(height: AppDimentions.k16 * 3),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -448,9 +449,9 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             ),
           ],
         ),
-        const SizedBox(height: GlobalConstants.k16 * 2),
+        const SizedBox(height: AppDimentions.k16 * 2),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: GlobalConstants.k12 - 2),
+          padding: EdgeInsets.symmetric(horizontal: AppDimentions.k12 - 2),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -477,7 +478,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             ],
           ),
         ),
-        const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+        const SizedBox(height: (AppDimentions.k16 * 2) + 7),
         Align(
           alignment: Alignment.bottomCenter,
           child: Text.rich(
@@ -522,7 +523,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             ),
           ),
         ),
-        const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+        const SizedBox(height: (AppDimentions.k16 * 2) + 7),
       ],
     );
   }

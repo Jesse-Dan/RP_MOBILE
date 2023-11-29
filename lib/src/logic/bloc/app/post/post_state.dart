@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:recenth_posts/src/logic/models/app/post/res/comment_response.dart';
 import 'package:recenth_posts/src/logic/models/app/post/res/get_all_post_response.dart';
+
+import '../../../models/app/post/res/react_response.dart';
+import '../../../models/app/post/res/view_response.dart';
 
 abstract class PostState extends Equatable {
   const PostState();
@@ -9,13 +13,43 @@ abstract class PostState extends Equatable {
 }
 
 class PostLoadedState extends PostState {
-  final List<PostResponse> postResponses;
-  const PostLoadedState({required this.postResponses});
+  final List<Post> postResponse;
+  const PostLoadedState({required this.postResponse});
 
   @override
   String toString() => 'UnPostState';
   @override
-  List<Object> get props => [postResponses];
+  List<Object> get props => [postResponse];
+}
+
+class ViewsLoadedState extends PostState {
+  final List<View> views;
+  const ViewsLoadedState({required this.views});
+
+  @override
+  String toString() => 'UnPostState';
+  @override
+  List<Object> get props => [views];
+}
+
+class CommentsLoadedState extends PostState {
+  final List<Comment> comments;
+  const CommentsLoadedState({required this.comments});
+
+  @override
+  String toString() => 'UnPostState';
+  @override
+  List<Object> get props => [comments];
+}
+
+class ReactionLoadedState extends PostState {
+  final List<Reaction> reactions;
+  const ReactionLoadedState({required this.reactions});
+
+  @override
+  String toString() => 'UnPostState';
+  @override
+  List<Object> get props => [reactions];
 }
 
 class PostInitialState extends PostState {

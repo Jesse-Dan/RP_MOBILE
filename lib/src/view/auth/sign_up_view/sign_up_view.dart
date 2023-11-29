@@ -25,6 +25,7 @@ import '../../../utils/components/app_check_box.dart';
 import '../../../utils/components/app_text_field.dart';
 import '../../../utils/constants/global_constants.dart';
 import '../../../utils/style/app_colors.dart';
+import '../../../utils/style/app_dimentions.dart';
 import '../../base/base_scaffold.dart';
 import '../sign_in_view/components/social_btn.dart';
 import '../sign_in_view/sign_in_view.dart';
@@ -123,7 +124,7 @@ class _RegistrationViewState extends State<RegistrationView>
               key: _formKey,
               child: Column(children: [
                 SizedBox(height: 100.h),
-                SizedBox(height: (GlobalConstants.k20 + 10).h),
+                SizedBox(height: (AppDimentions.k20 + 10).h),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -136,7 +137,7 @@ class _RegistrationViewState extends State<RegistrationView>
                     ),
                   ),
                 ),
-                SizedBox(height: GlobalConstants.k16.h),
+                SizedBox(height: AppDimentions.k16.h),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -150,7 +151,7 @@ class _RegistrationViewState extends State<RegistrationView>
                     ),
                   ),
                 ),
-                const SizedBox(height: GlobalConstants.k20 * 1.5),
+                const SizedBox(height: AppDimentions.k20 * 1.5),
                 AppTextField(
                   controller: _firstNameController,
                   labelText: 'First Name',
@@ -159,7 +160,7 @@ class _RegistrationViewState extends State<RegistrationView>
                   keyboardType: TextInputType.name,
                   validator: (_) => validateTextField(_!),
                 ),
-                const SizedBox(height: GlobalConstants.k14),
+                const SizedBox(height: AppDimentions.k14),
                 AppTextField(
                   controller: _lastNameController,
                   labelText: 'Last Name',
@@ -168,7 +169,7 @@ class _RegistrationViewState extends State<RegistrationView>
                   keyboardType: TextInputType.name,
                   validator: (_) => validateTextField(_!),
                 ),
-                const SizedBox(height: GlobalConstants.k14),
+                const SizedBox(height: AppDimentions.k14),
                 AppTextField(
                   controller: _emailController,
                   labelText: 'Email',
@@ -177,7 +178,7 @@ class _RegistrationViewState extends State<RegistrationView>
                   keyboardType: TextInputType.emailAddress,
                   validator: (_) => validateEmail(_!),
                 ),
-                const SizedBox(height: GlobalConstants.k14),
+                const SizedBox(height: AppDimentions.k14),
                 BlocBuilder<CountryBloc, CountryState>(
                   builder: (context, state) {
                     return AppTextField(
@@ -192,7 +193,7 @@ class _RegistrationViewState extends State<RegistrationView>
                     );
                   },
                 ),
-                const SizedBox(height: GlobalConstants.k14),
+                const SizedBox(height: AppDimentions.k14),
                 AppTextField(
                   controller: _passwordController,
                   labelText: 'Password',
@@ -207,7 +208,7 @@ class _RegistrationViewState extends State<RegistrationView>
                   },
                   validator: (_) => validatePassword(_!),
                 ),
-                const SizedBox(height: GlobalConstants.k14),
+                const SizedBox(height: AppDimentions.k14),
                 AppTextField(
                   controller: _confirmPasswordController,
                   labelText: 'Confirm Password',
@@ -224,7 +225,7 @@ class _RegistrationViewState extends State<RegistrationView>
                       _passwordController.text,
                       _confirmPasswordController.text),
                 ),
-                const SizedBox(height: (GlobalConstants.k12 - 2) * 2),
+                const SizedBox(height: (AppDimentions.k12 - 2) * 2),
                 isNewUser
                     ? const SizedBox.shrink()
                     : AppCheckBox(
@@ -240,7 +241,7 @@ class _RegistrationViewState extends State<RegistrationView>
                         disabledColor: AppColors.kdotGrey,
                         emptyColor: AppColors.kdotGrey,
                       ),
-                const SizedBox(height: GlobalConstants.k12),
+                const SizedBox(height: AppDimentions.k12),
                 AppButton(
                   btnText: 'Register',
                   buttonType: ButtonType.LONG_BTN,
@@ -268,7 +269,7 @@ class _RegistrationViewState extends State<RegistrationView>
                     }
                   },
                 ),
-                const SizedBox(height: GlobalConstants.k20),
+                const SizedBox(height: AppDimentions.k20),
                 Align(
                   alignment: Alignment.center,
                   child: Row(
@@ -302,7 +303,7 @@ class _RegistrationViewState extends State<RegistrationView>
                     ],
                   ),
                 ),
-                const SizedBox(height: GlobalConstants.k20),
+                const SizedBox(height: AppDimentions.k20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,14 +313,14 @@ class _RegistrationViewState extends State<RegistrationView>
                         imageWidget:
                             SvgPicture.asset('assets/images/_Facebook.svg'),
                         buttonText: 'Facebook'),
-                    const SizedBox(height: GlobalConstants.k16),
+                    const SizedBox(height: AppDimentions.k16),
                     SocialButton(
                         imageWidget:
                             SvgPicture.asset('assets/images/google.svg'),
                         buttonText: 'Google')
                   ],
                 ),
-                const SizedBox(height: GlobalConstants.k20 + 40),
+                const SizedBox(height: AppDimentions.k20 + 40),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Text.rich(
@@ -365,7 +366,7 @@ class _RegistrationViewState extends State<RegistrationView>
                     ),
                   ),
                 ),
-                const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+                const SizedBox(height: (AppDimentions.k16 * 2) + 7),
               ]),
             ),
           ],
@@ -413,7 +414,7 @@ class _RegistrationViewState extends State<RegistrationView>
             )
           ],
         ),
-        const SizedBox(height: GlobalConstants.k16 + 2),
+        const SizedBox(height: AppDimentions.k16 + 2),
         Align(
           alignment: Alignment.topCenter,
           child: Image.asset(
@@ -422,7 +423,7 @@ class _RegistrationViewState extends State<RegistrationView>
             height: 38,
           ),
         ),
-        const SizedBox(height: GlobalConstants.k16 * 2.5),
+        const SizedBox(height: AppDimentions.k16 * 2.5),
         const Text(
           'Sign up',
           style: TextStyle(
@@ -433,7 +434,7 @@ class _RegistrationViewState extends State<RegistrationView>
             height: 0,
           ),
         ),
-        const SizedBox(height: GlobalConstants.k12 - 2),
+        const SizedBox(height: AppDimentions.k12 - 2),
         const Text(
           'Feed your urge for recent updates',
           textAlign: TextAlign.center,
@@ -445,23 +446,23 @@ class _RegistrationViewState extends State<RegistrationView>
             height: 0,
           ),
         ),
-        const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+        const SizedBox(height: (AppDimentions.k16 * 2) + 7),
         AppTextField(controller: _firstNameController, hintText: 'First Name'),
-        const SizedBox(height: GlobalConstants.k16),
+        const SizedBox(height: AppDimentions.k16),
         AppTextField(controller: _lastNameController, hintText: 'Last Name'),
-        const SizedBox(height: GlobalConstants.k16),
+        const SizedBox(height: AppDimentions.k16),
         AppTextField(controller: _emailController, hintText: 'Email'),
-        const SizedBox(height: GlobalConstants.k16),
+        const SizedBox(height: AppDimentions.k16),
         AppTextField(
             controller: _passwordController,
             hintText: 'Password',
             obscureText: true),
-        const SizedBox(height: GlobalConstants.k16),
+        const SizedBox(height: AppDimentions.k16),
         AppTextField(
             controller: _confirmPasswordController,
             hintText: 'Confirm Password',
             obscureText: true),
-        const SizedBox(height: GlobalConstants.k16 + 4),
+        const SizedBox(height: AppDimentions.k16 + 4),
         // Align(
         //   alignment: Alignment.topRight,
         //   child: TextButton(
@@ -478,7 +479,7 @@ class _RegistrationViewState extends State<RegistrationView>
         //     ),
         //   ),
         // ),
-        const SizedBox(height: (GlobalConstants.k12 - 2) * 3),
+        const SizedBox(height: (AppDimentions.k12 - 2) * 3),
         AppCheckBox(
           isChecked: check,
           onChanged: (bool value) {
@@ -492,12 +493,12 @@ class _RegistrationViewState extends State<RegistrationView>
           disabledColor: AppColors.kdotGrey,
           emptyColor: AppColors.kdotGrey,
         ),
-        const SizedBox(height: GlobalConstants.k12 - 2),
+        const SizedBox(height: AppDimentions.k12 - 2),
         AppButton(
           btnText: 'Sign up',
           buttonType: ButtonType.LONG_BTN,
         ),
-        const SizedBox(height: GlobalConstants.k16 * 3),
+        const SizedBox(height: AppDimentions.k16 * 3),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -528,9 +529,9 @@ class _RegistrationViewState extends State<RegistrationView>
             ),
           ],
         ),
-        const SizedBox(height: GlobalConstants.k16 * 2),
+        const SizedBox(height: AppDimentions.k16 * 2),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: GlobalConstants.k12 - 2),
+          padding: EdgeInsets.symmetric(horizontal: AppDimentions.k12 - 2),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -557,7 +558,7 @@ class _RegistrationViewState extends State<RegistrationView>
             ],
           ),
         ),
-        const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+        const SizedBox(height: (AppDimentions.k16 * 2) + 7),
         Align(
           alignment: Alignment.bottomCenter,
           child: Text.rich(
@@ -602,7 +603,7 @@ class _RegistrationViewState extends State<RegistrationView>
             ),
           ),
         ),
-        const SizedBox(height: (GlobalConstants.k16 * 2) + 7),
+        const SizedBox(height: (AppDimentions.k16 * 2) + 7),
       ],
     );
   }

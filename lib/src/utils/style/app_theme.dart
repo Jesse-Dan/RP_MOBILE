@@ -31,7 +31,7 @@ class AppTheme extends AppColors {
     }
   }
 
- static  Color userColor({
+  static Color userColor({
     required Color? darkColor,
     required Color? lightColor,
     required BuildContext context,
@@ -48,7 +48,6 @@ class AppTheme extends AppColors {
   static lightThemeData(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
-   
       textTheme: getTextTheme(),
       primaryTextTheme: getTextTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -56,9 +55,8 @@ class AppTheme extends AppColors {
   }
 
   static darkThemeData(BuildContext context) {
-     return ThemeData(
+    return ThemeData(
       useMaterial3: true,
-   
       textTheme: getTextTheme(),
       primaryTextTheme: getTextTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -67,19 +65,69 @@ class AppTheme extends AppColors {
 
   static TextTheme getTextTheme() {
     return const TextTheme(
-      bodyText1: TextStyle(fontFamily: "Aeonik"),
-      bodyText2: TextStyle(fontFamily: "Aeonik"),
-      headline1: TextStyle(fontFamily: "Aeonik"),
-      headline2: TextStyle(fontFamily: "Aeonik"),
-      headline3: TextStyle(fontFamily: "Aeonik"),
-      headline4: TextStyle(fontFamily: "Aeonik"),
-      headline5: TextStyle(fontFamily: "Aeonik"),
-      headline6: TextStyle(fontFamily: "Aeonik"),
-      subtitle1: TextStyle(fontFamily: "Aeonik"),
-      subtitle2: TextStyle(fontFamily: "Aeonik"),
-      button: TextStyle(fontFamily: "Aeonik"),
-      caption: TextStyle(fontFamily: "Aeonik"),
-      overline: TextStyle(fontFamily: "Aeonik"),
+      bodyText1: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 14,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w700,
+      ),
+      bodyText2: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 14,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w700,
+      ),
+      headline2: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 32,
+        fontFamily: "Poppins",
+        fontWeight: FontWeight.w700,
+      ),
+      headline1: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 32,
+        fontFamily: "Poppins",
+        fontWeight: FontWeight.w700,
+      ),
+      headline3: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 32,
+        fontFamily: "Poppins",
+        fontWeight: FontWeight.w700,
+      ),
+      headline4: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 32,
+        fontFamily: "Poppins",
+        fontWeight: FontWeight.w700,
+      ),
+      headline5: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 32,
+        fontFamily: "Poppins",
+        fontWeight: FontWeight.w700,
+      ),
+      headline6: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 32,
+        fontFamily: "Poppins",
+        fontWeight: FontWeight.w700,
+      ),
+      subtitle1: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 16,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w400,
+      ),
+      subtitle2: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 15,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w200,
+      ),
+      button: TextStyle(fontFamily: "DM Sans"),
+      caption: TextStyle(fontFamily: "DM Sans"),
+      overline: TextStyle(fontFamily: "DM Sans"),
     );
   }
 

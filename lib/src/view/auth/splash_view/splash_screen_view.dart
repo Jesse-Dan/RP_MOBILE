@@ -1,10 +1,14 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/view/auth/onboarding_view/onboarding_view.dart';
+import 'package:recenth_posts/src/utils/style/app_colors.dart';
+import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
+
 import '../../base/base_scaffold.dart';
+import '../onboarding_view/onboarding_view.dart';
 
 class SplashScreenView extends StatefulWidget {
   static String routeName = '/splash.screen.view';
@@ -18,36 +22,43 @@ class SplashScreenView extends StatefulWidget {
 class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
-Timer(const Duration(seconds: 4), () {
-          Go(context, routeName: OnboardingView.routeName).toAndClearAll();
-        });    super.initState();
+    Timer(const Duration(seconds: 4), () {
+      Go(context, routeName: OnboardingView.routeName).toAndClearAll();
+    });
+    super.initState();
   }
-
-  // Future<void> _initialize() async {
-    // try {
-    //   CSFRTokenRepo csfrTokenRepo = CSFRTokenRepo();
-    //   if (await csfrTokenRepo.getToken()) {
-    //     Timer(const Duration(seconds: 4), () {
-    //       Go(context, routeName: OnboardingView.routeName).toAndClearAll();
-    //     });
-    //   } else {
-    //     Go(context).pop();
-    //   }
-    // } catch (e) {
-    //   ErrorHandler(context: context,message: e.toString());
-    //   Go(context).pop();
-    // }
-  // }
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
+      backgroundColor: AppColors.kprimaryColor100,
       body: Align(
         alignment: Alignment.center,
-        child: Image.asset(
-          'assets/images/rp_logo_with_text.png',
-          width: 218,
-          height: 38,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppDimentions.space(height: 282),
+            Image.asset(
+              'assets/images/MainLogo.png',
+              width: 303.80,
+              height: 120.22,
+            ),
+            const SizedBox(height: AppDimentions.k20),
+            SizedBox(
+              width: 232,
+              child: Text(
+                'Share your life\'s moments and connect with others.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.useHex('#232323'),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
