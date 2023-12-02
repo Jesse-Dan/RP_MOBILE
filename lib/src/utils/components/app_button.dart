@@ -69,7 +69,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-            child:GestureDetector(
+      child: GestureDetector(
         onDoubleTap: loading ? null : onDoubleTap,
         onTap: loading ? null : onTap,
         onLongPress: loading ? null : onLongPress,
@@ -77,7 +77,7 @@ class AppButton extends StatelessWidget {
           margin: (applyInternalPadding ?? false)
               ? const EdgeInsets.all(5)
               : const EdgeInsets.all(0),
-          height: 60,
+          height: 56,
           width: (buttonType ?? ButtonType.SHORT_BTN) == ButtonType.LONG_BTN
               ? null
               : width,
@@ -134,7 +134,7 @@ class AppButton extends StatelessWidget {
       style: btnTxtFontStyle ??
           TextStyle(
             fontFamily: 'Satoshi',
-            color: btnTextColor ?? AppColors.kWhiteColor,
+            color: btnTextColor ?? AppColors.kbrandWhite,
             fontSize: btnTxtFontSize ?? 14.sp,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.36.sp,
