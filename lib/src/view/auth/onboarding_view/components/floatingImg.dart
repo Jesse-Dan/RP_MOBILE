@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -5,13 +7,14 @@ import '../../../../logic/models/app/onboarding_screen/onboarding_screen.dart';
 
 class FloatingImage extends StatefulWidget {
   final int currentIndex;
-  final PageController pageController;
   final void Function(int)? onPageChanged;
+  final PageController pageController;
+
   const FloatingImage(
       {super.key,
-      required this.pageController,
       required this.currentIndex,
-      this.onPageChanged});
+      this.onPageChanged,
+      required this.pageController});
 
   @override
   State<FloatingImage> createState() => _FloatingImageState();
@@ -29,17 +32,17 @@ class _FloatingImageState extends State<FloatingImage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      itemCount: OnboardingViewModel.pages.length,
-      onPageChanged: widget.onPageChanged,
-      itemBuilder: (context, i) {
-        return Positioned(
-            top: 50,
-            left: MediaQuery.of(context).size.width / 6,
-            child: Image.asset('assets/images/home_post_img.png')
-                .animate()
-                .slideY(duration: const Duration(milliseconds: 100)));
-      },
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: Positioned(
+        top: 50,
+        left: MediaQuery.of(context).size.width / 6,
+        child: OnboardingViewModel.pages[widget.currentIndex].imgWiget
+            .animate()
+            .slide(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInBack),
+      ),
     );
   }
 }

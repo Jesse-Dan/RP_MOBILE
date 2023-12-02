@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -9,18 +11,23 @@ import '../../../../utils/style/app_colors.dart';
 import '../../../../utils/style/app_dimentions.dart';
 import 'btns.dart';
 
-class MyWidget extends StatefulWidget {
+class ButtomSection extends StatefulWidget {
   final int currentIndex;
   final PageController pageController;
   final void Function()? onTap;
-  const MyWidget(
-      {super.key, required this.pageController, required this.currentIndex, this.onTap});
+  final void Function(int)? onDotClicked;
+  const ButtomSection(
+      {super.key,
+      required this.pageController,
+      required this.currentIndex,
+      this.onTap,
+      this.onDotClicked});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<ButtomSection> createState() => _ButtomSectionState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _ButtomSectionState extends State<ButtomSection> {
   int currentIndex = 0;
 
   @override
@@ -39,8 +46,7 @@ class _MyWidgetState extends State<MyWidget> {
         width: double.infinity,
         padding: EdgeInsets.all(
             AppDimentions.buildDimention(20, operation: "+", dimention: 4)),
-        child: SizedBox(
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
             child: Column(
               children: [
                 Text(OnboardingViewModel.pages[widget.currentIndex].title,
@@ -66,12 +72,7 @@ class _MyWidgetState extends State<MyWidget> {
                         strokeWidth: 12,
                         activeDotColor: AppColors.kprimaryColor500,
                         dotColor: AppColors.kgrayColor100),
-                    onDotClicked: (index) {
-                      widget.pageController.jumpToPage(index);
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    },
+                    onDotClicked: widget.onDotClicked,
                   ),
                 ),
                 const SizedBox(height: AppDimentions.k20),
@@ -85,7 +86,10 @@ class _MyWidgetState extends State<MyWidget> {
             ),
           ),
         ),
-      ),
-    ).animate().fade(duration: 400.ms).scale(delay: 200.ms);
+      
+    )
+        .animate()
+        .scale(delay: 200.ms)
+        .fade(duration: 500.ms, curve: Curves.easeInExpo);
   }
 }

@@ -13,10 +13,10 @@ class OnboardingViewModel {
 
   static var pages = <OnboardingViewModel>[
     OnboardingViewModel(
-      title: 'Connect with Everyone Instantly!Stay updated, anytime, anywhere.',
+      title: 'Stay updated, anytime, anywhere.',
       subtitle:
           'Welcome to our news app – your ultimate destination for trending news, exclusive stories, and personalized content.',
-      imgWiget: Image.asset('assets/images/ob_1.png'),
+      imgWiget: Image.asset('assets/images/home_post_img.png'),
     ),
     OnboardingViewModel(
       title: 'Share your voice with the world.',
