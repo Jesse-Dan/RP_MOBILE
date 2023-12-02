@@ -4,20 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 
 class BaseScaffold extends StatefulWidget {
-  const BaseScaffold(
-      {super.key,
-      this.backgroundColor,
-      this.bottomNavigationBar,
-      this.body,
-      this.floatingActionButton,
-      this.addBackgroundColor = true,
-      this.appbar,
-      this.addbodyPadding = false,
-      this.addSafeArea = false,
-      this.addAppBar,
-      this.refreshable = false,
-      this.physics,
-      this.onRefresh,});
+  const BaseScaffold({
+    super.key,
+    this.backgroundColor,
+    this.bottomNavigationBar,
+    this.body,
+    this.floatingActionButton,
+    this.addBackgroundColor = true,
+    this.appbar,
+    this.addbodyPadding = false,
+    this.addSafeArea = false,
+    this.addAppBar,
+    this.refreshable = false,
+    this.physics,
+    this.onRefresh,
+  });
 
   final Color? backgroundColor;
   final bool addBackgroundColor;
@@ -53,7 +54,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
     return Scaffold(
       appBar: (widget.addAppBar ?? false) ? (widget.appbar ?? AppBar()) : null,
       backgroundColor: widget.backgroundColor ??
-          (widget.addBackgroundColor ? AppColors.kWhiteColor : null),
+          (widget.addBackgroundColor ? AppColors.kwhiteColor : null),
       body: widget.refreshable
           ? RefreshIndicator.adaptive(
               child: _body(), onRefresh: widget.onRefresh ?? () async {})

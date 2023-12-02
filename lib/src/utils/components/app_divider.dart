@@ -6,7 +6,7 @@ class AppDivider {
         width: width ?? double.infinity,
         height: height ?? 1.2,
         decoration: BoxDecoration(
-          color: color ?? AppColors.kbrandGrey100,
+          color: color ?? AppColors.kgrayColor50,
         ),
       );
 }

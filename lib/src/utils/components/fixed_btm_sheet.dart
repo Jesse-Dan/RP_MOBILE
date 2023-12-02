@@ -45,11 +45,11 @@ class FixedBTMSheet {
               bottom: bottommargin,
               top: topmargin,
             ),
-        height: height ?? 208.h,
+        // height: height ?? 208.h,
         width: width ?? double.infinity,
         decoration: BoxDecoration(
           border: border ??
-              Border.all(color: AppColors.kbrandGrey100, width: 1.5.w),
+              Border.all(color: AppColors.kgrayColor100, width: 1.5.w),
           color: color,
           borderRadius: borderRadius ??
               const BorderRadius.only(

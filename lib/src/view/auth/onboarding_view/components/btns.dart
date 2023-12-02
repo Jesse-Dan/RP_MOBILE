@@ -4,9 +4,12 @@ import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
 
 import '../../../../utils/enums/enums.dart';
+import '../../../../utils/style/app_colors.dart';
 
 class OnboardingAppBtns extends StatefulWidget {
-  const OnboardingAppBtns({super.key});
+  final PageController pageController;
+  final void Function()? onTap;
+  const OnboardingAppBtns({super.key, required this.pageController, this.onTap});
 
   @override
   State<OnboardingAppBtns> createState() => _OnboardingAppBtnsState();
@@ -18,16 +21,9 @@ class _OnboardingAppBtnsState extends State<OnboardingAppBtns> {
     return Container(
       width: 430,
       height: 112,
-      decoration: const BoxDecoration(
-        color: Color(0xFFFEFEFE),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x1E898A8D),
-            blurRadius: 1,
-            offset: Offset(0, -1),
-            spreadRadius: 0,
-          )
-        ],
+      padding: const EdgeInsets.only(top: AppDimentions.k20 + 6),
+      decoration: BoxDecoration(
+        color: AppColors.kwhiteColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,6 +40,7 @@ class _OnboardingAppBtnsState extends State<OnboardingAppBtns> {
           AppButton(
             btnText: 'Continue',
             buttonType: ButtonType.LONG_BTN,
+            onTap:widget.onTap,
           )
         ],
       ),

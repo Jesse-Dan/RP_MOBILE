@@ -13,7 +13,7 @@ class AppColors extends HexColor {
   ///  STANDARD COLOR
 
   static final kblackColor = HexColor('#0B0B0B');
-  static final kWhiteColor = HexColor('#FFFFF');
+  static final kwhiteColor = HexColor('#FFFFFF');
 
   /// ERROR DESIGN COLORS
   static final kerrorColor50 = HexColor('#FDE9EA');

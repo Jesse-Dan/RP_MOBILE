@@ -15,16 +15,16 @@ LoadingProgressIndicator AppCustomSpinner(
   return LoadingProgressIndicator(
     size: (size) ?? 24,
     indicator: BallSpinFadeLoaderProgressIndicator(),
-    color: loaderColor ?? AppColors.kWhiteColor,
+    color: loaderColor ?? AppColors.kwhiteColor,
   );
 }
 
 /// [OVERLAY LOAD]
-Widget AppLoadingIndicator({Color? color,loaderColor}) => Center(
+Widget AppLoadingIndicator({Color? color, loaderColor}) => Center(
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: color ?? AppColors.kWhiteColor,
+          color: color ?? AppColors.kwhiteColor,
         ),
         height: 50,
         width: 50,
