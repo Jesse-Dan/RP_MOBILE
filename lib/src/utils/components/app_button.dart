@@ -69,7 +69,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-            child:GestureDetector(
+      child: GestureDetector(
         onDoubleTap: loading ? null : onDoubleTap,
         onTap: loading ? null : onTap,
         onLongPress: loading ? null : onLongPress,
@@ -134,7 +134,7 @@ class AppButton extends StatelessWidget {
       style: btnTxtFontStyle ??
           TextStyle(
             fontFamily: 'Satoshi',
-            color: btnTextColor ?? AppColors.kWhiteColor,
+            color: btnTextColor ?? AppColors.kwhiteColor,
             fontSize: btnTxtFontSize ?? 14.sp,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.36.sp,
