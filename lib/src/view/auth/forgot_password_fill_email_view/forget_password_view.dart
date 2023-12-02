@@ -6,8 +6,6 @@ import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/components/app_text_field.dart';
 import 'package:recenth_posts/src/view/auth/otp_view/otp_view.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
-
-import '../../../utils/constants/global_constants.dart';
 import '../../../utils/enums/enums.dart';
 import '../../../utils/style/app_colors.dart';
 import '../../../utils/style/app_dimentions.dart';

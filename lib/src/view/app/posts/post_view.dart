@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:navigation_system/go/go.dart';
@@ -182,7 +183,9 @@ class PostWidget extends StatelessWidget {
         // Implement onTap to navigate to a detailed post view
         onTap: () {
           // Implement navigation logic to detailed view
-          print('Tapped on post: ${post.id}');
+          if (kDebugMode) {
+            print('Tapped on post: ${post.id}');
+          }
         },
       ),
     );

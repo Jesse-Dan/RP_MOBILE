@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:recenth_posts/src/logic/models/service/un_auth_response.dart';
 import 'package:recenth_posts/src/logic/services/logger/logger.dart';

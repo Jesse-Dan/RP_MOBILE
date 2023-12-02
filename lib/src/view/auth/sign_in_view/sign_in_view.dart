@@ -17,7 +17,6 @@ import '../../../logic/repository/auth/auth_repo.dart';
 import '../../../logic/services/handler/handlers/loading_handler.dart';
 import '../../../utils/components/app_check_box.dart';
 import '../../../utils/components/app_text_field.dart';
-import '../../../utils/constants/global_constants.dart';
 import '../../../utils/style/app_colors.dart';
 import '../../../utils/style/app_dimentions.dart';
 import '../../app/posts/post_view.dart';

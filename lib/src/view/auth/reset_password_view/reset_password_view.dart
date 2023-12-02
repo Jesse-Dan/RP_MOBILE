@@ -6,7 +6,6 @@ import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 import '../../../logic/services/validator/validator.dart';
 import '../../../utils/components/app_button.dart';
 import '../../../utils/components/app_text_field.dart';
-import '../../../utils/constants/global_constants.dart';
 import '../../../utils/enums/enums.dart';
 import '../../../utils/style/app_colors.dart';
 import '../../../utils/style/app_dimentions.dart';
