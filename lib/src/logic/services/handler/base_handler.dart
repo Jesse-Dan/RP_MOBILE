@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../utils/components/app_dialogue.dart';
 import '../../../utils/components/app_custom_loader.dart';
+import '../../../utils/components/app_dialogue.dart';
 import '../../../utils/enums/enums.dart';
 import '../logger/logger.dart';
 
@@ -30,10 +30,13 @@ class BaseHandler {
   /// Whether theAlertTypecan be dismissed by tapping outside
 
   final bool barrierDismissible;
+
+  var title;
   BaseHandler({
     required this.context,
     required this.tag,
     required this.message,
+    this.title = 'Done',
     this.stackTrace,
     this.callBack,
     this.btnText = '',
@@ -48,12 +51,17 @@ class BaseHandler {
         builder: (_) => tag == Tag.LOADING
             ? AppLoadingIndicator()
             : AppDialogue(
+                title: title,
                 tag: tag,
                 message: message,
                 callBack: callBack,
                 btnText: btnText,
               ));
 
-    Logger.log(tag: tag, message: message, error: null, stackTrace: stackTrace);
+    Logger.log(
+        tag: tag,
+        message: "\nTitle: $title\nMessage: $message\n",
+        error: null,
+        stackTrace: stackTrace);
   }
 }

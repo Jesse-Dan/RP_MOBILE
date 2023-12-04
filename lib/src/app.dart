@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:in_app_notification/in_app_notification.dart';
 import 'package:recenth_posts/src/logic/bloc/app/comments/comment_bloc.dart';
 import 'package:recenth_posts/src/logic/bloc/app/comments/comment_state.dart';
 import 'package:recenth_posts/src/logic/bloc/app/countries/country_state.dart';
@@ -64,10 +65,12 @@ class _MainAppState extends State<MainApp> {
                   create: (context) => ViewBloc(const ViewInitialState()),
                 ),
               ],
-              child: MaterialApp(
-                  theme: AppTheme.lightThemeData(context),
-                  onGenerateRoute: (RouteSettings routeSettings) =>
-                      AppRoutes.getRoutes(routeSettings)),
+              child: InAppNotification(
+                child: MaterialApp(
+                    theme: AppTheme.lightThemeData(context),
+                    onGenerateRoute: (RouteSettings routeSettings) =>
+                        AppRoutes.getRoutes(routeSettings)),
+              ),
             ),
           );
         });

@@ -7,11 +7,13 @@ import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
+import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 
 import '../../../utils/components/app_divider.dart';
 
+// ignore: must_be_immutable
 class LoginModeView extends StatelessWidget {
   static String routeName = '/login.mode';
   LoginModeView({super.key});
@@ -123,7 +125,7 @@ class LoginModeView extends StatelessWidget {
               btnText: 'Log in',
               btnColor: AppColors.kprimaryColor600,
               onTap: () {
-                Go(context, routeName: LoginModeView.routeName).to();
+                Go(context, routeName: LoginView.routeName).to();
               },
             ),
             const SizedBox(height: AppDimentions.k20 + 4),

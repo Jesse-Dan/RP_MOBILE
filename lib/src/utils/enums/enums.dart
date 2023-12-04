@@ -8,6 +8,8 @@ enum Tag {
   DIO_REQUEST,
   SERVICE_ACTION,
   BLOC_EVENT,
+  PERSON_SUCCESS,
+
 }
 
 enum ButtonType { LONG_BTN, SHORT_BTN }
@@ -35,3 +37,6 @@ enum CheckBoxTextPosition {
 enum BtnContentType { IMG, TEXT }
 
 enum TextFieldType {PHONE,TEXT,PASSWORD,OTP,DROPDOWN}
+
+
+enum AppNotifierType{SUCCESS, ERROR}

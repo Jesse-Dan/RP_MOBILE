@@ -5,7 +5,7 @@ import '../style/app_dimentions.dart';
 class BaseFormBody {
   static build(BuildContext context,
       {required List<Widget> topChildren,
-      required List<Widget> bottomChildren}) {
+      required List<Widget> bottomChildren,GlobalKey<FormState>? formKey}) {
     List<Widget> items = [];
     items.addAll(topChildren);
     items.add(
@@ -22,9 +22,12 @@ class BaseFormBody {
             ),
           ),
         ),
-        child: ListView(
-          shrinkWrap: true,
-          children: bottomChildren,
+        child: Form(
+          key: formKey,
+          child: ListView(
+            shrinkWrap: true,
+            children: bottomChildren,
+          ),
         ),
       ),
     );
