@@ -7,9 +7,13 @@ import '../../../../utils/enums/enums.dart';
 
 class OnboardingAppBtns extends StatefulWidget {
   final PageController pageController;
-  final void Function()? onTap;
+  final void Function()? onContinueTap;
+  final void Function()? onSkipTap;
   const OnboardingAppBtns(
-      {super.key, required this.pageController, this.onTap});
+      {super.key,
+      required this.pageController,
+      this.onContinueTap,
+      this.onSkipTap});
 
   @override
   State<OnboardingAppBtns> createState() => _OnboardingAppBtnsState();
@@ -36,13 +40,14 @@ class _OnboardingAppBtnsState extends State<OnboardingAppBtns> {
             buttonType: ButtonType.LONG_BTN,
             btnColor: AppColors.kprimaryColor100,
             btnTextColor: AppColors.kprimaryColor500,
+            onTap: widget.onSkipTap,
           ),
           const SizedBox(width: AppDimentions.k20 + 4),
           AppButton(
             applyInternalPadding: false,
             btnText: 'Continue',
             buttonType: ButtonType.LONG_BTN,
-            onTap: widget.onTap,
+            onTap: widget.onContinueTap,
           )
         ],
       ),

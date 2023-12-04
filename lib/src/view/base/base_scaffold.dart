@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 
 class BaseScaffold extends StatefulWidget {
@@ -18,6 +19,7 @@ class BaseScaffold extends StatefulWidget {
     this.refreshable = false,
     this.physics,
     this.onRefresh,
+    this.defaultBackBtnCallBack,
   });
 
   final Color? backgroundColor;
@@ -35,6 +37,7 @@ class BaseScaffold extends StatefulWidget {
   final Widget? body;
   final Widget? floatingActionButton;
   final Future<void> Function()? onRefresh;
+  final void Function()? defaultBackBtnCallBack;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -52,7 +55,18 @@ class _BaseScaffoldState extends State<BaseScaffold> {
 
   Scaffold _buildBody() {
     return Scaffold(
-      appBar: (widget.addAppBar ?? false) ? (widget.appbar ?? AppBar()) : null,
+      appBar: (widget.addAppBar ?? false)
+          ? (widget.appbar ??
+              AppBar(
+                leading: IconButton(
+                    onPressed: widget.defaultBackBtnCallBack ??
+                        () {
+                          Go(context).pop();
+                        },
+                    icon: Image.asset('assets/icons/back_icon.png')),
+                backgroundColor: AppColors.kprimaryColor100,
+              ))
+          : null,
       backgroundColor: widget.backgroundColor ??
           (widget.addBackgroundColor ? AppColors.kwhiteColor : null),
       body: widget.refreshable

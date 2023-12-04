@@ -32,17 +32,10 @@ class _FloatingImageState extends State<FloatingImage> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Positioned(
-        top: 50,
-        left: MediaQuery.of(context).size.width / 6,
-        child: OnboardingViewModel.pages[widget.currentIndex].imgWiget
-            .animate()
-            .slide(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInBack),
-      ),
-    );
+    return OnboardingViewModel.pages[widget.currentIndex].imgWiget
+        .animate()
+        .slide(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInBack);
   }
 }

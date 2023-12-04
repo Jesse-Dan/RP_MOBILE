@@ -49,20 +49,20 @@ class AppCheckBox extends StatelessWidget {
         InkWell(
             onTap: onChanged != null ? () => onChanged!(!isChecked) : null,
             child: Container(
-              width: 20,
-              height: 20,
+              width: 16,
+              height: 16,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: isChecked ? enabledColor : disabledColor,
-                  width: 2,
+                  width: 1,
                 ),
                 borderRadius: BorderRadius.circular(4),
-                color: isChecked ? enabledColor : emptyColor,
+                color: isChecked ? enabledColor : null,
               ),
               child: isChecked
                   ? const Icon(
                       Icons.check,
-                      size: 14,
+                      size: 12,
                       color: Colors.white,
                     )
                   : null,

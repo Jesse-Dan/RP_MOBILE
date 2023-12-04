@@ -14,14 +14,13 @@ import 'btns.dart';
 class ButtomSection extends StatefulWidget {
   final int currentIndex;
   final PageController pageController;
-  final void Function()? onTap;
-  final void Function(int)? onDotClicked;
+final void Function()? onContinueTap;
+  final void Function()? onSkipTap;  final void Function(int)? onDotClicked;
   const ButtomSection(
       {super.key,
       required this.pageController,
       required this.currentIndex,
-      this.onTap,
-      this.onDotClicked});
+      this.onDotClicked, this.onContinueTap, this.onSkipTap});
 
   @override
   State<ButtomSection> createState() => _ButtomSectionState();
@@ -47,46 +46,46 @@ class _ButtomSectionState extends State<ButtomSection> {
         padding: EdgeInsets.all(
             AppDimentions.buildDimention(20, operation: "+", dimention: 4)),
         child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Text(OnboardingViewModel.pages[widget.currentIndex].title,
-                    style: Theme.of(context).textTheme.headline1),
-                const SizedBox(height: AppDimentions.k16),
-                Text(
-                  OnboardingViewModel.pages[widget.currentIndex].subtitle,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(color: AppColors.kbrandsubtitleGrey),
+          child: Column(
+            children: [
+              Text(OnboardingViewModel.pages[widget.currentIndex].title,
+                  style: Theme.of(context).textTheme.headline1),
+              const SizedBox(height: AppDimentions.k16),
+              Text(
+                OnboardingViewModel.pages[widget.currentIndex].subtitle,
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle1!
+                    .copyWith(color: AppColors.kbrandsubtitleGrey),
+              ),
+              const SizedBox(height: AppDimentions.k20 + 10),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: SmoothPageIndicator(
+                  controller: widget.pageController,
+                  count: OnboardingViewModel.pages.length,
+                  effect: ExpandingDotsEffect(
+                      spacing: 4,
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      strokeWidth: 12,
+                      activeDotColor: AppColors.kprimaryColor500,
+                      dotColor: AppColors.kgrayColor100),
+                  onDotClicked: widget.onDotClicked,
                 ),
-                const SizedBox(height: AppDimentions.k20 + 10),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: SmoothPageIndicator(
-                    controller: widget.pageController,
-                    count: OnboardingViewModel.pages.length,
-                    effect: ExpandingDotsEffect(
-                        spacing: 4,
-                        dotHeight: 8,
-                        dotWidth: 8,
-                        strokeWidth: 12,
-                        activeDotColor: AppColors.kprimaryColor500,
-                        dotColor: AppColors.kgrayColor100),
-                    onDotClicked: widget.onDotClicked,
-                  ),
-                ),
-                const SizedBox(height: AppDimentions.k20),
-                AppDivider.build(),
-                const SizedBox(height: AppDimentions.k12),
-                OnboardingAppBtns(
-                  onTap: widget.onTap,
-                  pageController: widget.pageController,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: AppDimentions.k20),
+              AppDivider.build(),
+              const SizedBox(height: AppDimentions.k12),
+              OnboardingAppBtns(
+                onSkipTap: widget.onSkipTap,
+                onContinueTap: widget.onContinueTap,
+                pageController: widget.pageController,
+              ),
+            ],
           ),
         ),
-      
+      ),
     )
         .animate()
         .scale(delay: 200.ms)

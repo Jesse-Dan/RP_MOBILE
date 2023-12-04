@@ -17,9 +17,10 @@ StatefulBuilder appDropdownButton({
         icon: Padding(
           padding: const EdgeInsets.only(right: 10.0),
           child: Icon(
-            Icons.keyboard_arrow_down_rounded,
+            Icons.arrow_drop_down_rounded,
             color: Colors.grey.withOpacity(.8),
-            size: 30.0,
+            size: 35,
+            opticalSize: 18,
           ),
         ),
         elevation: 4,

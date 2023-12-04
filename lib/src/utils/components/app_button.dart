@@ -31,7 +31,8 @@ class AppButton extends StatelessWidget {
       this.boxShadowColor,
       this.loading = false,
       this.loadingText = 'loading',
-      this.borderRadius})
+      this.borderRadius,
+      this.disabled = false})
       : super(key: key) {
     // if ((btnContentType != BtnContentType.TEXT && btnContent == null) ||
     //     (btnContentType != BtnContentType.TEXT &&
@@ -65,14 +66,27 @@ class AppButton extends StatelessWidget {
   final bool loading;
   final String loadingText;
   final double? borderRadius;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
     return Flexible(
       child: GestureDetector(
-        onDoubleTap: loading ? null : onDoubleTap,
-        onTap: loading ? null : onTap,
-        onLongPress: loading ? null : onLongPress,
+        onDoubleTap: disabled
+            ? null
+            : loading
+                ? null
+                : onDoubleTap,
+        onTap: disabled
+            ? null
+            : loading
+                ? null
+                : onTap,
+        onLongPress: disabled
+            ? null
+            : loading
+                ? null
+                : onLongPress,
         child: Container(
           margin: (applyInternalPadding ?? false)
               ? const EdgeInsets.all(5)
@@ -86,7 +100,9 @@ class AppButton extends StatelessWidget {
                 ? Border.all(color: borderColor ?? Colors.white)
                 : null,
             borderRadius: BorderRadius.circular(borderRadius ?? 28.sp),
-            color: btnColor ?? AppColors.kprimaryColor500,
+            color: disabled
+                ? AppColors.kgrayColor500
+                : btnColor ?? AppColors.kprimaryColor600,
             boxShadow: !addboxShadow
                 ? null
                 : boxShadow ??

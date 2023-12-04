@@ -28,6 +28,8 @@ class FixedBTMSheet {
           Color? color,
           BoxBorder? border,
 
+          /// add single child
+
           /// child
           Widget? child}) =>
       Container(
@@ -45,7 +47,7 @@ class FixedBTMSheet {
               bottom: bottommargin,
               top: topmargin,
             ),
-        // height: height ?? 208.h,
+        height: height,
         width: width ?? double.infinity,
         decoration: BoxDecoration(
           border: border ??

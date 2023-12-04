@@ -1,6 +1,10 @@
 // ignore_for_file: deprecated_member_use, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:navigation_system/go/go.dart';
+import 'package:recenth_posts/src/logic/services/logger/logger.dart';
+import 'package:recenth_posts/src/utils/enums/enums.dart';
+import 'package:recenth_posts/src/view/auth/onboarding_view/login_mode.dart';
 
 import '../../../logic/models/app/onboarding_screen/onboarding_screen.dart';
 import '../../../utils/style/app_colors.dart';
@@ -24,66 +28,86 @@ class _OnboardingViewState extends State<OnboardingView> {
   final TextEditingController _ctl = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BaseScaffold(
         addBackgroundColor: false,
         backgroundColor: AppColors.kbrandWhite,
         physics: const NeverScrollableScrollPhysics(),
-        body: PageView.builder(
-          controller: pageController,
-          itemCount: OnboardingViewModel.pages.length,
-          physics: const BouncingScrollPhysics(),
-          pageSnapping: true,
-          onPageChanged: (val) {
-            setState(() {
-              currentIndex = val;
-            });
-          },
-          itemBuilder: (context, i) {
-            return AnimatedContainer(
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOut,
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: AppDimentions.k20 - 20),
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: Stack(
-                      children: [
-                        FloatingImage(
-                          pageController: pageController,
-                          currentIndex: currentIndex,
+        body: SizedBox(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: OnboardingViewModel.pages.length,
+            physics: const BouncingScrollPhysics(),
+            pageSnapping: true,
+            onPageChanged: (val) {
+              setState(() {
+                currentIndex = val;
+              });
+            },
+            itemBuilder: (context, i) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: AppDimentions.k20 - 20),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.center,
+                              child: FloatingImage(
+                                pageController: pageController,
+                                currentIndex: currentIndex,
+                              ),
+                            ),
+                            AnimatedOpacity(
+                              opacity: currentIndex == i ? 1.0 : 0.0,
+                              duration: const Duration(milliseconds: 500),
+                              child: ButtomSection(
+                                currentIndex: currentIndex,
+                                pageController: pageController,
+                                onContinueTap: () {
+                                  if (currentIndex != 2) {
+                                    pageController.nextPage(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        curve: Curves.easeIn);
+                                  } else {
+                                    Go(context,
+                                            routeName: LoginModeView.routeName)
+                                        .toAndClearAll();
+                                  }
+                                },
+                                onSkipTap: () {
+                                  Go(context,
+                                          routeName: LoginModeView.routeName)
+                                      .toAndClearAll();
+                                },
+                                onDotClicked: (index) {
+                                  pageController.jumpToPage(index);
+                                  setState(() {
+                                    currentIndex = index;
+                                  });
+                                },
+                              ),
+                            )
+                          ],
                         ),
-                        AnimatedOpacity(
-                          opacity: currentIndex == i ? 1.0 : 0.0,
-                          duration: const Duration(milliseconds: 500),
-                          child: ButtomSection(
-                            currentIndex: currentIndex,
-                            pageController: pageController,
-                            onTap: () {
-                              currentIndex++;
-                            },
-                            onDotClicked: (index) {
-                              pageController.jumpToPage(index);
-                              setState(() {
-                                currentIndex = index;
-                              });
-                            },
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ));
   }
 }
