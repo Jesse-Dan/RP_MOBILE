@@ -252,10 +252,10 @@ packages:
     dependency: "direct main"
     description:
       name: navigation_system
-      sha256: fac0e7b2f2f8a60e19266d675f6090450bb261deba0bb31a90f2f330d9c07dc5
+      sha256: "423c28ccb1927d71852d04158dfa755a14a53e0120f11442fef23124970ba9fd"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.5"
   nested:
     dependency: transitive
     description:

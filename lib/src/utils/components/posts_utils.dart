@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/view/app/posts/components/comment_on_post.dart';
-import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 
 import '../style/app_colors.dart';
 import 'profile_icon.dart';
@@ -21,9 +18,7 @@ class PostsUtils {
         height: 48,
         child: TextFormField(
           readOnly: true,
-          onTap: () {
-            
-          },
+          onTap: () {},
           decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide:

@@ -13,7 +13,7 @@ class AppNotifier {
           String message = ''}) =>
       InAppNotification.show(
         dismissCurve: Curves.easeInOutBack,
-        duration: Durations.long3,
+        duration: const Duration(seconds: 2),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: AppDimentions.k16),
           width: 382,
@@ -65,4 +65,56 @@ class AppNotifier {
         context: context,
         onTap: () => Logger(tag: Tag.SERVICE_ACTION, message: 'Notified'),
       );
+
+  static notifyAction({
+    context,
+    AppNotifierFormat appNotifierFormat = AppNotifierFormat.NEW_POST,
+    String title = '',
+    String message = '',
+  }) {
+    return InAppNotification.show(
+      dismissCurve: Curves.easeInOutBack,
+      duration: const Duration(seconds: 2),
+      child: appNotifierFormat == AppNotifierFormat.NEW_POST
+          ? _buildNewPost(context, message)
+          : Container(),
+      context: context,
+      onTap: () => Logger(tag: Tag.SERVICE_ACTION, message: 'Notified'),
+    );
+  }
+
+  static Widget _buildNewPost(context, message) {
+    return AnimatedContainer(
+      margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+      width: 94,
+      height: 32,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      clipBehavior: Clip.antiAlias,
+      decoration: ShapeDecoration(
+        color: const Color(0xFFD75B6B),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+      duration: Durations.long3,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+              height: 0.11,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

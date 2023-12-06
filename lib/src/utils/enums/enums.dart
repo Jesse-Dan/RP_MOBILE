@@ -38,6 +38,8 @@ enum TextFieldType { PHONE, TEXT, PASSWORD, OTP, DROPDOWN }
 
 enum AppNotifierType { SUCCESS, ERROR }
 
+enum AppNotifierFormat{NEW_POST,USER_OPERATION,FAVORITE}
+
 enum PostCardType { fav, defaultt }
 
 enum CommentType { Comment, Reply }

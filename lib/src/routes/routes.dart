@@ -22,8 +22,7 @@ class AppRoutes {
           SplashScreenView.routeName: (context, args) =>
               const SplashScreenView(),
           OnboardingView.routeName: (context, args) => const OnboardingView(),
-          PostView.routeName: (context, args) =>
-              PostView(newPost: args?.arguments[0]['newPost']),
+          PostView.routeName: (context, args) => const PostView(),
           RegistrationView.routeName: (context, args) =>
               const RegistrationView(),
           LoginView.routeName: (context, args) => const LoginView(),
@@ -33,7 +32,9 @@ class AppRoutes {
           ResetPasswordView.routeName: (context, args) =>
               const ResetPasswordView(),
           LoginModeView.routeName: (context, args) => LoginModeView(),
-          BaseApp.routeName: (context, args) => const BaseApp(),
+          BaseApp.routeName: (context, args) => BaseApp(
+              currentIndex: args?.arguments[0]['currentIndex'] ?? 0,
+              newPost: args?.arguments[0]['newPost']),
           ReplyPost.routeName: (context, arg) => ReplyPost(
                 post: arg?.arguments[0]['post'],
                 commentType:

@@ -1,13 +1,20 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 
+import '../../logic/models/app/post/res/get_all_post_response.dart';
+import '../../logic/services/logger/logger.dart';
 import '../../utils/components/app_nav_bar_icoons.dart';
+import '../../utils/enums/enums.dart';
 
 class BaseApp extends StatefulWidget {
   static const String routeName = 'app.app';
-  const BaseApp({super.key});
+  int currentIndex;
+  final Post? newPost;
+  BaseApp({super.key, this.currentIndex = 0, this.newPost});
 
   @override
   State<BaseApp> createState() => _BaseAppState();
@@ -21,13 +28,13 @@ class _BaseAppState extends State<BaseApp> {
     const Center(child: Text('profile')),
   ];
 
-  int currentIndex = 0;
-
   tabMove(int value) {
     setState(() {
-      currentIndex = value;
+      widget.currentIndex = value;
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +55,7 @@ class _BaseAppState extends State<BaseApp> {
               AppNavBarIcon(
                   img: 'home_tab.png',
                   selectedImg: 'sel_home_tab.png',
-                  currentIndex: currentIndex,
+                  currentIndex: widget.currentIndex,
                   value: 0,
                   onTap: () {
                     tabMove(0);
@@ -56,7 +63,7 @@ class _BaseAppState extends State<BaseApp> {
               AppNavBarIcon(
                   img: 'search_tab.png',
                   selectedImg: 'sel_search_tab.png',
-                  currentIndex: currentIndex,
+                  currentIndex: widget.currentIndex,
                   value: 1,
                   onTap: () {
                     tabMove(1);
@@ -64,7 +71,7 @@ class _BaseAppState extends State<BaseApp> {
               AppNavBarIcon(
                   img: 'chats_tab.png',
                   selectedImg: 'sel_chats_tab.png',
-                  currentIndex: currentIndex,
+                  currentIndex: widget.currentIndex,
                   value: 2,
                   onTap: () {
                     tabMove(2);
@@ -72,7 +79,7 @@ class _BaseAppState extends State<BaseApp> {
               AppNavBarIcon(
                   img: 'profile_tab.png',
                   selectedImg: 'sel_profile_tab.png',
-                  currentIndex: currentIndex,
+                  currentIndex: widget.currentIndex,
                   value: 3,
                   onTap: () {
                     tabMove(3);
@@ -85,6 +92,6 @@ class _BaseAppState extends State<BaseApp> {
         body: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: screens[currentIndex]));
+            child: screens[widget.currentIndex]));
   }
 }

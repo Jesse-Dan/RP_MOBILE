@@ -2,39 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/logic/models/app/post/res/get_all_post_response.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 
-import '../../../../logic/models/app/post/data.dart';
-import '../../../../utils/style/app_dimentions.dart';
-import 'post_details.dart';
+import '../../../../../utils/style/app_dimentions.dart';
+import '../mains/mains.dart';
 
 var hashtag = ['Election', 'Government', 'Currupt'];
 
-class PostCard extends StatelessWidget {
-  final PostCardType postCardType;
-  const PostCard({
-    super.key,
-    this.postCardType = PostCardType.defaultt,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: PostData.generate().length,
-        physics: const BouncingScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (item, i) {
-          return PostWidget(
-            postCardType: postCardType,
-            post: PostData.generate()[i],
-            i: i,
-          );
-        });
-  }
-}
-
-class PostWidget extends StatelessWidget {
+class AllPostWidget extends StatelessWidget {
   final int i;
   final Post post;
-  const PostWidget({
+  const AllPostWidget({
     super.key,
     required this.postCardType,
     required this.i,

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:recenth_posts/src/logic/models/app/post/res/get_all_post_response.dart';
-import 'package:recenth_posts/src/utils/components/app_notifier.dart';
 import 'package:recenth_posts/src/utils/components/posts_utils.dart';
-import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
-import 'package:recenth_posts/src/view/app/posts/components/favorite_view.dart';
+import 'package:recenth_posts/src/view/app/posts/components/favorite_post/favorite_view.dart';
 
 import '../../base/base_body.dart';
 import '../../base/base_scaffold.dart';
-import 'components/all_post_view.dart';
+import 'components/all_posts/all_post_view.dart';
 
 class PostView extends StatefulWidget {
-  final Post? newPost;
   static const String routeName = '/post.view';
 
-  const PostView({super.key, this.newPost});
+  const PostView({
+    super.key,
+  });
 
   @override
   State<PostView> createState() => _PostViewState();
@@ -25,12 +23,6 @@ class _PostViewState extends State<PostView>
   late final TabController _tabController =
       TabController(length: 2, vsync: this);
 
-  var tabs = [
-    const AllPostsVIew(),
-    const Center(
-      child: Text('dsd'),
-    )
-  ];
   @override
   void dispose() {
     super.dispose();
@@ -39,19 +31,12 @@ class _PostViewState extends State<PostView>
 
   @override
   void initState() {
-    if (widget.newPost != null) {
-      AppNotifier.notify(context,
-          appNotifierType: AppNotifierType.SUCCESS,
-          title: 'Post status',
-          message: 'Post sent sucessfully');
-      super.initState();
-    }
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      
       addAppBar: true,
       appbar: PostsUtils.homeAppBar(
         context: context,
@@ -75,7 +60,10 @@ class _PostViewState extends State<PostView>
       body: BaseBody(
         child: TabBarView(
           controller: _tabController,
-          children: const [AllPostsVIew(), FavoritePost()],
+          children: const [
+            AllPostsVIew(),
+            FavoritePost(),
+          ],
         ),
       ),
     );
