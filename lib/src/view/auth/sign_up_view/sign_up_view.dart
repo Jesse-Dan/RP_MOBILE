@@ -79,8 +79,7 @@ class _RegistrationViewState extends State<RegistrationView>
           const Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: AppDimentions.k16, vertical: AppDimentions.k20),
-            child: Column(
-              children: [
+            child: Column(children: [
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -108,6 +107,7 @@ class _RegistrationViewState extends State<RegistrationView>
             ]),
           ),
         ],
+        formKey: _formKey,
         bottomChildren: [
           const SizedBox(height: AppDimentions.k20 * 1.5),
           AppTextField(
@@ -237,6 +237,7 @@ class _RegistrationViewState extends State<RegistrationView>
           ),
           const SizedBox(height: AppDimentions.k12 - 2),
           AppButton(
+            flex: false,
             disabled: false,
             btnText: 'Register',
             buttonType: ButtonType.LONG_BTN,

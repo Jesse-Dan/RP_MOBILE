@@ -32,7 +32,8 @@ class AppButton extends StatelessWidget {
       this.loading = false,
       this.loadingText = 'loading',
       this.borderRadius,
-      this.disabled = false})
+      this.disabled = false,
+      this.flex = true})
       : super(key: key) {
     // if ((btnContentType != BtnContentType.TEXT && btnContent == null) ||
     //     (btnContentType != BtnContentType.TEXT &&
@@ -67,63 +68,69 @@ class AppButton extends StatelessWidget {
   final String loadingText;
   final double? borderRadius;
   final bool disabled;
-
+  final bool flex;
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: GestureDetector(
-        onDoubleTap: disabled
-            ? null
-            : loading
-                ? null
-                : onDoubleTap,
-        onTap: disabled
-            ? null
-            : loading
-                ? null
-                : onTap,
-        onLongPress: disabled
-            ? null
-            : loading
-                ? null
-                : onLongPress,
-        child: Container(
-          margin: (applyInternalPadding ?? false)
-              ? const EdgeInsets.all(5)
-              : const EdgeInsets.all(0),
-          height: 56,
-          width: (buttonType ?? ButtonType.SHORT_BTN) == ButtonType.LONG_BTN
+    return flex
+        ? Flexible(
+            child: _build(),
+          )
+        : _build();
+  }
+
+  GestureDetector _build() {
+    return GestureDetector(
+      onDoubleTap: disabled
+          ? null
+          : loading
               ? null
-              : width,
-          decoration: BoxDecoration(
-            border: addBorder ?? false
-                ? Border.all(color: borderColor ?? Colors.white)
-                : null,
-            borderRadius: BorderRadius.circular(borderRadius ?? 28.sp),
-            color: disabled
-                ? AppColors.kgrayColor500
-                : btnColor ?? AppColors.kprimaryColor600,
-            boxShadow: !addboxShadow
-                ? null
-                : boxShadow ??
-                    [
-                      BoxShadow(
-                        color: boxShadowColor ??
-                            AppColors.kblackColor.withOpacity(0.1),
-                        offset: const Offset(2,
-                            2), // Increase the offset for a more visible shadow
-                        blurStyle: BlurStyle.outer,
-                        blurRadius:
-                            7, // Increase the blur radius for a softer shadow
-                      )
-                    ],
-          ),
-          child: Align(
-            alignment: Alignment.center,
-            child: btnContentType == BtnContentType.IMG
-                ? btnContent
-                : _loaderByText(),
-          ),
+              : onDoubleTap,
+      onTap: disabled
+          ? null
+          : loading
+              ? null
+              : onTap,
+      onLongPress: disabled
+          ? null
+          : loading
+              ? null
+              : onLongPress,
+      child: Container(
+        margin: (applyInternalPadding ?? false)
+            ? const EdgeInsets.all(5)
+            : const EdgeInsets.all(0),
+        height: 56,
+        width: (buttonType ?? ButtonType.SHORT_BTN) == ButtonType.LONG_BTN
+            ? null
+            : width,
+        decoration: BoxDecoration(
+          border: addBorder ?? false
+              ? Border.all(color: borderColor ?? Colors.white)
+              : null,
+          borderRadius: BorderRadius.circular(borderRadius ?? 28.sp),
+          color: disabled
+              ? AppColors.kgrayColor500
+              : btnColor ?? AppColors.kprimaryColor600,
+          boxShadow: !addboxShadow
+              ? null
+              : boxShadow ??
+                  [
+                    BoxShadow(
+                      color: boxShadowColor ??
+                          AppColors.kblackColor.withOpacity(0.1),
+                      offset: const Offset(2,
+                          2), // Increase the offset for a more visible shadow
+                      blurStyle: BlurStyle.outer,
+                      blurRadius:
+                          7, // Increase the blur radius for a softer shadow
+                    )
+                  ],
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: btnContentType == BtnContentType.IMG
+              ? btnContent
+              : _loaderByText(),
         ),
       ),
     );

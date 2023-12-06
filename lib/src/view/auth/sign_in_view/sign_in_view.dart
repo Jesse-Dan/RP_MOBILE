@@ -1,14 +1,16 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/logic/services/handler/handlers/custom_handler.dart';
 import 'package:recenth_posts/src/logic/services/validator/validator.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
-import 'package:recenth_posts/src/utils/components/app_notifier.dart';
 import 'package:recenth_posts/src/utils/components/base_form_body.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
+import 'package:recenth_posts/src/view/base/base_app.dart';
 
 import '../../../utils/components/app_check_box.dart';
 import '../../../utils/components/app_text_field.dart';
@@ -142,6 +144,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
           ),
           const SizedBox(height: AppDimentions.k20 + 4),
           AppButton(
+            flex: false,
             disabled: false,
             btnText: 'Log in',
             buttonType: ButtonType.LONG_BTN,
@@ -154,10 +157,9 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
                 title: 'Sign in Successful!',
                 tag: Tag.PERSON_SUCCESS,
               );
-              AppNotifier.notify(context,
-                  appNotifierType: AppNotifierType.SUCCESS,
-                  title: 'Email verification',
-                  message: 'Email verified sucessfully');
+              Timer(const Duration(seconds: 2), () {
+                Go(context, routeName: BaseApp.routeName).toAndClearAll();
+              });
             },
           ),
           const SizedBox(height: AppDimentions.k16),

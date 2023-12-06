@@ -44,7 +44,7 @@ mixin ValidatorMixin {
       return 'Passwords do not match';
     }
 
-    return null; // Confirm password is valid
+    return null;
   }
 
   String? validateEmail(String val) {

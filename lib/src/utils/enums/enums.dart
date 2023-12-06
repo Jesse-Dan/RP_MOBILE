@@ -9,11 +9,9 @@ enum Tag {
   SERVICE_ACTION,
   BLOC_EVENT,
   PERSON_SUCCESS,
-
 }
 
 enum ButtonType { LONG_BTN, SHORT_BTN }
-
 
 enum ResponseType {
   Success,
@@ -36,7 +34,10 @@ enum CheckBoxTextPosition {
 
 enum BtnContentType { IMG, TEXT }
 
-enum TextFieldType {PHONE,TEXT,PASSWORD,OTP,DROPDOWN}
+enum TextFieldType { PHONE, TEXT, PASSWORD, OTP, DROPDOWN }
 
+enum AppNotifierType { SUCCESS, ERROR }
 
-enum AppNotifierType{SUCCESS, ERROR}
+enum PostCardType { fav, defaultt }
+
+enum CommentType { Comment, Reply }

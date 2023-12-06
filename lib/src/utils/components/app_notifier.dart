@@ -12,6 +12,8 @@ class AppNotifier {
           String title = '',
           String message = ''}) =>
       InAppNotification.show(
+        dismissCurve: Curves.easeInOutBack,
+        duration: Durations.long3,
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: AppDimentions.k16),
           width: 382,
@@ -54,6 +56,7 @@ class AppNotifier {
                     fontFamily: 'DM Sans',
                     fontWeight: FontWeight.w400,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               )
             ],
