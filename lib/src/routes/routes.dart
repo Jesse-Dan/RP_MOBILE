@@ -3,6 +3,7 @@ import 'package:navigation_system/navigation_system.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/view/app/posts/components/comment_on_post.dart';
 import 'package:recenth_posts/src/view/app/posts/components/post_details.dart';
+import 'package:recenth_posts/src/view/app/posts/components/report/report.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/auth/onboarding_view/login_mode.dart';
 import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_view.dart';
@@ -42,7 +43,8 @@ class AppRoutes {
               ),
           PostDetailsWidget.routeName: (context, arg) => PostDetailsWidget(
               postCardType: arg?.arguments[0]['postCardType'],
-              post: arg?.arguments[0]['post'])
+              post: arg?.arguments[0]['post']),
+          Report.routeName: (context, args) => Report(),
         },
       ).generateRoute(routeSettings);
 }

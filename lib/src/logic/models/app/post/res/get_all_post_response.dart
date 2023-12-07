@@ -6,8 +6,6 @@
 
 import 'dart:convert';
 
-import 'package:recenth_posts/src/logic/models/app/post/res/comment_response.dart';
-
 PostResponse postResponseFromJson(String str) =>
     PostResponse.fromJson(json.decode(str));
 
@@ -143,6 +141,7 @@ class Post {
             images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
       };
 }
+
 enum HashTag { CORRUPT, ELECTION, GOVERNMENT, PEOPLE, LOVE, TECHNOLOGY }
 
 class EnumValues<T> {

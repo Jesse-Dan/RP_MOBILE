@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recenth_posts/src/utils/components/app_custom_loader.dart';
@@ -47,37 +49,41 @@ class AppDialogue extends StatelessWidget {
             borderRadius: BorderRadius.circular(24),
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(child: Image.asset(getImage(tag))),
-            const SizedBox(height: 32),
-            Text(
-              title ?? '',
-              style: TextStyle(
-                color: Color(0xFFF48B99),
-                fontSize: 24,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w600,
+        child: GestureDetector(
+          onTap: callBack,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(child: Image.asset(getImage(tag))),
+              const SizedBox(height: 32),
+              Text(
+                title ?? '',
+                style: const TextStyle(
+                  color: Color(0xFFF48B99),
+                  fontSize: 24,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              message ?? '',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color(0xFF464646),
-                fontSize: 16,
-                fontFamily: 'DM Sans',
-                fontWeight: FontWeight.w400,
+              const SizedBox(height: 16),
+              Text(
+                message ?? '',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Color(0xFF464646),
+                  fontSize: 16,
+                  fontFamily: 'DM Sans',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ),
-            AppLoadingIndicator(
-                loaderColor: AppColors.useHex('#F9A7B2'), size: 30.0),
-            const SizedBox(height: 40)
-          ],
+              AppLoadingIndicator(
+                  loaderColor: AppColors.useHex('#F9A7B2'), size: 30.0),
+              const SizedBox(height: 40)
+            ],
+          ),
         ),
       ),
     );

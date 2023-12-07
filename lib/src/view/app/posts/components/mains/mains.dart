@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_breadcrumb/flutter_breadcrumb.dart';
@@ -16,6 +16,8 @@ import '../../../../../utils/components/app_notifier.dart';
 import '../../../../../utils/style/app_dimentions.dart';
 import '../comment_on_post.dart';
 import '../post_details.dart';
+import '../rate/rating.dart';
+import '../report/report.dart';
 
 // class CommentClickFIeld extends StatelessWidget {
 //   final Post post;
@@ -355,32 +357,41 @@ class PostImage extends StatelessWidget {
               itemCount: post.images?.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount:
-                    post.images!.length == 1 ? 1 : 2, // Number of columns
+                    (post.images!.length == 1 || post.images!.length == 3)
+                        ? 1
+                        : 2, // Number of columns
                 crossAxisSpacing: AppDimentions.k12, // Spacing between items
                 mainAxisSpacing: AppDimentions.k12,
               ),
-              itemBuilder: (context, index) => PostImageWidget(
-                post: post,
-              ),
+              itemBuilder: (context, index) =>
+                  (post.images!.length == 3 && index == 0)
+                      ? FirstPostImageWidget(
+                          images: post.images!,
+                        )
+                      : PostImageWidget(
+                          img: post.images![index],
+                        ),
             ));
   }
 }
 
 class PostImageWidget extends StatelessWidget {
-  final Post post;
+  final String img;
+  final double? height;
   const PostImageWidget({
     super.key,
-    required this.post,
+    this.height,
+    required this.img,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 163,
-      height: 140,
+      height: height ?? 140,
       decoration: ShapeDecoration(
-        image: const DecorationImage(
-          image: NetworkImage("https://via.placeholder.com/163x140"),
+        image: DecorationImage(
+          image: NetworkImage(img),
           fit: BoxFit.fill,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
@@ -389,13 +400,65 @@ class PostImageWidget extends StatelessWidget {
   }
 }
 
-class CommentBoxActionBtns extends StatelessWidget {
+class FirstPostImageWidget extends StatelessWidget {
+  final List<String> images;
+  const FirstPostImageWidget({
+    super.key,
+    required this.images,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 160,
+          // height: 280,
+          decoration: ShapeDecoration(
+            image: DecorationImage(
+              image: NetworkImage(images[0]),
+              fit: BoxFit.fill,
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            PostImageWidget(
+              img: images[1],
+              height: 160,
+            ),
+            PostImageWidget(
+              img: images[2],
+              height: 160,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class CommentBoxActionBtns extends StatefulWidget {
   final Post post;
 
-  const CommentBoxActionBtns({
+  CommentBoxActionBtns({
     super.key,
     required this.post,
   });
+
+  @override
+  State<CommentBoxActionBtns> createState() => _CommentBoxActionBtnsState();
+}
+
+class _CommentBoxActionBtnsState extends State<CommentBoxActionBtns> {
+  bool ratingVisibility = false;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -414,11 +477,12 @@ class CommentBoxActionBtns extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(height: 200, width: 200, child: FbReaction()),
                       ActionBtn(
                         imgUrl: 'solar_star-line-duotone.svg',
                       ),
@@ -449,7 +513,7 @@ class CommentBoxActionBtns extends StatelessWidget {
                                 routeName: ReplyPost.routeName,
                                 arguments: MyRouteArguments(arguments: [
                                   {
-                                    "post": post,
+                                    "post": widget.post,
                                     'commentType': CommentType.Reply
                                   },
                                 ])).toAndExpectData();
@@ -509,18 +573,27 @@ class CommentBoxActionBtns extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: double.infinity,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ActionBtn(imgUrl: 'ph_flag.svg'),
-                SizedBox(width: 8),
-                ActionBtn(imgUrl: 'mdi-light_share.svg'),
-                SizedBox(width: 8),
-                ActionBtn(imgUrl: 'mingcute_more-2-line.svg'),
+                ActionBtn(
+                  imgUrl: 'ph_flag.svg',
+                  onPressed: () {
+                    Go(context, routeName: Report.routeName).to();
+                  },
+                ),
+                const SizedBox(width: 8),
+                ActionBtn(
+                    imgUrl: 'mdi-light_share.svg',
+                    onPressed: () {
+                      shareBtmSheet(context);
+                    }),
+                const SizedBox(width: 8),
+                const PostMoreOptionsDD(imgUrl: 'mingcute_more-2-line.svg')
               ],
             ),
           ),
@@ -648,18 +721,30 @@ class ActionBtns extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: double.infinity,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ActionBtn(imgUrl: 'ph_flag.svg'),
-                SizedBox(width: 8),
-                ActionBtn(imgUrl: 'mdi-light_share.svg'),
-                SizedBox(width: 8),
-                ActionBtn(imgUrl: 'mingcute_more-2-line.svg'),
+                ActionBtn(
+                  imgUrl: 'ph_flag.svg',
+                  onPressed: () {
+                    Go(context, routeName: Report.routeName).to();
+                  },
+                ),
+                const SizedBox(width: 8),
+                ActionBtn(
+                  imgUrl: 'mdi-light_share.svg',
+                  onPressed: () {
+                    shareBtmSheet(context);
+                  },
+                ),
+                const SizedBox(width: 8),
+                const PostMoreOptionsDD(
+                  imgUrl: 'mingcute_more-2-line.svg',
+                )
               ],
             ),
           ),
@@ -870,56 +955,8 @@ class _PostDetailTopSectionState extends State<PostDetailTopSection> {
                   textAlign: TextAlign.center,
                 ),
                 const Spacer(),
-                ActionBtn(
-                  imgUrl: '',
-                  child: PopupMenuButton<String>(
-                    color: AppColors.kbrandWhite,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                    elevation: 2,
-                    icon: SvgPicture.asset(
-                      'assets/icons/mingcute_more-2-line.svg',
-                      height: 24,
-                      width: 24,
-                    ),
-                    onSelected: (value) {
-                      // Handle menu item selection
-                      print('Selected: $value');
-                    },
-                    itemBuilder: (BuildContext context) {
-                      return PostDetailsTopSectioonPopMenuItemModel.data
-                          .map((item) => PopupMenuItem<String>(
-                                value: item.text,
-                                child: SizedBox(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(14.0),
-                                        child: SvgPicture.asset(
-                                          'assets/icons/${item.img}',
-                                          height: 24,
-                                          width: 24,
-                                          color: AppColors.kblackColor,
-                                        ),
-                                      ),
-                                      Text(
-                                        item.text,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText2!
-                                            .copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              color: AppColors.kblackColor,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ), // Use the text from the model
-                              ))
-                          .toList();
-                    },
-                  ),
+                const PostMoreOptionsDD(
+                  imgUrl: 'mingcute_more-2-line.svg',
                 ),
               ],
             ),
@@ -1068,22 +1105,4 @@ class TopSection extends StatelessWidget {
       ],
     );
   }
-}
-
-class PostDetailsTopSectioonPopMenuItemModel {
-  final String img;
-  final String text;
-  final int? value;
-
-  PostDetailsTopSectioonPopMenuItemModel(
-      {this.value, required this.img, required this.text});
-  static List<PostDetailsTopSectioonPopMenuItemModel> data = [
-    PostDetailsTopSectioonPopMenuItemModel(
-        img: 'solar_star-line-duotone.svg', text: 'Add to favourite'),
-    PostDetailsTopSectioonPopMenuItemModel(
-        img: 'volume-slash.svg', text: 'Mute @PR9343839'),
-    PostDetailsTopSectioonPopMenuItemModel(
-        img: 'gg_close-r.svg', text: 'Block @PR9343839'),
-    PostDetailsTopSectioonPopMenuItemModel(img: 'ph_flag.svg', text: 'Report')
-  ];
 }

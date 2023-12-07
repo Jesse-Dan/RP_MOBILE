@@ -31,7 +31,7 @@ class BaseHandler {
 
   final bool barrierDismissible;
 
-  var title;
+  final  String title;
   BaseHandler({
     required this.context,
     required this.tag,

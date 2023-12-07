@@ -10,10 +10,12 @@ import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 
 import '../../../../logic/services/logger/logger.dart';
+import '../../../../utils/components/action_btn.dart';
 import '../../../../utils/components/app_notifier.dart';
 import '../../../../utils/style/app_dimentions.dart';
 import 'comment_on_post.dart';
 import 'mains/mains.dart';
+import 'report/report.dart';
 
 var hashtag = ['Election', 'Government', 'Currupt'];
 
@@ -38,7 +40,6 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -119,10 +120,8 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                             AppNotifier.notifyAction(
                                 message: data, context: context);
 
-                            Logger.log(
-                                tag: Tag.SERVICE_ACTION, message: data);
+                            Logger.log(tag: Tag.SERVICE_ACTION, message: data);
                           } catch (e) {
-                           
                             Logger.log(
                                 tag: Tag.ERROR,
                                 error: e,
@@ -130,8 +129,17 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                           }
                         },
                         img: 'fluent_comment-20-regular.svg'),
-                    const PostDetailsActionBtn(img: 'ph_flag.svg'),
-                    const PostDetailsActionBtn(img: 'mdi-light_share.svg')
+                    PostDetailsActionBtn(
+                        img: 'ph_flag.svg',
+                        onTap: () {
+                          Go(context, routeName: Report.routeName).to();
+                        }),
+                    PostDetailsActionBtn(
+                      img: 'mdi-light_share.svg',
+                      onTap: () async {
+                        await shareBtmSheet(context);
+                      },
+                    )
                   ],
                 ),
               ),

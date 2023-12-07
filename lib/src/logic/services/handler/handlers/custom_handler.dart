@@ -15,7 +15,7 @@ class AppHandler {
   AppHandler({
     required this.context,
     required this.title,
-    this.message = 'Done',
+    this.message = 'Please wait...\nYou will be directed to the homepage.',
     this.stackTrace,
     this.callBack,
     this.btnText = '',
@@ -26,7 +26,6 @@ class AppHandler {
       context: context,
       message: message,
       tag: tag,
-    
       stackTrace: stackTrace,
       callBack: callBack,
       btnText: btnText,

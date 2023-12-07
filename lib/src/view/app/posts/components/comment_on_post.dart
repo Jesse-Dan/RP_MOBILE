@@ -18,7 +18,7 @@ class ReplyPost extends StatefulWidget {
   final CommentType commentType;
   static const String routeName = '/post.create.new';
 
-  ReplyPost(
+  const ReplyPost(
       {super.key, required this.post, this.commentType = CommentType.Comment});
 
   @override

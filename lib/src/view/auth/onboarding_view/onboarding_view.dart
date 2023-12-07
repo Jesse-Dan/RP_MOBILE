@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/logic/services/logger/logger.dart';
-import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/view/auth/onboarding_view/login_mode.dart';
 
 import '../../../logic/models/app/onboarding_screen/onboarding_screen.dart';

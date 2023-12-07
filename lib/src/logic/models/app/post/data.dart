@@ -12,8 +12,15 @@ class PostData {
           subject: 'Free and fair election',
           content:
               'Local community achieves record-breaking charity success, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity.',
-          hashTags: [HashTag.CORRUPT, HashTag.ELECTION, HashTag.GOVERNMENT],
-          images: ['img1', 'img2']),
+          hashTags: [
+            HashTag.CORRUPT,
+            HashTag.ELECTION,
+            HashTag.GOVERNMENT
+          ],
+          images: [
+            'https://via.placeholder.com/163x140',
+            'https://via.placeholder.com/163x140'
+          ]),
       Post(
           id: 1,
           category: 'Politics',
@@ -35,7 +42,7 @@ class PostData {
           content:
               'Local community achieves record-breaking charity success, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity.',
           hashTags: [HashTag.PEOPLE, HashTag.LOVE, HashTag.TECHNOLOGY],
-          images: ['img1']),
+          images: ['https://via.placeholder.com/163x140']),
       Post(
           id: 1,
           category: 'Politics',
@@ -45,8 +52,17 @@ class PostData {
           subject: 'Free and fair election',
           content:
               'Local community achieves record-breaking charity success, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity.',
-          hashTags: [HashTag.CORRUPT, HashTag.LOVE, HashTag.TECHNOLOGY],
-          images: ['img1', 'img2', 'img1', 'img2']),
+          hashTags: [
+            HashTag.CORRUPT,
+            HashTag.LOVE,
+            HashTag.TECHNOLOGY
+          ],
+          images: [
+            'https://via.placeholder.com/163x140',
+            'https://via.placeholder.com/163x140',
+            'https://via.placeholder.com/163x140',
+            'https://via.placeholder.com/163x140'
+          ]),
       Post(
           id: 1,
           category: 'Politics',
@@ -56,8 +72,16 @@ class PostData {
           subject: 'Free and fair election',
           content:
               'Local community achieves record-breaking charity success, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity, demonstrating remarkable unity and generosity.',
-          hashTags: [HashTag.CORRUPT, HashTag.ELECTION, HashTag.GOVERNMENT],
-          images: ['img1', 'img1', 'img2']),
+          hashTags: [
+            HashTag.CORRUPT,
+            HashTag.ELECTION,
+            HashTag.GOVERNMENT
+          ],
+          images: [
+            'https://via.placeholder.com/163x140',
+            'https://via.placeholder.com/163x140',
+            'https://via.placeholder.com/163x140'
+          ]),
       Post(
           id: 1,
           category: 'Politics',

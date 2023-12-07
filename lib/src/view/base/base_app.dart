@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
@@ -6,9 +6,8 @@ import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 
 import '../../logic/models/app/post/res/get_all_post_response.dart';
-import '../../logic/services/logger/logger.dart';
 import '../../utils/components/app_nav_bar_icoons.dart';
-import '../../utils/enums/enums.dart';
+import '../app/profile/profile_view.dart';
 
 class BaseApp extends StatefulWidget {
   static const String routeName = 'app.app';
@@ -25,7 +24,7 @@ class _BaseAppState extends State<BaseApp> {
     const PostView(),
     const Center(child: Text('search')),
     const Center(child: Text('chats')),
-    const Center(child: Text('profile')),
+    const ProfileView(),
   ];
 
   tabMove(int value) {
@@ -33,8 +32,6 @@ class _BaseAppState extends State<BaseApp> {
       widget.currentIndex = value;
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {

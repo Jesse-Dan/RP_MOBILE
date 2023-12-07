@@ -28,14 +28,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> with ValidatorMixin {
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _countryController = TextEditingController();
-
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
   bool check = false;
   bool isNewUser = true;
   bool hide = true;

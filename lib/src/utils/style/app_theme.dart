@@ -48,6 +48,7 @@ class AppTheme extends AppColors {
   static lightThemeData(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
+      primaryColorLight: AppColors.kprimaryColor400,
       textTheme: getTextTheme(),
       primaryTextTheme: getTextTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -57,6 +58,7 @@ class AppTheme extends AppColors {
   static darkThemeData(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
+      primaryColorLight: AppColors.kprimaryColor400,
       textTheme: getTextTheme(),
       primaryTextTheme: getTextTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
