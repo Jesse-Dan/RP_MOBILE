@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recenth_posts/src/utils/style/app_colors.dart';
 
 import 'notifier_dot.dart';
 
@@ -43,8 +42,10 @@ class _AppNavBarIconState extends State<AppNavBarIcon> {
                         height: 40,
                         width: 62,
                       ),
-                      const NotifierDot( right: 18,
-                        top: 1,)
+                      const NotifierDot(
+                        right: 18,
+                        top: 1,
+                      )
                     ],
                   ),
                 ],
