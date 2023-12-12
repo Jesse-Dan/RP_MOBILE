@@ -101,18 +101,21 @@ class LoginModeView extends StatelessWidget {
               height: AppDimentions.k20 + 8,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AppDivider.build(
                       width: 166, height: 0.2, color: AppColors.kgrayColor700),
                   const SizedBox(height: AppDimentions.k16),
-                  Text('or',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 18,
-                          color: AppColors.kgrayColor700)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text('or',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 18,
+                            color: AppColors.kgrayColor700)),
+                  ),
                   const SizedBox(height: AppDimentions.k16),
                   AppDivider.build(
                       width: 166, height: 0.2, color: AppColors.kgrayColor700),
