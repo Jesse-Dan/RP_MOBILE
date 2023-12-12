@@ -16,7 +16,6 @@ import '../../../../../utils/components/app_notifier.dart';
 import '../../../../../utils/style/app_dimentions.dart';
 import '../comment_on_post.dart';
 import '../post_details.dart';
-import '../rate/rating.dart';
 import '../report/report.dart';
 
 // class CommentClickFIeld extends StatelessWidget {
@@ -482,7 +481,7 @@ class _CommentBoxActionBtnsState extends State<CommentBoxActionBtns> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 200, width: 200, child: FbReaction()),
+                      // SizedBox(height: 200, width: 200, child: FbReaction()),
                       ActionBtn(
                         imgUrl: 'solar_star-line-duotone.svg',
                       ),

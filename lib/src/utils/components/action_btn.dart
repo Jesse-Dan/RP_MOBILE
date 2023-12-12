@@ -9,31 +9,51 @@ import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
 
 import '../style/app_colors.dart';
+import 'notifier_dot.dart';
 
 class ActionBtn extends StatelessWidget {
   final VoidCallback? onPressed;
   final String imgUrl;
   final Widget? child;
+  final bool addbadge;
   const ActionBtn({
     super.key,
     this.onPressed,
     required this.imgUrl,
     this.child,
+    this.addbadge = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: child ??
-          SvgPicture.asset(
-            'assets/icons/$imgUrl',
-            height: 24,
-            width: 24,
-          ),
-    );
+    return addbadge
+        ? Stack(
+            children: [
+              InkWell(
+                onTap: onPressed,
+                child: child ??
+                    SvgPicture.asset(
+                      'assets/icons/$imgUrl',
+                      height: 24,
+                      width: 24,
+                    ),
+              ),
+              const NotifierDot()
+            ],
+          )
+        : InkWell(
+            onTap: onPressed,
+            child: child ??
+                SvgPicture.asset(
+                  'assets/icons/$imgUrl',
+                  height: 24,
+                  width: 24,
+                ),
+          );
   }
 }
+
+
 
 class PostMoreOptionsDD extends StatelessWidget {
   final String imgUrl;

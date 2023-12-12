@@ -13,7 +13,7 @@ class BaseApp extends StatefulWidget {
   static const String routeName = 'app.app';
   int currentIndex;
   final Post? newPost;
-  BaseApp({super.key, this.currentIndex = 0, this.newPost});
+  BaseApp({super.key, required this.currentIndex, this.newPost});
 
   @override
   State<BaseApp> createState() => _BaseAppState();
@@ -24,6 +24,7 @@ class _BaseAppState extends State<BaseApp> {
     const PostView(),
     const Center(child: Text('search')),
     const Center(child: Text('chats')),
+    // const ProfileView(),
     const ProfileView(),
   ];
 
@@ -32,6 +33,8 @@ class _BaseAppState extends State<BaseApp> {
       widget.currentIndex = value;
     });
   }
+
+  bool addbadge = true;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +68,14 @@ class _BaseAppState extends State<BaseApp> {
                   onTap: () {
                     tabMove(1);
                   }),
+              // AppNavBarIcon(
+              //     img: 'chats_tab.png',
+              //     selectedImg: 'sel_chats_tab.png',
+              //     currentIndex: widget.currentIndex,
+              //     value: 2,
+              //     onTap: () {
+              //       tabMove(2);
+              //     }),
               AppNavBarIcon(
                   img: 'chats_tab.png',
                   selectedImg: 'sel_chats_tab.png',
@@ -74,11 +85,15 @@ class _BaseAppState extends State<BaseApp> {
                     tabMove(2);
                   }),
               AppNavBarIcon(
+                  addbadge: addbadge,
                   img: 'profile_tab.png',
                   selectedImg: 'sel_profile_tab.png',
                   currentIndex: widget.currentIndex,
                   value: 3,
                   onTap: () {
+                    setState(() {
+                      addbadge = !addbadge;
+                    });
                     tabMove(3);
                   }),
             ],
