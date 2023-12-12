@@ -592,7 +592,8 @@ class _CommentBoxActionBtnsState extends State<CommentBoxActionBtns> {
                       shareBtmSheet(context);
                     }),
                 const SizedBox(width: 8),
-                const PostMoreOptionsDD(imgUrl: 'mingcute_more-2-line.svg')
+                const SearchTileMoreOptionsDD(
+                    imgUrl: 'mingcute_more-2-line.svg')
               ],
             ),
           ),
@@ -741,7 +742,7 @@ class ActionBtns extends StatelessWidget {
                   },
                 ),
                 const SizedBox(width: 8),
-                const PostMoreOptionsDD(
+                const SearchTileMoreOptionsDD(
                   imgUrl: 'mingcute_more-2-line.svg',
                 )
               ],

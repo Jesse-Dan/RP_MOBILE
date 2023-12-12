@@ -8,13 +8,14 @@ import 'package:recenth_posts/src/view/app/posts/components/post_details.dart';
 import 'package:recenth_posts/src/view/app/posts/components/report/report.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/app/profile/settings/subscriptions/subscriptions.dart';
-import 'package:recenth_posts/src/view/app/search/seerch.dart';
+import 'package:recenth_posts/src/view/app/search/components/search_more_view.dart';
+import 'package:recenth_posts/src/view/app/search/search.dart';
 import 'package:recenth_posts/src/view/auth/onboarding_view/login_mode.dart';
 import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
-
 import '../view/app/profile/settings/settings_view.dart';
+import '../view/app/search/components/trending_view.dart';
 import '../view/auth/forgot_password_fill_email_view/forget_password_view.dart';
 import '../view/auth/onboarding_view/onboarding_view.dart';
 import '../view/auth/otp_view/otp_view.dart';
@@ -39,7 +40,7 @@ class AppRoutes {
               const ResetPasswordView(),
           LoginModeView.routeName: (context, args) => LoginModeView(),
           BaseApp.routeName: (context, args) => BaseApp(
-              currentIndex: args?.arguments[0]['currentIndex'] ?? 0,
+              currentIndex: args?.arguments[0]['currentIndex'] ?? 1,
               newPost: args?.arguments[0]['newPost']),
           ReplyPost.routeName: (context, arg) => ReplyPost(
               post: arg?.arguments[0]['post'],
@@ -56,6 +57,8 @@ class AppRoutes {
           NotificationView.routeName: (context, args) =>
               const NotificationView(),
           SearchView.routeName: (context, args) => const SearchView(),
+          SearchMoreView.routeName: (context, args) => const SearchMoreView(),
+          TrendingView.routeName: (context, args) => const TrendingView(),
         },
       ).generateRoute(routeSettings);
 }

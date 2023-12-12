@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/app/chat/chats_view.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
-import 'package:recenth_posts/src/view/app/search/seerch.dart';
+import 'package:recenth_posts/src/view/app/search/search.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 
 import '../../logic/models/app/post/res/get_all_post_response.dart';

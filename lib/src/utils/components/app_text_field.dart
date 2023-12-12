@@ -21,6 +21,7 @@ class AppTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final void Function()? onTap;
   final List<String> items;
+  final Widget? prefix;
   String? value;
   AppTextField({
     Key? key,
@@ -37,6 +38,7 @@ class AppTextField extends StatefulWidget {
     this.onTap,
     this.items = const [],
     this.value,
+    this.prefix,
   }) : super(key: key);
 
   @override
@@ -201,6 +203,14 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                                   labelStyle: myTextFieldHintStyle(context),
                                   labelText: widget.hintText,
                                   hintText: widget.hintText,
+                                  // prefixIconConstraints:
+                                  //     BoxConstraints.loose(const Size(24, 24)),
+                                  prefixIcon: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: AppDimentions.k16,
+                                          bottom: AppDimentions.k16,
+                                          left: 10),
+                                      child: widget.prefix),
                                   contentPadding: const EdgeInsets.all(
                                       AppDimentions.k20 + 3),
                                   floatingLabelBehavior:

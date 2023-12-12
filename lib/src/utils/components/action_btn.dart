@@ -53,7 +53,66 @@ class ActionBtn extends StatelessWidget {
   }
 }
 
+class SearchTileMoreOptionsDD extends StatelessWidget {
+  final String imgUrl;
 
+  const SearchTileMoreOptionsDD({
+    super.key,
+    required this.imgUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<String>(
+      color: AppColors.kbrandWhite,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 2,
+      child: SvgPicture.asset(
+        'assets/icons/$imgUrl',
+        height: 24,
+        width: 24,
+      ),
+      onSelected: (value) {
+        // Handle menu item selection
+        if (kDebugMode) {
+          print('Selected: $value');
+        }
+      },
+      itemBuilder: (BuildContext context) {
+        return SearchTilePopMenuItemModel.data
+            .map(
+              (item) => PopupMenuItem<String>(
+                value: item.text,
+                child: SizedBox(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: SvgPicture.asset(
+                          'assets/icons/${item.img}',
+                          height: 24,
+                          width: 24,
+                          color: AppColors.kblackColor,
+                        ),
+                      ),
+                      Text(
+                        item.text,
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.kblackColor,
+                            ),
+                      ),
+                    ],
+                  ),
+                ), // Use the text from the model
+              ),
+            )
+            .toList();
+      },
+    );
+  }
+}
 
 class PostMoreOptionsDD extends StatelessWidget {
   final String imgUrl;
@@ -130,6 +189,21 @@ class PostDetailsTopSectioonPopMenuItemModel {
     PostDetailsTopSectioonPopMenuItemModel(
         img: 'gg_close-r.svg', text: 'Block @PR9343839'),
     PostDetailsTopSectioonPopMenuItemModel(img: 'ph_flag.svg', text: 'Report')
+  ];
+}
+
+class SearchTilePopMenuItemModel {
+  final String img;
+  final String text;
+  final int? value;
+
+  SearchTilePopMenuItemModel(
+      {this.value, required this.img, required this.text});
+  static List<SearchTilePopMenuItemModel> data = [
+    SearchTilePopMenuItemModel(
+        img: 'solar_star-line-duotone.svg', text: 'Add to favourite'),
+    SearchTilePopMenuItemModel(
+        img: 'lucide_thumbs-down.svg', text: 'Not interested in this'),
   ];
 }
 

@@ -19,7 +19,9 @@ class BaseScaffold extends StatefulWidget {
     this.refreshable = false,
     this.physics,
     this.onRefresh,
-    this.defaultBackBtnCallBack, this.controller, this.floatingActionButtonLocation,
+    this.defaultBackBtnCallBack,
+    this.controller,
+    this.floatingActionButtonLocation,
   });
 
   final Color? backgroundColor;
@@ -57,7 +59,6 @@ class _BaseScaffoldState extends State<BaseScaffold> {
 
   Scaffold _buildBody() {
     return Scaffold(
-      
       appBar: (widget.addAppBar ?? false)
           ? (widget.appbar ??
               AppBar(
@@ -84,7 +85,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
 
   SingleChildScrollView _body() {
     return SingleChildScrollView(
-      controller: widget.controller,
+        controller: widget.controller,
         physics: widget.physics ?? const BouncingScrollPhysics(),
         child: widget.addbodyPadding
             ? Padding(

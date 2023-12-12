@@ -42,6 +42,7 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   bool verified = false;
+  
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
