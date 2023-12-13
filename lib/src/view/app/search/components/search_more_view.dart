@@ -85,15 +85,15 @@ class _SearchMoreViewState extends State<SearchMoreView> {
                 borderRadius: BorderRadius.circular(20)),
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: ActionBtn(
-              imgUrl: 'bi_filter.svg',
-              onPressed: () {},
-            ),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 16.0),
+        //     child: ActionBtn(
+        //       imgUrl: 'bi_filter.svg',
+        //       onPressed: () {},
+        //     ),
+        //   ),
+        // ],
       ),
       safeAreaConfig: const SafeAreaConfig(bottom: false),
       physics: const BouncingScrollPhysics(),
