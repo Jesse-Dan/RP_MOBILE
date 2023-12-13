@@ -9,6 +9,7 @@ class AppNavBarIcon extends StatefulWidget {
   final int currentIndex;
   final int value;
   final bool addbadge;
+  final String label;
 
   const AppNavBarIcon(
       {super.key,
@@ -17,7 +18,7 @@ class AppNavBarIcon extends StatefulWidget {
       required this.selectedImg,
       this.onTap,
       required this.currentIndex,
-      required this.value});
+      required this.value, required this.label});
 
   @override
   State<AppNavBarIcon> createState() => _AppNavBarIconState();

@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/utils/components/action_btn.dart';
 import 'package:recenth_posts/src/utils/components/app_text_field.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
+import 'package:recenth_posts/src/view/app/search/components/search_more_view.dart';
+import 'package:recenth_posts/src/view/app/search/components/trending_view.dart';
 
 import '../../base/base_scaffold.dart';
 
@@ -36,10 +39,14 @@ class _SearchViewState extends State<SearchView> {
           children: [
             const SizedBox(height: 24),
             AppTextField(
+              readOnly: true,
               controller: searchCtl,
               prefix: SvgPicture.asset('assets/icons/search-normal.svg',
                   color: AppColors.kgrayColor400, height: 20, width: 20),
               hintText: 'Search',
+              onTap: () {
+                Go(context, routeName: SearchMoreView.routeName).to();
+              },
             ),
             const SizedBox(height: 24),
             Text(
@@ -51,7 +58,6 @@ class _SearchViewState extends State<SearchView> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: 15),
             SizedBox(
               width: 382,
               height: 512,
@@ -109,7 +115,9 @@ class _SearchViewState extends State<SearchView> {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Go(context, routeName: TrendingView.routeName).to();
+              },
               child: Text(
                 'See more',
                 style: TextStyle(

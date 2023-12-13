@@ -22,6 +22,7 @@ class AppTextField extends StatefulWidget {
   final void Function()? onTap;
   final List<String> items;
   final Widget? prefix;
+  final bool readOnly;
   String? value;
   AppTextField({
     Key? key,
@@ -39,6 +40,7 @@ class AppTextField extends StatefulWidget {
     this.items = const [],
     this.value,
     this.prefix,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -51,191 +53,188 @@ class _AppTextFieldState<T> extends State<AppTextField> {
     return SizedBox(
       // height: 100,
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: AppDimentions.k12),
-            SizedBox(
-              width: 288,
-              child: Text(
-                widget.labelText ?? '',
-                style: myTextFieldLabelStyle(context),
-              ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: AppDimentions.k12),
+          SizedBox(
+            width: 288,
+            child: Text(
+              widget.labelText ?? '',
+              style: myTextFieldLabelStyle(context),
             ),
-            const SizedBox(height: AppDimentions.k12),
-            SizedBox(
-              height: 56,
-              child: widget.textFieldType == TextFieldType.PASSWORD
-                  ? SizedBox(
-                      // height: 60,
-                      child: TextFormField(
-                        style: myTextFieldStyle(context),
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: widget.controller,
-                        validator: widget.validator,
-                        decoration: InputDecoration(
-                          labelStyle: myTextFieldHintStyle(context),
-                          labelText: widget.hintText,
-                          hintText: widget.hintText,
-                          contentPadding:
-                              const EdgeInsets.all(AppDimentions.k20 + 3),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                          suffixIcon: IconButton(
-                            onPressed: widget.onSufficIconClicked,
-                            icon: Icon(
-                              widget.obscureText
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                              size: 20,
-                              opticalSize: 18,
-                              color: AppColors.kgrayColor500,
-                            ),
+          ),
+          const SizedBox(height: AppDimentions.k12),
+          SizedBox(
+            height: 56,
+            child: widget.textFieldType == TextFieldType.PASSWORD
+                ? SizedBox(
+                    // height: 60,
+                    child: TextFormField(
+                      style: myTextFieldStyle(context),
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: widget.controller,
+                      validator: widget.validator,
+                      decoration: InputDecoration(
+                        labelStyle: myTextFieldHintStyle(context),
+                        labelText: widget.hintText,
+                        hintText: widget.hintText,
+                        contentPadding:
+                            const EdgeInsets.all(AppDimentions.k20 + 3),
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        suffixIcon: IconButton(
+                          onPressed: widget.onSufficIconClicked,
+                          icon: Icon(
+                            widget.obscureText
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            size: 20,
+                            opticalSize: 18,
+                            color: AppColors.kgrayColor500,
                           ),
-                          border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.kgrayColor200),
-                              borderRadius: BorderRadius.circular(4)),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.kgrayColor200),
-                              borderRadius: BorderRadius.circular(4)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.kgrayColor200),
-                              borderRadius: BorderRadius.circular(4)),
-                          errorBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: AppColors.kgrayColor200),
-                              borderRadius: BorderRadius.circular(4)),
                         ),
-                        obscureText: widget.obscureText,
-                        enabled: widget.isEnabled,
-                        onChanged: widget.onChanged,
-                        cursorColor: AppColors.kwineColor,
+                        border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.kgrayColor200),
+                            borderRadius: BorderRadius.circular(4)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.kgrayColor200),
+                            borderRadius: BorderRadius.circular(4)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.kgrayColor200),
+                            borderRadius: BorderRadius.circular(4)),
+                        errorBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.kgrayColor200),
+                            borderRadius: BorderRadius.circular(4)),
                       ),
-                    )
-                  : widget.textFieldType == TextFieldType.DROPDOWN
-                      ? Container(
-                          height: 70,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              color: AppColors.kbrandWhite,
-                              border:
-                                  Border.all(color: AppColors.kgrayColor200),
-                              borderRadius: BorderRadius.circular(4)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 25.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Expanded(
-                                    child: SizedBox(
-                                        child: Text(
-                                  widget.controller.text.isEmpty
-                                      ? widget.hintText
-                                      : widget.controller.text,
-                                  style: !widget.items
-                                          .contains(widget.controller.text)
-                                      ? myTextFieldHintStyle(context)
-                                      : myTextFieldStyle(context),
-                                ))),
-                                SizedBox(
-                                  width: 100,
-                                  height: 60,
-                                  child: appDropdownButton(
-                                    controller: widget.controller,
-                                    items: widget.items,
-                                    value: widget.value,
-                                    onChanged: (String? val) {
-                                      if (val != 'Loading...' ||
-                                          val != 'Error fetching countries') {
-                                        setState(() {
-                                          widget.value = val;
-                                          widget.controller.text = val!;
-                                        });
-                                      }
-                                    },
-                                  ),
+                      obscureText: widget.obscureText,
+                      enabled: widget.isEnabled,
+                      onChanged: widget.onChanged,
+                      cursorColor: AppColors.kwineColor,
+                    ),
+                  )
+                : widget.textFieldType == TextFieldType.DROPDOWN
+                    ? Container(
+                        height: 70,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: AppColors.kbrandWhite,
+                            border: Border.all(color: AppColors.kgrayColor200),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 25.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                  child: SizedBox(
+                                      child: Text(
+                                widget.controller.text.isEmpty
+                                    ? widget.hintText
+                                    : widget.controller.text,
+                                style: !widget.items
+                                        .contains(widget.controller.text)
+                                    ? myTextFieldHintStyle(context)
+                                    : myTextFieldStyle(context),
+                              ))),
+                              SizedBox(
+                                width: 100,
+                                height: 60,
+                                child: appDropdownButton(
+                                  controller: widget.controller,
+                                  items: widget.items,
+                                  value: widget.value,
+                                  onChanged: (String? val) {
+                                    if (val != 'Loading...' ||
+                                        val != 'Error fetching countries') {
+                                      setState(() {
+                                        widget.value = val;
+                                        widget.controller.text = val!;
+                                      });
+                                    }
+                                  },
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        )
-                      : widget.textFieldType == TextFieldType.OTP
-                          ? PinCodeTextField(
-                              autofocus: true,
-                              controller: widget.controller,
-                              hideCharacter: false,
-                              maxLength: 5,
-                              hasError: false,
-                              maskCharacter: "😎",
-                              onTextChanged: (text) {},
-                              onDone: (text) {},
-                              pinBoxWidth: 56,
-                              pinBoxHeight: 70,
-                              hasUnderline: false,
-                              wrapAlignment: WrapAlignment.spaceBetween,
-                              pinBoxDecoration: myPinBoxDecoration,
-                              pinTextStyle: TextStyle(
-                                color: AppColors.kwineColor.withOpacity(.7),
-                                fontSize: 24,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                              ),
-                              pinTextAnimatedSwitcherTransition:
-                                  ProvidedPinBoxTextAnimation.scalingTransition,
-                              pinBoxColor:
-                                  AppColors.kwineColor.withOpacity(0.09),
-                              pinTextAnimatedSwitcherDuration:
-                                  const Duration(milliseconds: 400),
-                              keyboardType: TextInputType.number,
-                            )
-                          : SizedBox(
-                              child: TextFormField(
-                                keyboardType: widget.keyboardType,
-                                controller: widget.controller,
-                                validator: widget.validator,
-                                style: myTextFieldStyle(context),
-                                decoration: InputDecoration(
-                                  labelStyle: myTextFieldHintStyle(context),
-                                  labelText: widget.hintText,
-                                  hintText: widget.hintText,
-                                  // prefixIconConstraints:
-                                  //     BoxConstraints.loose(const Size(24, 24)),
-                                  prefixIcon: Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: AppDimentions.k16,
-                                          bottom: AppDimentions.k16,
-                                          left: 10),
-                                      child: widget.prefix),
-                                  contentPadding: const EdgeInsets.all(
-                                      AppDimentions.k20 + 3),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never,
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppColors.kgrayColor200),
-                                      borderRadius: BorderRadius.circular(4)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppColors.kgrayColor200),
-                                      borderRadius: BorderRadius.circular(4)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppColors.kgrayColor200),
-                                      borderRadius: BorderRadius.circular(4)),
-                                ),
-                                obscureText: widget.obscureText,
-                                enabled: widget.isEnabled,
-                                onChanged: widget.onChanged,
-                                cursorColor: AppColors.kwineColor,
-                              ),
+                        ),
+                      )
+                    : widget.textFieldType == TextFieldType.OTP
+                        ? PinCodeTextField(
+                            autofocus: true,
+                            controller: widget.controller,
+                            hideCharacter: false,
+                            maxLength: 5,
+                            hasError: false,
+                            maskCharacter: "😎",
+                            onTextChanged: (text) {},
+                            onDone: (text) {},
+                            pinBoxWidth: 56,
+                            pinBoxHeight: 70,
+                            hasUnderline: false,
+                            wrapAlignment: WrapAlignment.spaceBetween,
+                            pinBoxDecoration: myPinBoxDecoration,
+                            pinTextStyle: TextStyle(
+                              color: AppColors.kwineColor.withOpacity(.7),
+                              fontSize: 24,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
                             ),
-            )
-          ]),
+                            pinTextAnimatedSwitcherTransition:
+                                ProvidedPinBoxTextAnimation.scalingTransition,
+                            pinBoxColor: AppColors.kwineColor.withOpacity(0.09),
+                            pinTextAnimatedSwitcherDuration:
+                                const Duration(milliseconds: 400),
+                            keyboardType: TextInputType.number,
+                          )
+                        : TextFormField(
+                          onTap: widget.onTap,
+                          readOnly: widget.readOnly,
+                          keyboardType: widget.keyboardType,
+                          controller: widget.controller,
+                          validator: widget.validator,
+                          style: myTextFieldStyle(context),
+                          decoration: InputDecoration(
+                            labelStyle: myTextFieldHintStyle(context),
+                            labelText: widget.hintText,
+                            hintText: widget.hintText,
+                            prefixIcon: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: AppDimentions.k16,
+                                    bottom: AppDimentions.k16,
+                                    left: 10),
+                                child: widget.prefix),
+                            contentPadding:
+                                const EdgeInsets.all(AppDimentions.k20 + 3),
+                            floatingLabelBehavior:
+                                FloatingLabelBehavior.never,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.kgrayColor200),
+                                borderRadius: BorderRadius.circular(4)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.kgrayColor200),
+                                borderRadius: BorderRadius.circular(4)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.kgrayColor200),
+                                borderRadius: BorderRadius.circular(4)),
+                          ),
+                          obscureText: widget.obscureText,
+                          enabled: widget.isEnabled,
+                          onChanged: widget.onChanged,
+                          cursorColor: AppColors.kwineColor,
+                        ),
+          )
+        ],
+      ),
     );
   }
 

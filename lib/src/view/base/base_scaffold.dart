@@ -22,6 +22,7 @@ class BaseScaffold extends StatefulWidget {
     this.defaultBackBtnCallBack,
     this.controller,
     this.floatingActionButtonLocation,
+    this.safeAreaConfig = const SafeAreaConfig(),
   });
 
   final Color? backgroundColor;
@@ -42,6 +43,7 @@ class BaseScaffold extends StatefulWidget {
   final Future<void> Function()? onRefresh;
   final void Function()? defaultBackBtnCallBack;
   final ScrollController? controller;
+  final SafeAreaConfig safeAreaConfig;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -51,7 +53,11 @@ class _BaseScaffoldState extends State<BaseScaffold> {
   @override
   Widget build(BuildContext context) {
     return widget.addSafeArea
-        ? SafeArea(
+        ? SafeAreaConfig(
+            left: widget.safeAreaConfig.left,
+            right: widget.safeAreaConfig.right,
+            top: widget.safeAreaConfig.top,
+            bottom: widget.safeAreaConfig.bottom,
             child: _buildBody(),
           )
         : _buildBody();
@@ -96,5 +102,39 @@ class _BaseScaffoldState extends State<BaseScaffold> {
 
   _wBody() {
     return (widget.body);
+  }
+}
+
+class SafeAreaConfig extends StatelessWidget {
+  final bool left;
+  final bool top;
+  final bool right;
+  final bool bottom;
+  final EdgeInsets minimum;
+  final bool maintainBottomViewPadding;
+  final Widget? child;
+
+  const SafeAreaConfig({
+    super.key,
+    this.left = true,
+    this.top = true,
+    this.right = true,
+    this.bottom = true,
+    this.minimum = EdgeInsets.zero,
+    this.maintainBottomViewPadding = false,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      minimum: minimum,
+      maintainBottomViewPadding: maintainBottomViewPadding,
+      child: child ?? const SizedBox(),
+    );
   }
 }
