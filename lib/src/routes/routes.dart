@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:navigation_system/navigation_system.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/view/app/chat/chats_view.dart';
+import 'package:recenth_posts/src/view/app/chat/components/chat_user.dart';
 import 'package:recenth_posts/src/view/app/notification/nootification_view.dart';
 import 'package:recenth_posts/src/view/app/posts/components/comment_on_post.dart';
 import 'package:recenth_posts/src/view/app/posts/components/post_details.dart';
@@ -14,6 +15,8 @@ import 'package:recenth_posts/src/view/auth/onboarding_view/login_mode.dart';
 import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
+
+import '../view/app/chat/components/chat_details.dart';
 import '../view/app/profile/settings/settings_view.dart';
 import '../view/app/search/components/trending_view.dart';
 import '../view/auth/forgot_password_fill_email_view/forget_password_view.dart';
@@ -40,7 +43,7 @@ class AppRoutes {
               const ResetPasswordView(),
           LoginModeView.routeName: (context, args) => LoginModeView(),
           BaseApp.routeName: (context, args) => BaseApp(
-              currentIndex: args?.arguments[0]['currentIndex'] ?? 1,
+              currentIndex: args?.arguments[0]['currentIndex'],
               newPost: args?.arguments[0]['newPost']),
           ReplyPost.routeName: (context, arg) => ReplyPost(
               post: arg?.arguments[0]['post'],
@@ -59,6 +62,9 @@ class AppRoutes {
           SearchView.routeName: (context, args) => const SearchView(),
           SearchMoreView.routeName: (context, args) => const SearchMoreView(),
           TrendingView.routeName: (context, args) => const TrendingView(),
+          ChatsUseriew.routeName: (context, args) => const ChatsUseriew(),
+          AddChatFromFavView.routeName: (context, args) =>
+              const AddChatFromFavView()
         },
       ).generateRoute(routeSettings);
 }

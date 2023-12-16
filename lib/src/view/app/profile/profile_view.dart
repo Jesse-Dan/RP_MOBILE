@@ -42,7 +42,7 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   bool verified = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -52,45 +52,48 @@ class _ProfileViewState extends State<ProfileView> {
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         appbar: ProfileAppBar(),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            VerifiedStatusBar(
-              verified: !verified,
-              onCancelled: () {
-                setState(() {
-                  verified = !verified;
-                });
-              },
-            ),
-            (!verified) ? ProfileAppBar() : const SizedBox.shrink(),
-            const SizedBox(height: 24),
-            const ProfileHead(),
-            const SizedBox(height: 24),
-            const Text(
-              'Passionate about technology, enjoys sharing insights about the digital world.',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'DM Sans',
-                fontWeight: FontWeight.w400,
+        body: Padding(
+          padding: const EdgeInsets.only(bottom: 40.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              VerifiedStatusBar(
+                verified: !verified,
+                onCancelled: () {
+                  setState(() {
+                    verified = !verified;
+                  });
+                },
               ),
-            ),
-            const SizedBox(height: 24),
-            const CountAndRating(),
-            ListView.builder(
-                itemCount: PostData.generate().length,
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (item, i) {
-                  return AllPostWidget(
-                    postCardType: PostCardType.fav,
-                    post: PostData.generate()[i],
-                    i: i,
-                  );
-                }),
-          ],
+              (!verified) ? ProfileAppBar() : const SizedBox.shrink(),
+              const SizedBox(height: 24),
+              const ProfileHead(),
+              const SizedBox(height: 24),
+              const Text(
+                'Passionate about technology, enjoys sharing insights about the digital world.',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontFamily: 'DM Sans',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(height: 24),
+              const CountAndRating(),
+              ListView.builder(
+                  itemCount: PostData.generate().length,
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (item, i) {
+                    return AllPostWidget(
+                      postCardType: PostCardType.fav,
+                      post: PostData.generate()[i],
+                      i: i,
+                    );
+                  }),
+            ],
+          ),
         ));
   }
 

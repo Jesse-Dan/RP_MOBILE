@@ -58,7 +58,7 @@ class AppTheme extends AppColors {
   static darkThemeData(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
-      primaryColorLight: AppColors.kprimaryColor400,
+      primaryColorLight: AppColors.kblackColor.withOpacity(0.6),
       textTheme: getTextTheme(),
       primaryTextTheme: getTextTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,

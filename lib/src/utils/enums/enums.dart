@@ -45,13 +45,29 @@ enum PostCardType { fav, defaultt }
 enum CommentType { Comment, Reply }
 
 enum SubType {
-  // BASIC,
-  // ESSENTIAL,
-  // PRO,
+  BASIC,
+  ESSENTIAL,
+  PRO,
   PREMIUM,
-  // GOLD,
+  GOLD,
   PLATINUM,
-  // ULTIMATE,
-  // DIAMOND,
+  ULTIMATE,
+  DIAMOND,
   EXECUTIVE
+}
+
+
+enum NotificationType{
+  FAVORITE,
+  SECURITY,
+  DEFAULT,
+  ACTION
+}
+
+enum PredefinedDateFormat {
+  dateOnly,
+  timeOnly,
+  dateTime,
+  time12HourFormat,
+  time24HourFormat
 }

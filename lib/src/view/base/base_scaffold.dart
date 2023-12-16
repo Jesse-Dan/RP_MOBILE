@@ -68,6 +68,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       appBar: (widget.addAppBar ?? false)
           ? (widget.appbar ??
               AppBar(
+              
                 leading: IconButton(
                     onPressed: widget.defaultBackBtnCallBack ??
                         () {

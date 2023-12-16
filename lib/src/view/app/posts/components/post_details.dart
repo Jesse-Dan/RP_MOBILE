@@ -117,8 +117,7 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                 ])).toAndExpectData();
                             Logger.log(tag: Tag.SERVICE_ACTION, message: data);
 
-                            AppNotifier.notifyAction(
-                                message: data, context: context);
+                            AppNotifier.notifyAction(message: data, context);
 
                             Logger.log(tag: Tag.SERVICE_ACTION, message: data);
                           } catch (e) {

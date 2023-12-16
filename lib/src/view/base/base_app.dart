@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/app/chat/chats_view.dart';
+import 'package:recenth_posts/src/view/app/notification/nootification_view.dart';
 import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/app/search/search.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
@@ -13,10 +14,10 @@ import '../app/profile/profile_view.dart';
 
 class BaseApp extends StatefulWidget {
   static const String routeName = 'app.app';
-  final int currentIndex;
+  final int? currentIndex;
   final Post? newPost;
   BaseApp({super.key, required this.currentIndex, this.newPost}) {
-    _currentIndex = currentIndex;
+    _currentIndex = currentIndex ?? 0;
   }
   late int _currentIndex;
 
@@ -29,72 +30,46 @@ class _BaseAppState extends State<BaseApp> {
     const PostView(),
     const SearchView(),
     const ChatsView(),
-    const ChatsView(),
+    const NotificationView(),
     const ProfileView(),
   ];
-
-  void tabMove(int value) {
-    setState(() {
-      widget._currentIndex = value;
-    });
-  }
 
   bool addbadge = true;
   final BottomNavigationBarType _bottomNavType = BottomNavigationBarType.fixed;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     List<AppNavBarIcon> t = [
-      AppNavBarIcon(
-          label: 'Home',
-          img: 'linear_home-2.svg',
-          selectedImg: 'bold_home-2.svg',
-          currentIndex: widget.currentIndex,
-          value: 0,
-          onTap: () {
-            tabMove(0);
-          }),
-      AppNavBarIcon(
-          label: 'Search',
-          img: 'linear_search-normal.svg',
-          selectedImg: 'bold_search-normal.svg',
-          currentIndex: widget.currentIndex,
-          value: 1,
-          onTap: () {
-            tabMove(1);
-          }),
-      AppNavBarIcon(
+      const AppNavBarIcon(
+        label: 'Home',
+        img: 'linear_home-2.svg',
+        selectedImg: 'bold_home-2.svg',
+      ),
+      const AppNavBarIcon(
+        label: 'Search',
+        img: 'linear_search-normal.svg',
+        selectedImg: 'bold_search-normal.svg',
+      ),
+      const AppNavBarIcon(
         img: 'linear_message.svg',
         selectedImg: 'bold_message.svg',
-        currentIndex: widget.currentIndex,
-        value: 2,
-        onTap: () {
-          tabMove(2);
-        },
         label: 'Chat',
       ),
-      AppNavBarIcon(
-          label: 'Notification',
-          img: 'linear_notification.svg',
-          selectedImg: 'bold_notification.svg',
-          currentIndex: widget.currentIndex,
-          value: 3,
-          onTap: () {
-            tabMove(2);
-          }),
-      AppNavBarIcon(
-          label: 'Profile',
-          addbadge: addbadge,
-          img: 'linear_profile.svg',
-          selectedImg: 'bold_frame.svg',
-          currentIndex: widget.currentIndex,
-          value: 4,
-          onTap: () {
-            setState(() {
-              addbadge = !addbadge;
-            });
-            tabMove(3);
-          }),
+      const AppNavBarIcon(
+        label: 'Notification',
+        img: 'linear_notification.svg',
+        selectedImg: 'bold_notification.svg',
+      ),
+      const AppNavBarIcon(
+        label: 'Profile',
+        img: 'linear_profile.svg',
+        selectedImg: 'bold_frame.svg',
+      ),
     ];
 
     List<BottomNavigationBarItem> navBarItems = t
@@ -114,6 +89,8 @@ class _BaseAppState extends State<BaseApp> {
     return BaseScaffold(
         physics: const NeverScrollableScrollPhysics(),
         bottomNavigationBar: BottomNavigationBar(
+            enableFeedback: false,
+            elevation: 2,
             selectedLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -126,13 +103,17 @@ class _BaseAppState extends State<BaseApp> {
             selectedItemColor: AppColors.kprimaryColor700,
             unselectedItemColor: const Color(0xff757575),
             type: _bottomNavType,
-            onTap: tabMove,
+            onTap: (value) {
+              setState(() {
+                widget._currentIndex = value;
+              });
+            },
             items: navBarItems),
         backgroundColor: AppColors.kbrandWhite,
         addbodyPadding: false,
         body: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height - 40,
             child: screens[widget._currentIndex]));
   }
 }

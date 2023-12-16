@@ -1,30 +1,29 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, must_be_immutable
-
+// ignore_for_file: non_constant_identifier_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_final_fields, must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:recenth_posts/src/utils/components/app_divider.dart';
-import 'package:recenth_posts/src/utils/components/app_notifier.dart';
 import 'package:recenth_posts/src/utils/components/profile_icon.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
-import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
 import 'package:sticky_grouped_list/sticky_grouped_list.dart';
 
-import '../../../logic/services/date_service/date_time_service.dart';
-import '../../../utils/components/action_btn.dart';
-import '../../../utils/enums/enums.dart';
-import '../../base/base_scaffold.dart';
+import '../../../../logic/services/date_service/date_time_service.dart';
+import '../../../../utils/components/action_btn.dart';
+import '../../../../utils/components/app_divider.dart';
+import '../../../../utils/components/app_notifier.dart';
+import '../../../../utils/enums/enums.dart';
+import '../../../../utils/style/app_dimentions.dart';
+import '../../../base/base_scaffold.dart';
 
-class NotificationView extends StatefulWidget {
-  static const String routeName = '/notification.view';
+class ChatsUseriew extends StatefulWidget {
+  static const String routeName = '/chats.user.view';
 
-  const NotificationView({
+  const ChatsUseriew({
     super.key,
   });
 
   @override
-  State<NotificationView> createState() => _NotificationViewState();
+  State<ChatsUseriew> createState() => _ChatsUseriewState();
 }
 
-class _NotificationViewState extends State<NotificationView> {
+class _ChatsUseriewState extends State<ChatsUseriew> {
   String getDayOfTheWeek(DateTime day) {
     DateTime now = DateTime.now();
 
@@ -58,122 +57,116 @@ class _NotificationViewState extends State<NotificationView> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-        addbodyPadding: true,
-        physics: const BouncingScrollPhysics(),
-        backgroundColor: AppColors.kbrandWhite,
+        addbodyPadding: false,
         addAppBar: true,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         appbar: AppBar(
-          toolbarHeight: 80,
-          backgroundColor: AppColors.kbrandWhite,
-          title: Text(
-            'Notification',
-            textAlign: TextAlign.center,
-            // ignore: deprecated_member_use
-            style: Theme.of(context).textTheme.headline2!.copyWith(
-                  fontSize: 24,
+          leading: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              size: 20,
+            ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ProfileIcon(
+                margin: EdgeInsets.all(0),
+              ),
+              const SizedBox(width: 26),
+              Text(
+                'Annette Black',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF0B0B0B),
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
                   fontWeight: FontWeight.w600,
+                  height: 0.08,
                 ),
+              ),
+            ],
           ),
           centerTitle: false,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: ActionBtn(
-                imgUrl: 'setting-2.svg',
-                onPressed: () {},
-              ),
-            ),
-          ],
         ),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height - 180,
-          width: MediaQuery.of(context).size.width,
-          child: notifications.isEmpty
-              ? Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: 260,
-                    height: 75,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'No Notification Yet',
-                          style: TextStyle(
-                            color: Color(0xFF232323),
-                            fontSize: 24,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 11),
-                        SizedBox(
+        physics: const BouncingScrollPhysics(),
+        backgroundColor: AppColors.kbrandWhite,
+        body: 1 == 1
+            ? Center(
+                child: Text('jesse'),
+              )
+            : SizedBox(
+                height: MediaQuery.of(context).size.height - 180,
+                width: MediaQuery.of(context).size.width,
+                child: chats.isEmpty
+                    ? Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
                           width: 260,
+                          height: 75,
                           child: Text(
-                            'All notification will show here',
-                            textAlign: TextAlign.center,
+                            'Send a message',
                             style: TextStyle(
-                              color: Color(0xFF8D8D8D),
-                              fontSize: 16,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF232323),
+                              fontSize: 24,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                )
-              : StickyGroupedListView<Notification, DateTime>(
-                  itemScrollController: itemScrollController,
-                  elements: notifications,
-                  groupBy: (Notification element) => element.date,
-                  floatingHeader: true,
-                  reverse: false,
-                  groupSeparatorBuilder: (Notification element) => Container(
-                      color: AppColors.kbrandWhite,
-                      width: double.infinity,
-                      margin: EdgeInsets.only(bottom: AppDimentions.k16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            getDayOfTheWeek(element.date),
-                            style: TextStyle(
-                              color: Color(0xFF8D8D8D),
-                              fontSize: 14,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(width: AppDimentions.k16),
-                          AppDivider.build(
-                              width: MediaQuery.of(context).size.width / 1.4,
-                              height: 1.5)
-                        ],
-                      )),
-                  itemBuilder: (context, Notification element) {
-                    return NotificationTile(
-                      notification: element,
-                    );
-                  },
-                  // Row(children: [Icon(element.icon), Text((element.name))]),
-                  // itemComparator: (e1, e2) => e2.name.compareTo(e1.name), // optional
-                  // elementIdentifier: (element) =>
-                  //     element, // optional - see below for usage
-                  //  itemScrollController: itemScrollController, // optional
-                  order: StickyGroupedListOrder.DESC, // optional
-                ),
-        ));
+                      )
+                    : StickyGroupedListView<Chat, DateTime>(
+                        itemScrollController: itemScrollController,
+                        elements: chats,
+                        groupBy: (Chat element) => element.date,
+                        floatingHeader: true,
+                        reverse: false,
+                        groupSeparatorBuilder: (Chat element) => Container(
+                            color: AppColors.kbrandWhite,
+                            width: double.infinity,
+                            margin: EdgeInsets.only(bottom: AppDimentions.k16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  getDayOfTheWeek(element.date),
+                                  style: TextStyle(
+                                    color: Color(0xFF8D8D8D),
+                                    fontSize: 14,
+                                    fontFamily: 'DM Sans',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                const SizedBox(width: AppDimentions.k16),
+                                AppDivider.build(
+                                    width:
+                                        MediaQuery.of(context).size.width / 1.4,
+                                    height: 1.5)
+                              ],
+                            )),
+                        itemBuilder: (context, Chat element) {
+                          return NotificationTile(
+                            notification: element,
+                          );
+                        },
+                        // Row(children: [Icon(element.icon), Text((element.name))]),
+                        // itemComparator: (e1, e2) => e2.name.compareTo(e1.name), // optional
+                        // elementIdentifier: (element) =>
+                        //     element, // optional - see below for usage
+                        //  itemScrollController: itemScrollController, // optional
+                        order: StickyGroupedListOrder.DESC, // optional
+                      ),
+              ));
   }
 }
 
 class NotificationTile extends StatelessWidget {
-  final Notification notification;
+  final Chat notification;
   NotificationTile({
     super.key,
     required this.notification,
@@ -367,7 +360,7 @@ class NotificationTile extends StatelessWidget {
   }
 }
 
-class Notification {
+class Chat {
   final String id;
   final String content;
   final String title;
@@ -375,7 +368,7 @@ class Notification {
   final User user;
   final DateTime date;
 
-  Notification({
+  Chat({
     required this.id,
     required this.content,
     required this.title,
@@ -417,7 +410,7 @@ final User user3 =
     User(id: 3, firstName: 'Bob', lastName: 'Johnson', userId: '@RP002KOP4');
 
 // Creating Notifications linked to Users
-final Notification notification1 = Notification(
+final Chat notification1 = Chat(
     id: '1',
     content: 'This is notification 1 content FAVORITE',
     title: 'Notification 1',
@@ -425,7 +418,7 @@ final Notification notification1 = Notification(
     user: user1,
     date: DateTime(2020, 8, 2, 12));
 
-final Notification notification2 = Notification(
+final Chat notification2 = Chat(
     id: '2',
     content: 'This is notification 2 content ACTION',
     title: 'Notification 2',
@@ -433,7 +426,7 @@ final Notification notification2 = Notification(
     user: user2,
     date: DateTime(2023, 12, 15, 0));
 
-final Notification notification3 = Notification(
+final Chat notification3 = Chat(
     id: '3',
     content: 'This is notification 3 content ACTION',
     title: 'Notification 3',
@@ -441,28 +434,28 @@ final Notification notification3 = Notification(
     user: user3,
     date: DateTime.now());
 
-final Notification notification4 = Notification(
+final Chat notification4 = Chat(
     id: '2',
     content: 'This is notification 2 content SECURITY',
     title: 'Notification 2',
     notificationType: NotificationType.SECURITY,
     user: user2,
     date: DateTime(2023, 12, 15, 0));
-final Notification notification5 = Notification(
+final Chat notification5 = Chat(
     id: '2',
     content: 'This is notification 2 content FAVORITE',
     title: 'Notification 2',
     notificationType: NotificationType.FAVORITE,
     user: user2,
     date: DateTime(2023, 12, 15, 0));
-final Notification notification6 = Notification(
+final Chat notification6 = Chat(
     id: '2',
     content: 'This is notification 2 content SECURITY',
     title: 'Notification 2',
     notificationType: NotificationType.SECURITY,
     user: user2,
     date: DateTime(2020, 8, 2, 12));
-final Notification notification7 = Notification(
+final Chat notification7 = Chat(
     id: '2',
     content: 'This is notification 2 content FAVORITE',
     title: 'Notification 2',
@@ -470,7 +463,7 @@ final Notification notification7 = Notification(
     user: user2,
     date: DateTime(2020, 8, 2, 12));
 
-List<Notification> notifications = [
+List<Chat> chats = [
   notification1,
   notification2,
   notification3,

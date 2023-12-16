@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/style/hex_method.dart';
 
 class AppColors extends HexColor {
@@ -11,7 +12,7 @@ class AppColors extends HexColor {
   static final kpouchBlue = HexColor('#00C4CC');
 
   ///  STANDARD COLOR
-
+  static const ktransparentColor = Colors.transparent;
   static final kblackColor = HexColor('#0B0B0B');
   static final kwhiteColor = HexColor('#FFFFFF');
 

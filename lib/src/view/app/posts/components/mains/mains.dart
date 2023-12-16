@@ -518,8 +518,8 @@ class _CommentBoxActionBtnsState extends State<CommentBoxActionBtns> {
                                 ])).toAndExpectData();
                             Logger.log(tag: Tag.SERVICE_ACTION, message: data);
 
-                            AppNotifier.notifyAction(
-                                message: data, context: context);
+                            AppNotifier.notifyAction(context,
+                                message: data,  );
 
                             Logger.log(tag: Tag.SERVICE_ACTION, message: data);
                           } catch (e) {
@@ -667,8 +667,8 @@ class ActionBtns extends StatelessWidget {
                                 ])).toAndExpectData();
                             Logger.log(tag: Tag.SERVICE_ACTION, message: data);
 
-                            AppNotifier.notifyAction(
-                                message: data, context: context);
+                            AppNotifier.notifyAction(context,
+                                message: data,  );
 
                             Logger.log(tag: Tag.SERVICE_ACTION, message: data);
                           } catch (e) {

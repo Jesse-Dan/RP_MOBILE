@@ -68,6 +68,8 @@ class _MainAppState extends State<MainApp> {
               child: InAppNotification(
                 child: MaterialApp(
                     theme: AppTheme.lightThemeData(context),
+                    darkTheme: AppTheme.darkThemeData(context),
+                    themeMode: ThemeMode.dark,
                     onGenerateRoute: (RouteSettings routeSettings) =>
                         AppRoutes.getRoutes(routeSettings)),
               ),

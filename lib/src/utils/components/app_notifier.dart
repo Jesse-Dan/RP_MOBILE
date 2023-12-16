@@ -66,10 +66,9 @@ class AppNotifier {
         onTap: () => Logger(tag: Tag.SERVICE_ACTION, message: 'Notified'),
       );
 
-  static notifyAction({
-    context,
+  static notifyAction(
+    context,{
     AppNotifierFormat appNotifierFormat = AppNotifierFormat.NEW_POST,
-    String title = '',
     String message = '',
   }) {
     return InAppNotification.show(
