@@ -75,15 +75,15 @@ class _NotificationViewState extends State<NotificationView> {
                 ),
           ),
           centerTitle: false,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: ActionBtn(
-                imgUrl: 'setting-2.svg',
-                onPressed: () {},
-              ),
-            ),
-          ],
+          // actions: [
+          //   Padding(
+          //     padding: const EdgeInsets.only(right: 16.0),
+          //     child: ActionBtn(
+          //       imgUrl: 'setting-2.svg',
+          //       onPressed: () {},
+          //     ),
+          //   ),
+          // ],
         ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height - 180,

@@ -60,7 +60,8 @@ class _BaseAppState extends State<BaseApp> {
         selectedImg: 'bold_message.svg',
         label: 'Chat',
       ),
-      const AppNavBarIcon(
+      AppNavBarIcon(
+        addbadge: addbadge,
         label: 'Notification',
         img: 'linear_notification.svg',
         selectedImg: 'bold_notification.svg',
@@ -75,12 +76,47 @@ class _BaseAppState extends State<BaseApp> {
     List<BottomNavigationBarItem> navBarItems = t
         .map(
           (e) => BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              'assets/icons/${e.img}',
-            ),
-            activeIcon: SvgPicture.asset(
-              'assets/icons/${e.selectedImg}',
-            ),
+            icon: e.addbadge
+                ? Stack(
+                    children: [
+                      SvgPicture.asset('assets/icons/${e.img}'),
+                      Positioned(
+                        top: 1.2,
+                        right: 1.5,
+                        child: Container(
+                          height: 10,
+                          width: 10,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.kprimaryColor700),
+                        ),
+                      )
+                    ],
+                  )
+                : SvgPicture.asset('assets/icons/${e.img}'),
+            activeIcon: e.addbadge
+                ? Stack(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/icons/${e.selectedImg}',
+                      ),
+                      Positioned(
+                        top: 1.2,
+                        right: 1.5,
+                        child: Container(
+                          height: 10,
+                          width: 10,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.kprimaryColor700,
+                              border: Border.all(color: AppColors.kbrandWhite)),
+                        ),
+                      )
+                    ],
+                  )
+                : SvgPicture.asset(
+                    'assets/icons/${e.selectedImg}',
+                  ),
             label: e.label,
           ),
         )

@@ -57,13 +57,16 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
 
   final GroupedItemScrollController itemScrollController =
       GroupedItemScrollController();
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
       addbodyPadding: false,
       addAppBar: true,
-      bottomSheet: ChatTextField(),
+      bottomSheet: ChatTextField(
+        textEditingController: textEditingController,
+      ),
       appbar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -174,8 +177,10 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
 }
 
 class ChatTextField extends StatefulWidget {
+  final TextEditingController textEditingController;
   const ChatTextField({
     super.key,
+    required this.textEditingController,
   });
 
   @override
@@ -208,6 +213,10 @@ class _ChatTextFieldState extends State<ChatTextField> {
                   borderRadius: BorderRadius.circular(8)),
             ),
             child: TextFormField(
+              onChanged: (val) {
+                setState(() {});
+              },
+              controller: widget.textEditingController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   errorBorder: InputBorder.none,
@@ -217,22 +226,26 @@ class _ChatTextFieldState extends State<ChatTextField> {
           ),
           Spacer(),
           GestureDetector(
-            onTap: () {
-              chats.add(Chat(
-                  id: 5,
-                  content: 'jesse loves you ',
-                  sender: user1,
-                  reciever: user4,
-                  date: DateTime(2023, 12, 15, 0),
-                  seen: false));
-              setState(() {});
-            },
+            onTap: widget.textEditingController.text.isEmpty
+                ? null
+                : () {
+                    chats.add(Chat(
+                        id: 5,
+                        content: 'jesse loves you ',
+                        sender: user1,
+                        reciever: user4,
+                        date: DateTime(2023, 12, 15, 0),
+                        seen: false));
+                    setState(() {});
+                  },
             child: Container(
               width: 48,
               height: 48,
               alignment: Alignment.center,
               decoration: ShapeDecoration(
-                color: Color(0xFFD75B6B),
+                color: widget.textEditingController.text.isEmpty
+                    ? AppColors.kprimaryColor200
+                    : AppColors.kprimaryColor700,
                 shape: OvalBorder(),
               ),
               child:

@@ -92,40 +92,42 @@ class Settings {
 
   static List<Settings> settings(BuildContext context) => [
         Settings(voidCallback: () {}, title: 'Profile', img: 'profile.svg'),
-        Settings(
-            voidCallback: () {}, title: 'Verify Account', img: 'verify.svg'),
+        // Settings(
+        //     voidCallback: () {}, title: 'Verify Account', img: 'verify.svg'),
         Settings(
             voidCallback: () {},
             title: 'Change Password',
             img: 'solar_lock-outline.svg'),
-        Settings(
-            voidCallback: () {}, title: 'Customise ID', img: 'magicpen.svg'),
+        // Settings(
+        //     voidCallback: () {}, title: 'Customise ID', img: 'magicpen.svg'),
         Settings(
             voidCallback: () {},
             title: 'Privacy',
             img: 'material-symbols-light_privacy-tip-outline-rounded.svg'),
         Settings(
             voidCallback: () {
-              Go(context,routeName: SubscritionsView.routeName).to();
+              Go(context, routeName: SubscritionsView.routeName).to();
             },
             title: 'Subscription',
             img: 'star.svg'),
         Settings(voidCallback: () {}, title: 'Payment Method', img: 'card.svg'),
         Settings(
             voidCallback: () {}, title: 'Security', img: 'carbon_security.svg'),
-        Settings(
-            voidCallback: () {},
-            title: 'Language',
-            img: 'iconoir_language.svg'),
-        Settings(
-            voidCallback: () {},
-            title: 'Notifications',
-            img: 'basil_notification-outline.svg'),
-        Settings(
-            voidCallback: () {}, title: 'Help Center', img: 'formkit_help.svg'),
-        Settings(voidCallback: () {}, title: 'About', img: 'iconoir_page.svg'),
-        Settings(
-            voidCallback: () {}, title: 'Delete Account', img: 'trash.svg'),
+        // Settings(
+        //     voidCallback: () {},
+        //     title: 'Language',
+        //     img: 'iconoir_language.svg'),
+        // Settings(
+        //     voidCallback: () {},
+        //     title: 'Notifications',
+        //     img: 'basil_notification-outline.svg'),
+        // Settings(
+        //     voidCallback: () {},
+        //     title: 'Help Center - About',
+        //     img: 'formkit_help.svg'),
+        // Settings(voidCallback: () {}, title: 'About', img: 'iconoir_page.svg'),
+        // Settings(
+        //     voidCallback: () {}, title: 'Delete Account', img: 'trash.svg'),
         Settings(
             voidCallback: () {},
             title: 'Log out',
