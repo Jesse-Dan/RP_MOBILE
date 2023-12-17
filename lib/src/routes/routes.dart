@@ -14,7 +14,6 @@ import 'package:recenth_posts/src/view/auth/onboarding_view/login_mode.dart';
 import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
-
 import '../view/app/chat/components/chat_details.dart';
 import '../view/app/profile/settings/settings_view.dart';
 import '../view/app/search/components/trending_view.dart';
