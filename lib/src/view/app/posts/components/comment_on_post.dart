@@ -3,12 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:navigation_system/go/go.dart';
-import 'package:navigation_system/go/go_service.dart';
 import 'package:recenth_posts/src/logic/models/app/post/res/get_all_post_response.dart';
 import 'package:recenth_posts/src/utils/components/profile_icon.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
-import 'package:recenth_posts/src/view/base/base_app.dart';
 
 import '../../../../utils/enums/enums.dart';
 import '../../../base/base_scaffold.dart';
@@ -50,15 +48,7 @@ class _ReplyPostState extends State<ReplyPost> {
             onTap: replyController.text.isEmpty
                 ? null
                 : () {
-                    Go<String>(
-                      context,
-                      routeName: BaseApp.routeName,
-                      arguments: MyRouteArguments(
-                        arguments: [
-                          {'newPost': widget.post, "currentIndex": 0}
-                        ],
-                      ),
-                    ).backWithData(
+                    Go<String>(context).backWithData(
                         '${widget.commentType.name.toLowerCase()} sent ');
                   },
             child: Container(

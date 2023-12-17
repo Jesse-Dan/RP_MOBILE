@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
+import 'package:navigation_system/go/go_service.dart';
 import 'package:recenth_posts/src/utils/components/action_btn.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
@@ -59,7 +60,7 @@ class _ChatsViewState extends State<ChatsView> {
               )
             ],
             bottom: ActiveUsers(),
-            toolbarHeight: 180,
+            toolbarHeight: 170,
           ),
           body: BaseBody(
             child: SingleChildScrollView(
@@ -74,10 +75,22 @@ class _ChatsViewState extends State<ChatsView> {
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       controller: scrollCtl,
-                      itemCount: 20,
+                      itemCount: users.length,
                       shrinkWrap: true,
                       itemBuilder: (ctx, i) {
-                        return ChatListTile();
+                        return users[i].id == 1
+                            ? SizedBox.shrink()
+                            : ChatListTile(
+                                recievingUser: users[i],
+                                recentChat: chats
+                                    .where((element) =>
+                                        element.reciever.id == users[i].id)
+                                    .lastOrNull,
+                                unredCount: (chats
+                                    .where((element) =>
+                                        element.reciever.id == users[i].id &&
+                                        element.seen == false)
+                                    .length));
                       },
                     ),
                   ),
@@ -87,7 +100,7 @@ class _ChatsViewState extends State<ChatsView> {
           ),
         ),
         Positioned(
-            bottom: 100,
+            bottom: 50,
             right: 16,
             child: FloatingActionButton(
               elevation: 0,
@@ -219,8 +232,14 @@ class _ChatsViewState extends State<ChatsView> {
 }
 
 class ChatListTile extends StatelessWidget {
+  final User recievingUser;
+  final Chat? recentChat;
+  final int unredCount;
   const ChatListTile({
     super.key,
+    required this.recievingUser,
+    required this.recentChat,
+    required this.unredCount,
   });
 
   @override
@@ -229,11 +248,15 @@ class ChatListTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: ListTile(
         onTap: () {
-          Go(context, routeName: AddChatFromFavView.routeName).to();
+          Go(context,
+              routeName: ChatDetailsView.routeName,
+              arguments: MyRouteArguments(arguments: [
+                {'chat': chats, 'reciever': recievingUser}
+              ])).to();
         },
         leading: ProfileIcon(height: 56, width: 56, margin: EdgeInsets.all(0)),
         title: Text(
-          'Maria  Amber',
+          '${recievingUser.firstName}  ${recievingUser.lastName}',
           style: TextStyle(
             color: Color(0xFF0B0B0B),
             fontSize: 16,
@@ -242,7 +265,7 @@ class ChatListTile extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          'Your post was see by me yeste...',
+          recentChat?.content ?? '',
           style: TextStyle(
             color: Color(0xFF8D8D8D),
             fontSize: 14,
@@ -272,7 +295,7 @@ class ChatListTile extends StatelessWidget {
                 shape: OvalBorder(),
               ),
               child: Text(
-                '2',
+                unredCount.toString(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12,
@@ -290,24 +313,23 @@ class ChatListTile extends StatelessWidget {
 }
 
 class ActiveUsers extends StatelessWidget implements PreferredSizeWidget {
-  const ActiveUsers({super.key});
+  const ActiveUsers({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment:
+            CrossAxisAlignment.start, // Align column's children to the left
         children: [
           const SizedBox(height: 20),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Now Active',
-                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFF232323),
                   fontSize: 16,
@@ -315,56 +337,52 @@ class ActiveUsers extends StatelessWidget implements PreferredSizeWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Spacer(),
-              Text(
-                'See All',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFFD75B6B),
-                  fontSize: 16,
-                  fontFamily: 'DM Sans',
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
             ],
           ),
           const SizedBox(height: 26),
-          SizedBox(
-            height: 90,
-            child: ListView.builder(
-                itemCount: 9,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (ctx, i) {
-                  return GestureDetector(
-                    onTap: () {
-                      Go(context, routeName: AddChatFromFavView.routeName).to();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ProfileIcon(
-                              height: 56, width: 56, margin: EdgeInsets.all(0)),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Monica',
-                            // textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Color(0xFF8D8D8D),
-                              fontSize: 14,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          )
-                        ],
-                      ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(users.length, (i) {
+                return GestureDetector(
+                  onTap: () {
+                    if (users[i].id == 1) {
+                      null;
+                    } else {
+                      Go(context,
+                          routeName: ChatDetailsView.routeName,
+                          arguments: MyRouteArguments(arguments: [
+                            {'chat': chats, 'reciever': users[i]}
+                          ])).to();
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ProfileIcon(
+                            height: 56, width: 56, margin: EdgeInsets.all(0)),
+                        const SizedBox(height: 10),
+                        Text(
+                          users[i].id == users[0].id
+                              ? 'You'
+                              : users[i].firstName,
+                          style: TextStyle(
+                            color: Color(0xFF8D8D8D),
+                            fontSize: 14,
+                            fontFamily: 'DM Sans',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        )
+                      ],
                     ),
-                  );
-                }),
+                  ),
+                );
+              }),
+            ),
           ),
           const SizedBox(height: 26),
         ],
@@ -373,6 +391,5 @@ class ActiveUsers extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

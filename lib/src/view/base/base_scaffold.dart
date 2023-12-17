@@ -22,7 +22,7 @@ class BaseScaffold extends StatefulWidget {
     this.defaultBackBtnCallBack,
     this.controller,
     this.floatingActionButtonLocation,
-    this.safeAreaConfig = const SafeAreaConfig(),
+    this.safeAreaConfig = const SafeAreaConfig(), this.bottomSheet,
   });
 
   final Color? backgroundColor;
@@ -44,6 +44,7 @@ class BaseScaffold extends StatefulWidget {
   final void Function()? defaultBackBtnCallBack;
   final ScrollController? controller;
   final SafeAreaConfig safeAreaConfig;
+  final Widget? bottomSheet;
 
   @override
   State<BaseScaffold> createState() => _BaseScaffoldState();
@@ -87,6 +88,8 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
+      
+      bottomSheet: widget.bottomSheet,
     );
   }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:navigation_system/navigation_system.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/view/app/chat/chats_view.dart';
-import 'package:recenth_posts/src/view/app/chat/components/chat_user.dart';
 import 'package:recenth_posts/src/view/app/notification/nootification_view.dart';
 import 'package:recenth_posts/src/view/app/posts/components/comment_on_post.dart';
 import 'package:recenth_posts/src/view/app/posts/components/post_details.dart';
@@ -62,9 +61,11 @@ class AppRoutes {
           SearchView.routeName: (context, args) => const SearchView(),
           SearchMoreView.routeName: (context, args) => const SearchMoreView(),
           TrendingView.routeName: (context, args) => const TrendingView(),
-          ChatsUseriew.routeName: (context, args) => const ChatsUseriew(),
-          AddChatFromFavView.routeName: (context, args) =>
-              const AddChatFromFavView()
+          // ChatsUseriew.routeName: (context, args) => const ChatsUseriew(),
+          ChatDetailsView.routeName: (context, args) => ChatDetailsView(
+                chatsData: args?.arguments[0]['chat'] as List<Chat>,
+                reciever: args?.arguments[0]['reciever'],
+              )
         },
       ).generateRoute(routeSettings);
 }

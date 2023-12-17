@@ -24,6 +24,7 @@ dependencies:
   in_app_notification: ^1.1.2
   input_history_text_field: ^0.2.0
   intl: ^0.19.0
+  keyboard_attachable: ^2.2.0
   loading_progress_indicator: ^0.1.6
   navigation_system: ^0.0.5
   percent_indicator: ^4.2.3
