@@ -16,12 +16,14 @@ class ActionBtn extends StatelessWidget {
   final String imgUrl;
   final Widget? child;
   final bool addbadge;
+  final Color? color;
   const ActionBtn({
     super.key,
     this.onPressed,
     required this.imgUrl,
     this.child,
     this.addbadge = false,
+    this.color,
   });
 
   @override
@@ -33,6 +35,7 @@ class ActionBtn extends StatelessWidget {
                 onTap: onPressed,
                 child: child ??
                     SvgPicture.asset(
+                      color: color,
                       'assets/icons/$imgUrl',
                       height: 24,
                       width: 24,

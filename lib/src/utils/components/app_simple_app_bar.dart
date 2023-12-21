@@ -14,12 +14,14 @@ AppBar AppSimpleAppBar(BuildContext context, {title}) {
         },
         icon: const Icon(Icons.arrow_back_ios_new_rounded)),
     backgroundColor: AppColors.kbrandWhite,
-    title: Text(title,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline2!.copyWith(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
-            ),),
+    title: Text(
+      title,
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline2!.copyWith(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+    ),
     centerTitle: true,
   );
 }

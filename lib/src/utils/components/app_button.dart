@@ -110,7 +110,7 @@ class AppButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius ?? 28.sp),
           color: disabled
               ? AppColors.kgrayColor500
-              : btnColor ?? AppColors.kprimaryColor600,
+              : btnColor ?? AppColors.kprimaryColor700,
           boxShadow: !addboxShadow
               ? null
               : boxShadow ??

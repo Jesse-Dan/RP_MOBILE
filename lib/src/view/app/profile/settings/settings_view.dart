@@ -1,14 +1,18 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
+import 'package:recenth_posts/src/view/app/profile/settings/change_password/change_password.dart';
+import 'package:recenth_posts/src/view/app/profile/settings/privacy/privacy_view.dart';
+import 'package:recenth_posts/src/view/app/profile/settings/security/security_view.dart';
 import 'package:recenth_posts/src/view/app/profile/settings/subscriptions/subscriptions.dart';
+import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 
 import '../../../../utils/components/app_simple_app_bar.dart';
 import '../../../base/base_scaffold.dart';
+import 'profile/profile_view.dart';
 
 class SettingsView extends StatefulWidget {
   static const String routeName = '/profile.view.settings';
@@ -26,7 +30,7 @@ class _SettingsViewState extends State<SettingsView> {
   @override
   Widget build(BuildContext context) => BaseScaffold(
       addAppBar: true,
-      addSafeArea: true,
+      addSafeArea: false,
       addbodyPadding: true,
       appbar: AppSimpleAppBar(context, title: 'Settings'),
       physics: const BouncingScrollPhysics(),
@@ -91,28 +95,46 @@ class Settings {
       {required this.voidCallback, required this.title, required this.img});
 
   static List<Settings> settings(BuildContext context) => [
-        Settings(voidCallback: () {}, title: 'Profile', img: 'profile.svg'),
+        Settings(
+            voidCallback: () {
+              Go(context, routeName: ProfileDetailView.routeName).to();
+            },
+            title: 'Edit Profile',
+            img: 'profile.svg'),
         // Settings(
         //     voidCallback: () {}, title: 'Verify Account', img: 'verify.svg'),
         Settings(
-            voidCallback: () {},
+            voidCallback: () {
+              Go(context, routeName: ChangePasswordView.routeName).to();
+            },
             title: 'Change Password',
             img: 'solar_lock-outline.svg'),
         // Settings(
         //     voidCallback: () {}, title: 'Customise ID', img: 'magicpen.svg'),
         Settings(
-            voidCallback: () {},
+            voidCallback: () {
+              Go(context, routeName: PrivacyView.routeName).to();
+            },
             title: 'Privacy',
             img: 'material-symbols-light_privacy-tip-outline-rounded.svg'),
         Settings(
             voidCallback: () {
               Go(context, routeName: SubscritionsView.routeName).to();
             },
-            title: 'Subscription',
-            img: 'star.svg'),
-        Settings(voidCallback: () {}, title: 'Payment Method', img: 'card.svg'),
+            title: 'Payments and Subscription',
+            img: /*'star.svg'*/ 'card.svg'),
+        // Settings(
+        // voidCallback: () {
+        //   Go(context, routeName: Sub.routeName).to();
+        // },
+        // title: 'Payment Method',
+        // img: 'card.svg'),
         Settings(
-            voidCallback: () {}, title: 'Security', img: 'carbon_security.svg'),
+            voidCallback: () {
+              Go(context, routeName: SecurityView.routeName).to();
+            },
+            title: 'Security',
+            img: 'carbon_security.svg'),
         // Settings(
         //     voidCallback: () {},
         //     title: 'Language',
@@ -129,7 +151,10 @@ class Settings {
         // Settings(
         //     voidCallback: () {}, title: 'Delete Account', img: 'trash.svg'),
         Settings(
-            voidCallback: () {},
+            voidCallback: () {
+              Go(context, routeName: LoginView.routeName)
+                  .toAndClearAllNamedRoute();
+            },
             title: 'Log out',
             img: 'humbleicons_logout.svg'),
       ];

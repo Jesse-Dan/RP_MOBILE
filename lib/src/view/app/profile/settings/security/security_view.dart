@@ -23,7 +23,7 @@ class _SecurityViewState extends State<SecurityView> {
         addAppBar: true,
         addSafeArea: true,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Subscription'),
+        appbar: AppSimpleAppBar(context, title: 'Security'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         // body: ,

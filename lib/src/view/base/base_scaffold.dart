@@ -22,7 +22,8 @@ class BaseScaffold extends StatefulWidget {
     this.defaultBackBtnCallBack,
     this.controller,
     this.floatingActionButtonLocation,
-    this.safeAreaConfig = const SafeAreaConfig(), this.bottomSheet,
+    this.safeAreaConfig = const SafeAreaConfig(),
+    this.bottomSheet,
   });
 
   final Color? backgroundColor;
@@ -69,7 +70,6 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       appBar: (widget.addAppBar ?? false)
           ? (widget.appbar ??
               AppBar(
-              
                 leading: IconButton(
                     onPressed: widget.defaultBackBtnCallBack ??
                         () {
@@ -88,7 +88,6 @@ class _BaseScaffoldState extends State<BaseScaffold> {
       bottomNavigationBar: widget.bottomNavigationBar,
       floatingActionButton: widget.floatingActionButton,
       floatingActionButtonLocation: widget.floatingActionButtonLocation,
-      
       bottomSheet: widget.bottomSheet,
     );
   }

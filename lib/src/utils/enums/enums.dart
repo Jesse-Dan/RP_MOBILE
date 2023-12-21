@@ -45,16 +45,17 @@ enum PostCardType { fav, defaultt }
 enum CommentType { Comment, Reply }
 
 enum SubType {
-  BASIC,
-  ESSENTIAL,
-  PRO,
-  PREMIUM,
-  GOLD,
-  PLATINUM,
-  ULTIMATE,
-  DIAMOND,
-  EXECUTIVE
+  Basic,
+  Essential, 
+  Pro ,
+  Premium ,
+  Gold ,
+  Platinum ,
+  Ultimate ,
+  Diamond,
+  Executive ,
 }
+
 
 
 enum NotificationType{

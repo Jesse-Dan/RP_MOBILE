@@ -203,28 +203,31 @@ class _ChatTextFieldState extends State<ChatTextField> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 318,
-            height: 64,
-            padding: EdgeInsets.all(20),
-            decoration: ShapeDecoration(
-              color: Color(0xFFF7F7F7),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-            ),
-            child: TextFormField(
-              onChanged: (val) {
-                setState(() {});
-              },
-              controller: widget.textEditingController,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none),
+          Expanded(
+            child: Container(
+              height: 64,
+              padding: EdgeInsets.all(20),
+              decoration: ShapeDecoration(
+                color: Color(0xFFF7F7F7),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+              ),
+              child: TextFormField(
+                onChanged: (val) {
+                  setState(() {});
+                },
+                controller: widget.textEditingController,
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none),
+              ),
             ),
           ),
-          Spacer(),
+          const SizedBox(
+            width: AppDimentions.k16,
+          ),
           GestureDetector(
             onTap: widget.textEditingController.text.isEmpty
                 ? null

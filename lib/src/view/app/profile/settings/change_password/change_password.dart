@@ -23,7 +23,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
         addAppBar: true,
         addSafeArea: true,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Subscription'),
+        appbar: AppSimpleAppBar(context, title: 'Change Password'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         // body: ,
