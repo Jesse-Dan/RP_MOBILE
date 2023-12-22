@@ -52,7 +52,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
                 'Share your life\'s moments and connect with others.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: AppColors.useHex('#232323'),
+                  color: AppColors('#232323'),
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),

@@ -46,24 +46,17 @@ enum CommentType { Comment, Reply }
 
 enum SubType {
   Basic,
-  Essential, 
-  Pro ,
-  Premium ,
-  Gold ,
-  Platinum ,
-  Ultimate ,
+  Essential,
+  Pro,
+  Premium,
+  Gold,
+  Platinum,
+  Ultimate,
   Diamond,
-  Executive ,
+  Executive,
 }
 
-
-
-enum NotificationType{
-  FAVORITE,
-  SECURITY,
-  DEFAULT,
-  ACTION
-}
+enum NotificationType { FAVORITE, SECURITY, DEFAULT, ACTION }
 
 enum PredefinedDateFormat {
   dateOnly,
@@ -72,3 +65,5 @@ enum PredefinedDateFormat {
   time12HourFormat,
   time24HourFormat
 }
+
+enum AppDialogue2Type { one, two, loading }

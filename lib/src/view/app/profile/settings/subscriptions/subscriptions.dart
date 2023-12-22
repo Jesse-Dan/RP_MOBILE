@@ -1,11 +1,17 @@
 // ignore_for_file: deprecated_member_use
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:navigation_system/go/go.dart';
+import 'package:navigation_system/go/go_service.dart';
+import 'package:recenth_posts/src/logic/services/handler/handlers/descion_handler.dart';
+import 'package:recenth_posts/src/logic/services/handler/handlers/redirect_handler.dart';
 import 'package:recenth_posts/src/utils/components/action_btn.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
+import 'package:recenth_posts/src/utils/components/web_view.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/app/profile/settings/subscriptions/all_subs/all_subs_view.dart';
@@ -28,6 +34,7 @@ class SubscritionsView extends StatefulWidget {
 
 class _SubscritionsViewState extends State<SubscritionsView> {
   ScrollController scrollController = ScrollController();
+  int currentSubIndex = 7;
   @override
   Widget build(BuildContext context) => BaseScaffold(
         addAppBar: true,
@@ -62,7 +69,35 @@ class _SubscritionsViewState extends State<SubscritionsView> {
           const SizedBox(height: AppDimentions.k16 + 4),
           const PaymentMethodWidget(),
           const SizedBox(height: AppDimentions.k20 + 4),
+          const SizedBox(height: AppDimentions.k12),
+          AppDivider.build(height: 1.5, color: AppColors.kwarningColor100),
+          const SizedBox(height: AppDimentions.k12 - 6),
+          Text.rich(
+            TextSpan(children: [
+              TextSpan(
+                  text: 'Warning: ',
+                  style: TextStyle(
+                    color: AppColors.kwarningColor400,
+                    fontSize: 13,
+                    fontFamily: 'DM Sans',
+                    fontWeight: FontWeight.w500,
+                  )),
+              const TextSpan(
+                  text:
+                      'Payment method change can only happen on experiation of previous subscription.')
+            ]),
+            style: TextStyle(
+              color: AppColors.kwarningColor300,
+              fontSize: 12,
+              fontFamily: 'DM Sans',
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: AppDimentions.k12 - 6),
+          AppDivider.build(height: 1.5, color: AppColors.kwarningColor100),
+          const SizedBox(height: AppDimentions.k20 + 4),
           AppButton(
+            disabled: true,
             buttonType: ButtonType.LONG_BTN,
             flex: false,
             btnText: 'Change payment method',
@@ -93,30 +128,42 @@ class _SubscritionsViewState extends State<SubscritionsView> {
           const SizedBox(height: AppDimentions.k20 + 4),
           Row(
             children: [
-              const SubCard(),
+              SubCard(
+                  primaryColor: getPackageColor(
+                      SubType.values.elementAt(currentSubIndex).name)[0],
+                  secondaryColor: getPackageColor(
+                      SubType.values.elementAt(currentSubIndex).name)[1],
+                  isCurrentSub: true,
+                  subscribtionTitle:
+                      SubType.values.elementAt(currentSubIndex).name),
               const Spacer(),
-              Container(
-                height: 70,
-                width: 70,
-                padding: const EdgeInsets.all(7),
-                decoration: BoxDecoration(
-                    color: AppColors.kgrayColor50, shape: BoxShape.circle),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ActionBtn(
-                        imgUrl: 'card.svg',
-                        onPressed: () {
-                          Go(context, routeName: AllSubsView.routeName).to();
-                        },
-                        color: AppColors.kprimaryColor300),
-                    Icon(
-                      Icons.keyboard_arrow_right_rounded,
-                      color: AppColors.kprimaryColor300,
-                    )
-                  ],
+              GestureDetector(
+                onTap: () {
+                  Go(context, routeName: AllSubsView.routeName).to();
+                },
+                child: Container(
+                  height: 70,
+                  width: 70,
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                      color: AppColors.kgrayColor50, shape: BoxShape.circle),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ActionBtn(
+                          imgUrl: 'card.svg',
+                          onPressed: () {
+                            Go(context, routeName: AllSubsView.routeName).to();
+                          },
+                          color: AppColors.kprimaryColor300),
+                      Icon(
+                        Icons.keyboard_arrow_right_rounded,
+                        color: AppColors.kprimaryColor300,
+                      )
+                    ],
+                  ),
                 ),
               )
             ],
@@ -156,6 +203,41 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                 buttonType: ButtonType.LONG_BTN,
                 flex: true,
                 btnText: 'Renew',
+                onTap: () {
+                  DecisionHandler(
+                      context: context,
+                      tag: Tag.SERVICE_ACTION,
+                      appDialogue2Type: AppDialogue2Type.two,
+                      title: 'Renew Plan',
+                      message:
+                          'Are you sure you want to renew your subscription?',
+                      callBackTextOne: 'Cancel',
+                      callBackTextTwo: 'Proceed',
+                      barrierDismissible: true,
+                      callBackTwo: () {
+                        Go(context).pop();
+                        DecisionHandler(
+                          context: context,
+                          tag: Tag.SERVICE_ACTION,
+                          appDialogue2Type: AppDialogue2Type.loading,
+                          title: 'Renewing Subscription',
+                          message: 'Please wait...',
+                        );
+                        Timer(const Duration(seconds: 2), () {
+                          Go(context).pop();
+                          RedirectHandler(
+                              context: context,
+                              title: 'Plan renewed',
+                              message:
+                                  'You’ve now sucessfully reenewed Subscription.',
+                              tag: Tag.SUCCESS,
+                              callBack: () {});
+                          Timer(const Duration(seconds: 2), () {
+                            Go(context).pop();
+                          });
+                        });
+                      });
+                },
               ),
               const SizedBox(width: AppDimentions.k12),
               AppButton(
@@ -166,6 +248,41 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                 btnColor: AppColors.kbrandWhite,
                 btnTextColor: AppColors.kprimaryColor700,
                 btnText: 'Cancel',
+                onTap: () {
+                  DecisionHandler(
+                      context: context,
+                      tag: Tag.SERVICE_ACTION,
+                      appDialogue2Type: AppDialogue2Type.two,
+                      title: 'Cancel Plan',
+                      message:
+                          'Are you sure you want to cancel your subscription?',
+                      callBackTextOne: 'Cancel',
+                      callBackTextTwo: 'Proceed',
+                      barrierDismissible: true,
+                      callBackTwo: () {
+                        Go(context).pop();
+                        DecisionHandler(
+                          context: context,
+                          tag: Tag.SERVICE_ACTION,
+                          appDialogue2Type: AppDialogue2Type.loading,
+                          title: 'Cancelling Subscription',
+                          message: 'Please wait...',
+                        );
+                        Timer(const Duration(seconds: 2), () {
+                          Go(context).pop();
+                          RedirectHandler(
+                              context: context,
+                              title: 'Subscription Cancelled',
+                              message:
+                                  'You’ve now sucessfully cancelled Subscription.',
+                              tag: Tag.SUCCESS,
+                              callBack: () {});
+                          Timer(const Duration(seconds: 2), () {
+                            Go(context).pop();
+                          });
+                        });
+                      });
+                },
               ),
             ],
           ),
@@ -230,8 +347,16 @@ class PaymentMethodWidget extends StatelessWidget {
 }
 
 class SubCard extends StatelessWidget {
+  final Color primaryColor;
+  final Color secondaryColor;
+  final bool isCurrentSub;
+  final String subscribtionTitle;
   const SubCard({
     super.key,
+    required this.primaryColor,
+    this.isCurrentSub = false,
+    required this.secondaryColor,
+    this.subscribtionTitle = 'Basic',
   });
 
   @override
@@ -242,7 +367,9 @@ class SubCard extends StatelessWidget {
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1.18, color: AppColors.kprimaryColor300),
+          side: BorderSide(
+              width: 1.18,
+              color: isCurrentSub ? primaryColor : AppColors.kgrayColor100),
           borderRadius: BorderRadius.circular(8),
         ),
         shadows: const [
@@ -264,20 +391,20 @@ class SubCard extends StatelessWidget {
         children: [
           const SizedBox(height: AppDimentions.k20 + 4),
           Container(
-            width: 64,
+            constraints: const BoxConstraints(maxWidth: 96, minWidth: 63),
             alignment: Alignment.center,
             padding: const EdgeInsets.all(5),
             decoration: ShapeDecoration(
-              color: const Color(0xFFEFEFEF),
+              color: primaryColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            child: const Text(
-              'Basic',
+            child: Text(
+              subscribtionTitle,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF6A6A6A),
+                color: secondaryColor,
                 fontSize: 14,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500,
@@ -315,7 +442,9 @@ class SubCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Checkbox(
-                    activeColor: AppColors.kprimaryColor700,
+                    activeColor: isCurrentSub
+                        ? primaryColor.withOpacity(0.5)
+                        : primaryColor,
                     value: true,
                     onChanged: (onChanged) {},
                     shape: RoundedRectangleBorder(
@@ -335,34 +464,120 @@ class SubCard extends StatelessWidget {
           ),
           AppDivider.build(width: 202.w),
           const SizedBox(height: AppDimentions.k20 + 9),
-          Container(
-            width: 202,
-            height: 32,
-            padding: const EdgeInsets.all(10),
-            decoration: ShapeDecoration(
-              color: const Color(0xFFEFEFEF),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: const Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Cancel Plan',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFF6A6A6A),
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    height: 0.11,
-                    letterSpacing: -0.41,
-                  ),
+          GestureDetector(
+            onTap: isCurrentSub
+                ? () {
+                    DecisionHandler(
+                        context: context,
+                        tag: Tag.SERVICE_ACTION,
+                        appDialogue2Type: AppDialogue2Type.two,
+                        title: 'Cancel Plan',
+                        message:
+                            'Are you sure you want to cancel your subscription?',
+                        callBackTextOne: 'Cancel',
+                        callBackTextTwo: 'Proceed',
+                        barrierDismissible: true,
+                        callBackTwo: () {
+                          Go(context).pop();
+                          DecisionHandler(
+                            context: context,
+                            tag: Tag.SERVICE_ACTION,
+                            appDialogue2Type: AppDialogue2Type.loading,
+                            title: 'Cancelling Subscription',
+                            message: 'Please wait...',
+                          );
+                          Timer(const Duration(seconds: 2), () {
+                            Go(context).pop();
+                            RedirectHandler(
+                                context: context,
+                                title: 'Subscription Cancelled',
+                                message:
+                                    'You’ve now sucessfully cancelled Subscription.',
+                                tag: Tag.SUCCESS,
+                                callBack: () {});
+                            Timer(const Duration(seconds: 2), () {
+                              Go(context).pop();
+                            });
+                          });
+                        });
+                  }
+                : () {
+                    DecisionHandler(
+                        context: context,
+                        tag: Tag.SERVICE_ACTION,
+                        appDialogue2Type: AppDialogue2Type.two,
+                        title: 'Subscribe to $subscribtionTitle',
+                        message:
+                            'You are subscribing to $subscribtionTitle, do you wish to proceed?',
+                        callBackTextOne: 'Cancel',
+                        callBackTextTwo: 'Proceed',
+                        barrierDismissible: true,
+                        callBackTwo: () {
+                          Go(context).pop();
+                          Go(context,
+                              routeName: AppWebView.routeName,
+                              arguments: MyRouteArguments(arguments: [
+                                {
+                                  'url':
+                                      'https://pub.dev/packages/webview_flutter/example'
+                                }
+                              ])).to();
+                          // DecisionHandler(
+                          //   context: context,
+                          //   tag: Tag.SERVICE_ACTION,
+                          //   appDialogue2Type: AppDialogue2Type.loading,
+                          //   title: 'Processing payment',
+                          //   message: 'Please wait...',
+                          // );
+                          // Timer(const Duration(seconds: 2), () {
+                          //   Go(context).pop();
+                          //   Go(context,
+                          //       routeName: AppWebView.routeName,
+                          //       arguments: MyRouteArguments(arguments: [
+                          //         {'url': 'https://pub.dev/packages/webview_flutter/example'}
+                          //       ])).to();
+                          //   // RedirectHandler(
+                          //   //     context: context,
+                          //   //     title: 'Congratulations!',
+                          //   //     message:
+                          //   //         'You’re now a RecentPost Essential Member!',
+                          //   //     tag: Tag.SUCCESS);
+                          //   Timer(const Duration(seconds: 2), () {
+                          //     Go(context).pop();
+                          //     Go(context).pop();
+                          //   });
+                          // });
+                        });
+                  },
+            child: Container(
+              width: 202,
+              height: 32,
+              padding: const EdgeInsets.all(10),
+              decoration: ShapeDecoration(
+                color: primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    isCurrentSub ? 'Cancel Plan' : 'Select Plan',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: secondaryColor,
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      height: 0.11,
+                      letterSpacing: -0.41,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: AppDimentions.k20 + 9),

@@ -22,6 +22,7 @@ import 'package:recenth_posts/src/view/auth/reset_password_view/reset_password_v
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
 
+import '../utils/components/web_view.dart';
 import '../view/app/chat/components/chat_details.dart';
 import '../view/app/profile/settings/privacy/visibility.dart';
 import '../view/app/profile/settings/settings_view.dart';
@@ -87,7 +88,10 @@ class AppRoutes {
               const BlockedUsersView(),
           ReportedUsersView.routeName: (context, args) =>
               const ReportedUsersView(),
-          AllSubsView.routeName: (context, args) => const AllSubsView()
+          AllSubsView.routeName: (context, args) => const AllSubsView(),
+          AppWebView.routeName: (context, args) => AppWebView(
+                url: args?.arguments[0]['url'],
+              ),
         },
       ).generateRoute(routeSettings);
 }

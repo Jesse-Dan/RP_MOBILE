@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/logic/services/handler/handlers/custom_handler.dart';
+import 'package:recenth_posts/src/logic/services/handler/handlers/redirect_handler.dart';
 import 'package:recenth_posts/src/logic/services/validator/validator.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/components/base_form_body.dart';
@@ -144,7 +144,7 @@ class _LoginViewState extends State<LoginView> with ValidatorMixin {
             buttonType: ButtonType.LONG_BTN,
             onTap: () {
               // if (_formKey.currentState!.validate()) {}
-              AppHandler(
+              RedirectHandler(
                 message:
                     'Please wait...\nYou will be directed to the homepage.',
                 context: context,

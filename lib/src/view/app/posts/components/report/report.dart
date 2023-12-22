@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:recenth_posts/src/logic/services/handler/handlers/custom_handler.dart';
+import 'package:recenth_posts/src/logic/services/handler/handlers/redirect_handler.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
@@ -159,7 +159,7 @@ class _ReportState extends State<Report> {
               setState(() {
                 stageId += step;
               });
-              AppHandler(
+              RedirectHandler(
                   context: context,
                   title: 'Report successfully submitted',
                   tag: Tag.SUCCESS,

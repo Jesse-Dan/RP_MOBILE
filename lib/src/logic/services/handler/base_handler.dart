@@ -31,8 +31,10 @@ class BaseHandler {
 
   final bool barrierDismissible;
 
-  final  String title;
-  BaseHandler({
+  final String title;
+
+  final Widget? child;
+  BaseHandler({this.child, 
     required this.context,
     required this.tag,
     required this.message,
@@ -50,7 +52,7 @@ class BaseHandler {
         context: context,
         builder: (_) => tag == Tag.LOADING
             ? AppLoadingIndicator()
-            : AppDialogue(
+            :child?? AppDialogue(
                 title: title,
                 tag: tag,
                 message: message,
