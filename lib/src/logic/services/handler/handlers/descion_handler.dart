@@ -47,7 +47,7 @@ class DecisionHandler {
           title: title,
           message: message,
           btnText: btnText,
-          btnCount: appDialogue2Type,
+          appDialogue2Type: appDialogue2Type,
           callBackOne: callBackOne,
           callBackTwo: callBackTwo,
           callBackTextOne: callBackTextOne,

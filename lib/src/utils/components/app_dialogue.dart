@@ -133,7 +133,7 @@ class AppDialogue2 extends StatelessWidget {
   final String? callBackTextTwo;
 
   final String btnText;
-  final AppDialogue2Type btnCount;
+  final AppDialogue2Type appDialogue2Type;
 
   const AppDialogue2(
       {super.key,
@@ -142,7 +142,7 @@ class AppDialogue2 extends StatelessWidget {
       required this.btnText,
       this.callBackOne,
       this.callBackTwo,
-      this.btnCount = AppDialogue2Type.two,
+      this.appDialogue2Type = AppDialogue2Type.two,
       this.callBackTextOne,
       this.callBackTextTwo});
 
@@ -150,7 +150,7 @@ class AppDialogue2 extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> actions = _getActions(context);
 
-    return btnCount == AppDialogue2Type.loading
+    return appDialogue2Type == AppDialogue2Type.loading
         ? AlertDialog(
             actionsAlignment: MainAxisAlignment.center,
             insetPadding: const EdgeInsets.only(left: 10, right: 10),
@@ -251,7 +251,7 @@ class AppDialogue2 extends StatelessWidget {
   }
 
   List<Widget> _getActions(BuildContext context) {
-    if (btnCount == AppDialogue2Type.one) {
+    if (appDialogue2Type == AppDialogue2Type.one) {
       return [
         _alertBTN(context, callBackTextOne ?? 'Button Text', callBackOne),
       ];

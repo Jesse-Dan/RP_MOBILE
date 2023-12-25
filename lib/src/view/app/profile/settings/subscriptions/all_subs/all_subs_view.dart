@@ -31,7 +31,7 @@ class _AllSubsViewState extends State<AllSubsView> {
     );
     return BaseScaffold(
       addAppBar: true,
-      appbar: AppSimpleAppBar(context, title: 'Subscribtions'),
+      appBar: AppSimpleAppBar(context, title: 'Subscribtions'),
       addbodyPadding: true,
       body: Column(
           mainAxisAlignment: MainAxisAlignment.start,

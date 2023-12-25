@@ -32,7 +32,7 @@ class _SettingsViewState extends State<SettingsView> {
       addAppBar: true,
       addSafeArea: false,
       addbodyPadding: true,
-      appbar: AppSimpleAppBar(context, title: 'Settings'),
+      appBar: AppSimpleAppBar(context, title: 'Settings'),
       physics: const BouncingScrollPhysics(),
       backgroundColor: AppColors.kbrandWhite,
       body: ListView.builder(

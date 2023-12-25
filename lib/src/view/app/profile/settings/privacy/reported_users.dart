@@ -26,7 +26,7 @@ class _ReportedUsersViewState extends State<ReportedUsersView> {
         addAppBar: true,
         addSafeArea: false,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Reported Users (24)'),
+        appBar: AppSimpleAppBar(context, title: 'Reported Users (24)'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         body: ListView.builder(

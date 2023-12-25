@@ -26,7 +26,7 @@ class _BlockedUsersViewState extends State<BlockedUsersView> {
         addAppBar: true,
         addSafeArea: false,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Blocked Users (24)'),
+        appBar: AppSimpleAppBar(context, title: 'Blocked Users (24)'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         body: ListView.builder(

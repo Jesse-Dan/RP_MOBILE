@@ -35,7 +35,7 @@ class _ReportState extends State<Report> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       addAppBar: true,
-      appbar: AppBar(
+      appBar: AppBar(
         centerTitle: true,
         title: Image.asset(
           'assets/images/MainLogo.png',

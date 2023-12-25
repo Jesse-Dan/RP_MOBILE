@@ -24,7 +24,7 @@ class _PrivacyVisibilityViewState extends State<PrivacyVisibilityView> {
         addAppBar: true,
         addSafeArea: false,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Visibility'),
+        appBar: AppSimpleAppBar(context, title: 'Visibility'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         body: Column(

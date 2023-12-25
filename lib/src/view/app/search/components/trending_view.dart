@@ -24,7 +24,7 @@ class _TrendingViewState extends State<TrendingView> {
     return BaseScaffold(
       addbodyPadding: true,
       addAppBar: true,
-      appbar: AppSimpleAppBar(context, title: 'Trending Now'),
+      appBar: AppSimpleAppBar(context, title: 'Trending Now'),
       physics: const BouncingScrollPhysics(),
       backgroundColor: AppColors.kbrandWhite,
       body: ListView.builder(

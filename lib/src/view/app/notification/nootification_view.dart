@@ -62,7 +62,7 @@ class _NotificationViewState extends State<NotificationView> {
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         addAppBar: true,
-        appbar: AppBar(
+        appBar: AppBar(
           toolbarHeight: 80,
           backgroundColor: AppColors.kbrandWhite,
           title: Text(

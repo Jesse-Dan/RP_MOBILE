@@ -31,7 +31,7 @@ class _ReplyPostState extends State<ReplyPost> {
     return BaseScaffold(
       addAppBar: true,
       addbodyPadding: true,
-      appbar: AppBar(
+      appBar: AppBar(
         leadingWidth: 60,
         toolbarHeight: 90,
         automaticallyImplyLeading: false,

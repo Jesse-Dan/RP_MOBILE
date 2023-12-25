@@ -22,7 +22,6 @@ class ProfileDetailView extends StatefulWidget {
 }
 
 class _ProfileDetailViewState extends State<ProfileDetailView> {
-
   ScrollController scrollController = ScrollController();
   TextEditingController fullNameCtl = TextEditingController();
   TextEditingController userNameCtl = TextEditingController();
@@ -39,7 +38,7 @@ class _ProfileDetailViewState extends State<ProfileDetailView> {
         addAppBar: true,
         addSafeArea: false,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Edit Profile'),
+        appBar: AppSimpleAppBar(context, title: 'Edit Profile'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         body: SingleChildScrollView(

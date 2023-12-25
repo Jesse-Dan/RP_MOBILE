@@ -38,7 +38,7 @@ class _PostViewState extends State<PostView>
   Widget build(BuildContext context) {
     return BaseScaffold(
       addAppBar: true,
-      appbar: PostsUtils.homeAppBar(
+      appBar: PostsUtils.homeAppBar(
         context: context,
         bottom: TabBar(
           controller: _tabController,

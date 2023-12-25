@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -11,13 +11,14 @@ import 'package:recenth_posts/src/logic/services/handler/handlers/descion_handle
 import 'package:recenth_posts/src/logic/services/handler/handlers/redirect_handler.dart';
 import 'package:recenth_posts/src/utils/components/action_btn.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
-import 'package:recenth_posts/src/utils/components/web_view.dart';
+import 'package:recenth_posts/src/utils/components/app_dialogue.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/app/profile/settings/subscriptions/all_subs/all_subs_view.dart';
 
 import '../../../../../utils/components/app_divider.dart';
 import '../../../../../utils/components/app_simple_app_bar.dart';
+import '../../../../../utils/components/web_view.dart';
 import '../../../../../utils/style/app_dimentions.dart';
 import '../../../../base/base_scaffold.dart';
 
@@ -40,7 +41,7 @@ class _SubscritionsViewState extends State<SubscritionsView> {
         addAppBar: true,
         addSafeArea: false,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Payment and Subscription'),
+        appBar: AppSimpleAppBar(context, title: 'Payment and Subscription'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         body: Column(children: [
@@ -351,13 +352,14 @@ class SubCard extends StatelessWidget {
   final Color secondaryColor;
   final bool isCurrentSub;
   final String subscribtionTitle;
-  const SubCard({
+  SubCard({
     super.key,
     required this.primaryColor,
     this.isCurrentSub = false,
     required this.secondaryColor,
     this.subscribtionTitle = 'Basic',
   });
+  final btmSheetScrollCtl = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -512,16 +514,23 @@ class SubCard extends StatelessWidget {
                         callBackTextOne: 'Cancel',
                         callBackTextTwo: 'Proceed',
                         barrierDismissible: true,
-                        callBackTwo: () {
+                        callBackTwo: () async {
                           Go(context).pop();
-                          Go(context,
-                              routeName: AppWebView.routeName,
-                              arguments: MyRouteArguments(arguments: [
-                                {
-                                  'url':
-                                      'https://pub.dev/packages/webview_flutter/example'
-                                }
-                              ])).to();
+                          DecisionHandler(context: context);
+                          await Future.delayed(const Duration(seconds: 2));
+                          Go(context).pop();
+                          RedirectHandler(
+                              context: context,
+                              title: 'Initilization Successfull',
+                              message:
+                                  'Please wait...\nYou will be directed to the proceed with transaction.',
+                              tag: Tag.PERSON_SUCCESS);
+                          await Future.delayed(const Duration(seconds: 2));
+                          Go(context).pop();
+                          showTransactRefAndRunTransaction(context);
+
+                          /// reference_id: RecenthPosts_83jbusu3ubusb
+
                           // DecisionHandler(
                           //   context: context,
                           //   tag: Tag.SERVICE_ACTION,
@@ -583,6 +592,205 @@ class SubCard extends StatelessWidget {
           const SizedBox(height: AppDimentions.k20 + 9),
         ],
       ),
+    );
+  }
+
+  Future<dynamic> showTransactRefAndRunTransaction(BuildContext context) {
+    var isBackFromWebView = false;
+    return showModalBottomSheet(
+      elevation: 5,
+      enableDrag: !isBackFromWebView,
+      backgroundColor: AppColors.ktransparentColor,
+      context: context,
+      builder: (context) {
+        return WillPopScope(
+          onWillPop: () async {
+            return false;
+          },
+          child: StatefulBuilder(builder: (context, useState) {
+            return Container(
+              decoration: BoxDecoration(
+                  color: AppColors.kbrandWhite,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12))),
+              width: 430,
+              // height: 914,
+              child: Stack(
+                children: [
+                  Container(
+                    color: AppColors.kbrandWhite,
+                    margin: const EdgeInsets.only(top: 90.0),
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.only(top: 14.0, left: 14, right: 14),
+                    decoration: BoxDecoration(
+                        color: AppColors.kbrandWhite,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12))),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        Text(
+                          'Proceed with transaction',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: AppColors.kprimaryColor700,
+                            fontSize: 20,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Container(
+                            color: AppColors.kbrandWhite,
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(
+                                bottom: AppDimentions.k16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text.rich(
+                                  TextSpan(children: [
+                                    const TextSpan(text: 'Reference ID:'),
+                                    TextSpan(
+                                      text: ' RecenthPosts_83jbusu3ubusb',
+                                      style: TextStyle(
+                                        color: AppColors.kprimaryColor700,
+                                        fontSize: 14,
+                                        fontFamily: 'DM Sans',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    )
+                                  ]),
+                                  style: TextStyle(
+                                    color: AppColors.kgrayColor700,
+                                    fontSize: 14,
+                                    fontFamily: 'DM Sans',
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                const Spacer(),
+                                AppDivider.build(
+                                    width:
+                                        MediaQuery.of(context).size.width / 9,
+                                    height: 1.5),
+                                const Spacer(),
+                                SizedBox(
+                                  height: 18,
+                                  width: 18,
+                                  child: ActionBtn(
+                                    imgUrl: 'document-copy.svg',
+                                    color: AppColors.kprimaryColor700,
+                                    onPressed: () {},
+                                  ),
+                                )
+                              ],
+                            )),
+                        const SizedBox(height: AppDimentions.k20 + 4),
+                        AppDivider.build(
+                            height: 1.5, color: AppColors.kwarningColor100),
+                        const SizedBox(height: AppDimentions.k12 - 6),
+                        Text.rich(
+                          TextSpan(children: [
+                            TextSpan(
+                                text: 'Important: ',
+                                style: TextStyle(
+                                  color: AppColors.kwarningColor400,
+                                  fontSize: 13,
+                                  fontFamily: 'DM Sans',
+                                  fontWeight: FontWeight.w500,
+                                )),
+                            const TextSpan(
+                                text:
+                                    'To query error on unsuccessful transactions report transaction with Reference ID. You should find the reference ID above.\n\nNote: If payment is successfull, navigate back to verify transaction.')
+                          ]),
+                          style: TextStyle(
+                            color: AppColors.kwarningColor300,
+                            fontSize: 12,
+                            fontFamily: 'DM Sans',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: AppDimentions.k12 - 6),
+                        AppDivider.build(
+                            height: 1.5, color: AppColors.kwarningColor100),
+                        const SizedBox(height: AppDimentions.k20 * 2),
+                        AppButton(
+                          flex: false,
+                          btnText:
+                              isBackFromWebView ? 'Verify Payment' : 'Proceed',
+                          buttonType: ButtonType.LONG_BTN,
+                          onTap: isBackFromWebView
+                              ? () async {
+                                  /// use reference id to run check on status
+                                  DecisionHandler(
+                                    context: context,
+                                    tag: Tag.SERVICE_ACTION,
+                                    appDialogue2Type: AppDialogue2Type.loading,
+                                    title: 'Verifying Subscription',
+                                    message: 'Please wait...',
+                                  );
+                                  await Future.delayed(
+                                      const Duration(seconds: 2));
+                                  Go(context).pop();
+                                  RedirectHandler(
+                                      context: context,
+                                      title: "Subscription Successful",
+                                      message:
+                                          'Please wait...\nYou will be directed to the Subscription screen.',
+                                      tag: Tag.SUCCESS);
+                                  await Future.delayed(
+                                      const Duration(seconds: 2));
+                                  Go(context).pop();
+                                  useState(() {
+                                    isBackFromWebView = false;
+                                  });
+                                }
+                              : () async {
+                                  bool data = await Go<bool>(context,
+                                      routeName: AppWebView.routeName,
+                                      arguments: MyRouteArguments(arguments: [
+                                        {
+                                          'url':
+                                              'https://checkout.paystack.com/ydh4g7hd1deska5'
+                                        }
+                                      ])).toAndExpectData();
+                                  useState(() {
+                                    isBackFromWebView = data;
+                                  });
+                                  print(data);
+                                },
+                        )
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                      top: 16,
+                      right: 16,
+                      child: ActionBtn(
+                          onPressed: isBackFromWebView
+                              ? () {
+                                  const AppDialogue2(
+                                    message:
+                                        'Verify transaction before leaving',
+                                    btnText: 'close',
+                                  );
+                                }
+                              : () {
+                                  Go(context).pop();
+                                },
+                          imgUrl: 'iconamoon_close-fill.svg')),
+                ],
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 }

@@ -67,7 +67,7 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
       bottomSheet: ChatTextField(
         textEditingController: textEditingController,
       ),
-      appbar: AppBar(
+      appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Go(context).pop();

@@ -1,193 +1,243 @@
-// ignore_for_file: deprecated_member_use
-
-import 'dart:io';
+// ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:navigation_system/go/go.dart';
+import 'package:recenth_posts/src/utils/components/app_simple_app_bar.dart';
+import 'package:recenth_posts/src/view/base/base_scaffold.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class AppWebView extends StatefulWidget {
-  static const routeName = 'app.web.view';
-  String url;
+  static const String routeName = '/app.web.view.';
 
-  AppWebView({super.key, required this.url});
+  final String url;
+
+  AppWebView({Key? key, required this.url}) : super(key: key);
 
   @override
   State<AppWebView> createState() => _AppWebViewState();
 }
 
 class _AppWebViewState extends State<AppWebView> {
-  final GlobalKey webViewKey = GlobalKey();
-
-  InAppWebViewController? webViewController;
-
-  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
-      crossPlatform: InAppWebViewOptions(
-        useShouldOverrideUrlLoading: true,
-        mediaPlaybackRequiresUserGesture: false,
-      ),
-      android: AndroidInAppWebViewOptions(
-        useHybridComposition: true,
-      ),
-      ios: IOSInAppWebViewOptions(
-        allowsInlineMediaPlayback: true,
-      ));
-
-  late PullToRefreshController pullToRefreshController;
-
-  double progress = 0;
-
-  final urlController = TextEditingController();
+  late final WebViewController controller;
 
   @override
   void initState() {
     super.initState();
-
-    pullToRefreshController = PullToRefreshController(
-      options: PullToRefreshOptions(
-        color: Colors.blue,
-      ),
-      onRefresh: () async {
-        if (Platform.isAndroid) {
-          webViewController?.reload();
-        } else if (Platform.isIOS) {
-          webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await webViewController?.getUrl()));
-        }
-      },
-    );
+    controller = WebViewController()
+      ..clearCache()
+      ..clearLocalStorage()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(
+        Uri.parse(widget.url),
+      );
   }
 
   @override
   void dispose() {
     super.dispose();
+    controller.clearCache();
+    controller.clearCache();
+    controller.setJavaScriptMode(JavaScriptMode.disabled);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text("Official InAppWebView website")),
-        body: SafeArea(
-            child: Column(children: <Widget>[
-          TextField(
-            decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
-            controller: urlController,
-            keyboardType: TextInputType.url,
-            onSubmitted: (value) {
-              var url = Uri.parse(value);
-              if (url.scheme.isEmpty) {
-                url = Uri.parse("https://www.google.com/search?q=" + value);
-              }
-              webViewController?.loadUrl(urlRequest: URLRequest(url: url));
-            },
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                InAppWebView(
-                  key: webViewKey,
-                  initialUrlRequest:
-                      URLRequest(url: Uri.parse("https://inappwebview.dev/")),
-                  initialOptions: options,
-                  pullToRefreshController: pullToRefreshController,
-                  onWebViewCreated: (controller) {
-                    webViewController = controller;
-                  },
-                  onLoadStart: (controller, url) {
-                    setState(() {
-                      widget.url = url.toString();
-                      urlController.text = widget.url;
-                    });
-                  },
-                  androidOnPermissionRequest:
-                      (controller, origin, resources) async {
-                    return PermissionRequestResponse(
-                        resources: resources,
-                        action: PermissionRequestResponseAction.GRANT);
-                  },
-                  shouldOverrideUrlLoading:
-                      (controller, navigationAction) async {
-                    var uri = navigationAction.request.url!;
+    return BaseScaffold(
+      addAppBar: true,
+      appBar: AppSimpleAppBar(context, title: 'Plan Payment', actions: [
+        NavigationControls(controller: controller),
+        // Menu(controller: controller),
+      ], onPressed: () {
+        Go(context).backWithData(true);
+      }),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        child: WebViewStack(controller: controller),
+      ),
+    );
+  }
+}
 
-                    if (![
-                      "http",
-                      "https",
-                      "file",
-                      "chrome",
-                      "data",
-                      "javascript",
-                      "about"
-                    ].contains(uri.scheme)) {
-                      if (await canLaunch(widget.url)) {
-                        // Launch the App
-                        await launch(
-                          widget.url,
-                        );
-                        // and cancel the request
-                        return NavigationActionPolicy.CANCEL;
-                      }
-                    }
+class WebViewStack extends StatefulWidget {
+  WebViewStack({required this.controller, super.key}); // MODIFY
 
-                    return NavigationActionPolicy.ALLOW;
-                  },
-                  onLoadStop: (controller, url) async {
-                    pullToRefreshController.endRefreshing();
-                    setState(() {
-                      widget.url = url.toString();
-                      urlController.text = widget.url;
-                    });
-                  },
-                  onLoadError: (controller, url, code, message) {
-                    pullToRefreshController.endRefreshing();
-                  },
-                  onProgressChanged: (controller, progress) {
-                    if (progress == 100) {
-                      pullToRefreshController.endRefreshing();
-                    }
-                    setState(() {
-                      this.progress = progress / 100;
-                      urlController.text = widget.url;
-                    });
-                  },
-                  onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                    setState(() {
-                      widget.url = url.toString();
-                      urlController.text = widget.url;
-                    });
-                  },
-                  onConsoleMessage: (controller, consoleMessage) {
-                    print(consoleMessage);
-                  },
+  WebViewController controller;
+
+  @override
+  State<WebViewStack> createState() => _WebViewStackState();
+}
+
+class _WebViewStackState extends State<WebViewStack> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  var loadingPercentage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.setNavigationDelegate(
+      NavigationDelegate(
+        onPageStarted: (url) {
+          setState(() {
+            loadingPercentage = 0;
+          });
+        },
+        onProgress: (progress) {
+          setState(() {
+            loadingPercentage = progress;
+          });
+        },
+        onPageFinished: (url) {
+          setState(() {
+            loadingPercentage = 100;
+          });
+        },
+        onNavigationRequest: (navigation) {
+          final host = Uri.parse(navigation.url).host;
+          if (!host.contains('paystack.com')) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Blocking navigation to $host',
                 ),
-                progress < 1.0
-                    ? LinearProgressIndicator(value: progress)
-                    : Container(),
-              ],
-            ),
+              ),
+            );
+            return NavigationDecision.prevent;
+          }
+          return NavigationDecision.navigate;
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        WebViewWidget(
+          controller: widget.controller,
+        ),
+        if (loadingPercentage < 100)
+          LinearProgressIndicator(
+            value: loadingPercentage / 100.0,
           ),
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(
-                child: Icon(Icons.arrow_back),
-                onPressed: () {
-                  webViewController?.goBack();
-                },
-              ),
-              ElevatedButton(
-                child: Icon(Icons.arrow_forward),
-                onPressed: () {
-                  webViewController?.goForward();
-                },
-              ),
-              ElevatedButton(
-                child: Icon(Icons.refresh),
-                onPressed: () {
-                  webViewController?.reload();
-                },
-              ),
-            ],
-          ),
-        ])));
+      ],
+    );
+  }
+}
+
+class NavigationControls extends StatelessWidget {
+  const NavigationControls({required this.controller, super.key});
+
+  final WebViewController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        // IconButton(
+        //   icon: const Icon(Icons.arrow_back_ios),
+        //   onPressed: () async {
+        //     final messenger = ScaffoldMessenger.of(context);
+        //     if (await controller.canGoBack()) {
+        //       await controller.goBack();
+        //     } else {
+        //       messenger.showSnackBar(
+        //         const SnackBar(content: Text('No back history item')),
+        //       );
+        //       return;
+        //     }
+        //   },
+        // ),
+        // IconButton(
+        //   icon: const Icon(Icons.arrow_forward_ios),
+        //   onPressed: () async {
+        //     final messenger = ScaffoldMessenger.of(context);
+        //     if (await controller.canGoForward()) {
+        //       await controller.goForward();
+        //     } else {
+        //       messenger.showSnackBar(
+        //         const SnackBar(content: Text('No forward history item')),
+        //       );
+        //       return;
+        //     }
+        //   },
+        // ),
+        IconButton(
+          icon: const Icon(Icons.replay),
+          onPressed: () {
+            controller.reload();
+          },
+        ),
+      ],
+    );
+  }
+}
+
+enum _MenuOptions {
+  navigationDelegate,
+  userAgent,
+  javascriptChannel,
+}
+
+class Menu extends StatefulWidget {
+  const Menu({required this.controller, super.key});
+
+  final WebViewController controller;
+
+  @override
+  State<Menu> createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<_MenuOptions>(
+      onSelected: (value) async {
+        switch (value) {
+          case _MenuOptions.navigationDelegate:
+            await widget.controller
+                .loadRequest(Uri.parse('https://youtube.com'));
+            break;
+          case _MenuOptions.userAgent:
+            final userAgent = await widget.controller
+                .runJavaScriptReturningResult('navigator.userAgent');
+            if (!mounted) return;
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('$userAgent'),
+            ));
+            break;
+          case _MenuOptions.javascriptChannel:
+            await widget.controller.runJavaScript('''
+                var req = new XMLHttpRequest();
+                req.open('GET', "https://www.flutter.dev");
+                req.onload = function() {
+                  if (req.status == 200) {
+                    SnackBar.postMessage(req.responseText);
+                  } else {
+                    SnackBar.postMessage("Error: " + req.status);
+                  }
+                }
+                req.send();
+                
+              ''');
+            break;
+        }
+      },
+      itemBuilder: (context) => [
+        const PopupMenuItem<_MenuOptions>(
+          value: _MenuOptions.navigationDelegate,
+          child: Text('Navigate to YouTube'),
+        ),
+        const PopupMenuItem<_MenuOptions>(
+          value: _MenuOptions.userAgent,
+          child: Text('Show user-agent'),
+        ),
+        const PopupMenuItem<_MenuOptions>(
+          value: _MenuOptions.javascriptChannel,
+          child: Text('Lookup IP Address'),
+        ),
+      ],
+    );
   }
 }

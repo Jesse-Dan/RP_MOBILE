@@ -51,7 +51,7 @@ class _ProfileViewState extends State<ProfileView> {
         addbodyPadding: true,
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
-        appbar: ProfileAppBar(),
+        appBar: ProfileAppBar(),
         body: Padding(
           padding: const EdgeInsets.only(bottom: 40.0),
           child: Column(

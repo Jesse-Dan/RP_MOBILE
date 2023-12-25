@@ -36,7 +36,7 @@ class _ChatsViewState extends State<ChatsView> {
           addAppBar: true,
           physics: const BouncingScrollPhysics(),
           backgroundColor: AppColors.kbrandWhite,
-          appbar: AppBar(
+          appBar: AppBar(
             backgroundColor: AppColors.kbrandWhite,
             foregroundColor: AppColors.kbrandWhite,
             title: Text(

@@ -32,7 +32,7 @@ class _PrivacyViewState extends State<PrivacyView> {
         addAppBar: true,
         addSafeArea: false,
         addbodyPadding: true,
-        appbar: AppSimpleAppBar(context, title: 'Privacy'),
+        appBar: AppSimpleAppBar(context, title: 'Privacy'),
         physics: const BouncingScrollPhysics(),
         backgroundColor: AppColors.kbrandWhite,
         body: Column(

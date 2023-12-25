@@ -48,7 +48,7 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
     return BaseScaffold(
       addAppBar: true,
       addbodyPadding: true,
-      appbar: AppBar(
+      appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.kbrandWhite,
         leading: Padding(

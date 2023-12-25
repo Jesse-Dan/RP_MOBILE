@@ -12,7 +12,7 @@ class BaseScaffold extends StatefulWidget {
     this.body,
     this.floatingActionButton,
     this.addBackgroundColor = true,
-    this.appbar,
+    this.appBar,
     this.addbodyPadding = false,
     this.addSafeArea = false,
     this.addAppBar,
@@ -28,7 +28,7 @@ class BaseScaffold extends StatefulWidget {
 
   final Color? backgroundColor;
   final bool addBackgroundColor;
-  final PreferredSizeWidget? appbar;
+  final PreferredSizeWidget? appBar;
   final bool? addAppBar;
 
   final bool addbodyPadding;
@@ -68,7 +68,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
   Scaffold _buildBody() {
     return Scaffold(
       appBar: (widget.addAppBar ?? false)
-          ? (widget.appbar ??
+          ? (widget.appBar ??
               AppBar(
                 leading: IconButton(
                     onPressed: widget.defaultBackBtnCallBack ??

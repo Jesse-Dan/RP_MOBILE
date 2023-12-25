@@ -33,7 +33,7 @@ class _SearchMoreViewState extends State<SearchMoreView> {
       addbodyPadding: true,
       addSafeArea: false,
       addAppBar: true,
-      appbar: AppBar(
+      appBar: AppBar(
         leading: IconButton(
             onPressed: () {
               Go(context).pop();

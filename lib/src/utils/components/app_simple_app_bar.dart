@@ -5,11 +5,11 @@ import 'package:navigation_system/go/go.dart';
 
 import '../style/app_colors.dart';
 
-AppBar AppSimpleAppBar(BuildContext context, {title}) {
+AppBar AppSimpleAppBar(BuildContext context, {title, actions, void Function()? onPressed}) {
   return AppBar(
     toolbarHeight: 80,
     leading: IconButton(
-        onPressed: () {
+        onPressed:onPressed?? () {
           Go(context).pop();
         },
         icon: const Icon(Icons.arrow_back_ios_new_rounded)),
@@ -23,5 +23,6 @@ AppBar AppSimpleAppBar(BuildContext context, {title}) {
           ),
     ),
     centerTitle: true,
+    actions: actions,
   );
 }
