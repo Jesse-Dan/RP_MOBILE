@@ -69,15 +69,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
     return Scaffold(
       appBar: (widget.addAppBar ?? false)
           ? (widget.appBar ??
-              AppBar(
-                leading: IconButton(
-                    onPressed: widget.defaultBackBtnCallBack ??
-                        () {
-                          Go(context).pop();
-                        },
-                    icon: Image.asset('assets/icons/back_icon.png')),
-                backgroundColor: AppColors.kprimaryColor100,
-              ))
+              BaseAppBar(context, widget.defaultBackBtnCallBack))
           : null,
       backgroundColor: widget.backgroundColor ??
           (widget.addBackgroundColor ? AppColors.kwhiteColor : null),
@@ -140,4 +132,16 @@ class SafeAreaConfig extends StatelessWidget {
       child: child ?? const SizedBox(),
     );
   }
+}
+
+AppBar BaseAppBar(context, [defaultBackBtnCallBack]) {
+  return AppBar(
+    leading: IconButton(
+        onPressed: defaultBackBtnCallBack ??
+            () {
+              Go(context).pop();
+            },
+        icon: Image.asset('assets/icons/back_icon.png')),
+    backgroundColor: AppColors.kprimaryColor100,
+  );
 }

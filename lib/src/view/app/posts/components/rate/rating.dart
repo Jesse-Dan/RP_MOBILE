@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 import 'dart:io';
 
@@ -25,6 +27,8 @@ import 'package:path_provider/path_provider.dart';
 // }
 
 class FbReaction extends StatefulWidget {
+  const FbReaction({super.key});
+
   @override
   createState() => FbReactionState();
 }
@@ -403,7 +407,7 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
       child: Column(
         children: <Widget>[
           // Just a top space
-          Container(
+          const SizedBox(
             width: double.infinity,
             height: 100.0,
           ),
@@ -438,11 +442,11 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     ? Container(
                         margin: EdgeInsets.only(
                           top: processTopPosition(
-                              this.moveUpIconWhenRelease.value),
-                          left: this.moveLeftIconLikeWhenRelease.value,
+                              moveUpIconWhenRelease.value),
+                          left: moveLeftIconLikeWhenRelease.value,
                         ),
                         child: Transform.scale(
-                          scale: this.zoomIconWhenRelease.value,
+                          scale: zoomIconWhenRelease.value,
                           child: Image.asset(
                             'assets/icons/images/like.gif',
                             width: 40.0,
@@ -457,16 +461,16 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     ? Container(
                         margin: EdgeInsets.only(
                           top: processTopPosition(
-                              this.moveUpIconWhenRelease.value),
-                          left: this.moveLeftIconLoveWhenRelease.value,
+                              moveUpIconWhenRelease.value),
+                          left: moveLeftIconLoveWhenRelease.value,
                         ),
                         child: Transform.scale(
+                          scale: zoomIconWhenRelease.value,
                           child: Image.asset(
                             'assets/icons/images/love.gif',
                             width: 40.0,
                             height: 40.0,
                           ),
-                          scale: this.zoomIconWhenRelease.value,
                         ),
                       )
                     : Container(),
@@ -476,16 +480,16 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     ? Container(
                         margin: EdgeInsets.only(
                           top: processTopPosition(
-                              this.moveUpIconWhenRelease.value),
-                          left: this.moveLeftIconHahaWhenRelease.value,
+                              moveUpIconWhenRelease.value),
+                          left: moveLeftIconHahaWhenRelease.value,
                         ),
                         child: Transform.scale(
+                          scale: zoomIconWhenRelease.value,
                           child: Image.asset(
                             'assets/icons/images/haha.gif',
                             width: 40.0,
                             height: 40.0,
                           ),
-                          scale: this.zoomIconWhenRelease.value,
                         ),
                       )
                     : Container(),
@@ -495,16 +499,16 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     ? Container(
                         margin: EdgeInsets.only(
                           top: processTopPosition(
-                              this.moveUpIconWhenRelease.value),
-                          left: this.moveLeftIconWowWhenRelease.value,
+                              moveUpIconWhenRelease.value),
+                          left: moveLeftIconWowWhenRelease.value,
                         ),
                         child: Transform.scale(
+                          scale: zoomIconWhenRelease.value,
                           child: Image.asset(
                             'assets/icons/images/wow.gif',
                             width: 40.0,
                             height: 40.0,
                           ),
-                          scale: this.zoomIconWhenRelease.value,
                         ),
                       )
                     : Container(),
@@ -514,16 +518,16 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     ? Container(
                         margin: EdgeInsets.only(
                           top: processTopPosition(
-                              this.moveUpIconWhenRelease.value),
-                          left: this.moveLeftIconSadWhenRelease.value,
+                              moveUpIconWhenRelease.value),
+                          left: moveLeftIconSadWhenRelease.value,
                         ),
                         child: Transform.scale(
+                          scale: zoomIconWhenRelease.value,
                           child: Image.asset(
                             'assets/icons/images/sad.gif',
                             width: 40.0,
                             height: 40.0,
                           ),
-                          scale: this.zoomIconWhenRelease.value,
                         ),
                       )
                     : Container(),
@@ -533,16 +537,16 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     ? Container(
                         margin: EdgeInsets.only(
                           top: processTopPosition(
-                              this.moveUpIconWhenRelease.value),
-                          left: this.moveLeftIconAngryWhenRelease.value,
+                              moveUpIconWhenRelease.value),
+                          left: moveLeftIconAngryWhenRelease.value,
                         ),
                         child: Transform.scale(
+                          scale: zoomIconWhenRelease.value,
                           child: Image.asset(
                             'assets/icons/images/angry.gif',
                             width: 40.0,
                             height: 40.0,
                           ),
-                          scale: this.zoomIconWhenRelease.value,
                         ),
                       )
                     : Container(),
@@ -556,7 +560,7 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
 
   Widget renderBox() {
     return Opacity(
-      opacity: this.fadeInBox.value,
+      opacity: fadeInBox.value,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -573,9 +577,9 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
         ),
         width: 300.0,
         height: isDragging
-            ? (previousIconFocus == 0 ? this.zoomBoxIcon.value : 40.0)
+            ? (previousIconFocus == 0 ? zoomBoxIcon.value : 40.0)
             : isDraggingOutside
-                ? this.zoomBoxWhenDragOutside.value
+                ? zoomBoxWhenDragOutside.value
                 : 50.0,
         margin: const EdgeInsets.only(bottom: 130.0, left: 10.0),
       ),
@@ -586,21 +590,32 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
     return Container(
       width: 300.0,
       height: 250.0,
-      margin: EdgeInsets.only(left: this.moveRightGroupIcon.value, top: 50.0),
+      margin: EdgeInsets.only(left: moveRightGroupIcon.value, top: 50.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // icon like
           Transform.scale(
+            scale: isDragging
+                ? (currentIconFocus == 1
+                    ? zoomIconChosen.value
+                    : (previousIconFocus == 1
+                        ? zoomIconNotChosen.value
+                        : isJustDragInside
+                            ? zoomIconWhenDragInside.value
+                            : 0.8))
+                : isDraggingOutside
+                    ? zoomIconWhenDragOutside.value
+                    : zoomIconLike.value,
             child: Container(
+              margin: EdgeInsets.only(bottom: pushIconLikeUp.value),
+              width: 40.0,
+              height: currentIconFocus == 1 ? 70.0 : 40.0,
               child: Column(
                 children: <Widget>[
                   currentIconFocus == 1
                       ? Container(
-                          child: const Text(
-                            'Like',
-                            style:
-                                TextStyle(fontSize: 8.0, color: Colors.white),
-                          ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.black.withOpacity(0.3),
@@ -608,6 +623,11 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                           padding: const EdgeInsets.only(
                               left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
                           margin: const EdgeInsets.only(bottom: 8.0),
+                          child: const Text(
+                            'Like',
+                            style:
+                                TextStyle(fontSize: 8.0, color: Colors.white),
+                          ),
                         )
                       : Container(),
                   Image.asset(
@@ -618,41 +638,41 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(bottom: pushIconLikeUp.value),
-              width: 40.0,
-              height: currentIconFocus == 1 ? 70.0 : 40.0,
             ),
-            scale: isDragging
-                ? (currentIconFocus == 1
-                    ? this.zoomIconChosen.value
-                    : (previousIconFocus == 1
-                        ? this.zoomIconNotChosen.value
-                        : isJustDragInside
-                            ? this.zoomIconWhenDragInside.value
-                            : 0.8))
-                : isDraggingOutside
-                    ? this.zoomIconWhenDragOutside.value
-                    : this.zoomIconLike.value,
           ),
 
           // icon love
           Transform.scale(
+            scale: isDragging
+                ? (currentIconFocus == 2
+                    ? zoomIconChosen.value
+                    : (previousIconFocus == 2
+                        ? zoomIconNotChosen.value
+                        : isJustDragInside
+                            ? zoomIconWhenDragInside.value
+                            : 0.8))
+                : isDraggingOutside
+                    ? zoomIconWhenDragOutside.value
+                    : zoomIconLove.value,
             child: Container(
+              margin: EdgeInsets.only(bottom: pushIconLoveUp.value),
+              width: 40.0,
+              height: currentIconFocus == 2 ? 70.0 : 40.0,
               child: Column(
                 children: <Widget>[
                   currentIconFocus == 2
                       ? Container(
-                          child: const Text(
-                            'Love',
-                            style:
-                                TextStyle(fontSize: 8.0, color: Colors.white),
-                          ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               color: Colors.black.withOpacity(0.3)),
                           padding: const EdgeInsets.only(
                               left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
                           margin: const EdgeInsets.only(bottom: 8.0),
+                          child: const Text(
+                            'Love',
+                            style:
+                                TextStyle(fontSize: 8.0, color: Colors.white),
+                          ),
                         )
                       : Container(),
                   Image.asset(
@@ -663,41 +683,41 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(bottom: pushIconLoveUp.value),
-              width: 40.0,
-              height: currentIconFocus == 2 ? 70.0 : 40.0,
             ),
-            scale: isDragging
-                ? (currentIconFocus == 2
-                    ? this.zoomIconChosen.value
-                    : (previousIconFocus == 2
-                        ? this.zoomIconNotChosen.value
-                        : isJustDragInside
-                            ? this.zoomIconWhenDragInside.value
-                            : 0.8))
-                : isDraggingOutside
-                    ? this.zoomIconWhenDragOutside.value
-                    : this.zoomIconLove.value,
           ),
 
           // icon haha
           Transform.scale(
+            scale: isDragging
+                ? (currentIconFocus == 3
+                    ? zoomIconChosen.value
+                    : (previousIconFocus == 3
+                        ? zoomIconNotChosen.value
+                        : isJustDragInside
+                            ? zoomIconWhenDragInside.value
+                            : 0.8))
+                : isDraggingOutside
+                    ? zoomIconWhenDragOutside.value
+                    : zoomIconHaha.value,
             child: Container(
+              margin: EdgeInsets.only(bottom: pushIconHahaUp.value),
+              width: 40.0,
+              height: currentIconFocus == 3 ? 70.0 : 40.0,
               child: Column(
                 children: <Widget>[
                   currentIconFocus == 3
                       ? Container(
-                          child: const Text(
-                            'Haha',
-                            style:
-                                TextStyle(fontSize: 8.0, color: Colors.white),
-                          ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               color: Colors.black.withOpacity(0.3)),
                           padding: const EdgeInsets.only(
                               left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
                           margin: const EdgeInsets.only(bottom: 8.0),
+                          child: const Text(
+                            'Haha',
+                            style:
+                                TextStyle(fontSize: 8.0, color: Colors.white),
+                          ),
                         )
                       : Container(),
                   Image.asset(
@@ -708,41 +728,41 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(bottom: pushIconHahaUp.value),
-              width: 40.0,
-              height: currentIconFocus == 3 ? 70.0 : 40.0,
             ),
-            scale: isDragging
-                ? (currentIconFocus == 3
-                    ? this.zoomIconChosen.value
-                    : (previousIconFocus == 3
-                        ? this.zoomIconNotChosen.value
-                        : isJustDragInside
-                            ? this.zoomIconWhenDragInside.value
-                            : 0.8))
-                : isDraggingOutside
-                    ? this.zoomIconWhenDragOutside.value
-                    : this.zoomIconHaha.value,
           ),
 
           // icon wow
           Transform.scale(
+            scale: isDragging
+                ? (currentIconFocus == 4
+                    ? zoomIconChosen.value
+                    : (previousIconFocus == 4
+                        ? zoomIconNotChosen.value
+                        : isJustDragInside
+                            ? zoomIconWhenDragInside.value
+                            : 0.8))
+                : isDraggingOutside
+                    ? zoomIconWhenDragOutside.value
+                    : zoomIconWow.value,
             child: Container(
+              margin: EdgeInsets.only(bottom: pushIconWowUp.value),
+              width: 40.0,
+              height: currentIconFocus == 4 ? 70.0 : 40.0,
               child: Column(
                 children: <Widget>[
                   currentIconFocus == 4
                       ? Container(
-                          child: const Text(
-                            'Wow',
-                            style:
-                                TextStyle(fontSize: 8.0, color: Colors.white),
-                          ),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               color: Colors.black.withOpacity(0.3)),
                           padding: const EdgeInsets.only(
                               left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
                           margin: const EdgeInsets.only(bottom: 8.0),
+                          child: const Text(
+                            'Wow',
+                            style:
+                                TextStyle(fontSize: 8.0, color: Colors.white),
+                          ),
                         )
                       : Container(),
                   Image.asset(
@@ -753,35 +773,30 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(bottom: pushIconWowUp.value),
-              width: 40.0,
-              height: currentIconFocus == 4 ? 70.0 : 40.0,
             ),
-            scale: isDragging
-                ? (currentIconFocus == 4
-                    ? this.zoomIconChosen.value
-                    : (previousIconFocus == 4
-                        ? this.zoomIconNotChosen.value
-                        : isJustDragInside
-                            ? this.zoomIconWhenDragInside.value
-                            : 0.8))
-                : isDraggingOutside
-                    ? this.zoomIconWhenDragOutside.value
-                    : this.zoomIconWow.value,
           ),
 
           // icon sad
           Transform.scale(
+            scale: isDragging
+                ? (currentIconFocus == 5
+                    ? zoomIconChosen.value
+                    : (previousIconFocus == 5
+                        ? zoomIconNotChosen.value
+                        : isJustDragInside
+                            ? zoomIconWhenDragInside.value
+                            : 0.8))
+                : isDraggingOutside
+                    ? zoomIconWhenDragOutside.value
+                    : zoomIconSad.value,
             child: Container(
+              margin: EdgeInsets.only(bottom: pushIconSadUp.value),
+              width: 40.0,
+              height: currentIconFocus == 5 ? 70.0 : 40.0,
               child: Column(
                 children: <Widget>[
                   currentIconFocus == 5
                       ? Container(
-                          child: const Text(
-                            'Sad',
-                            style:
-                                TextStyle(fontSize: 8.0, color: Colors.white),
-                          ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.black.withOpacity(0.3),
@@ -789,6 +804,11 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                           padding: const EdgeInsets.only(
                               left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
                           margin: const EdgeInsets.only(bottom: 8.0),
+                          child: const Text(
+                            'Sad',
+                            style:
+                                TextStyle(fontSize: 8.0, color: Colors.white),
+                          ),
                         )
                       : Container(),
                   Image.asset(
@@ -799,35 +819,30 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(bottom: pushIconSadUp.value),
-              width: 40.0,
-              height: currentIconFocus == 5 ? 70.0 : 40.0,
             ),
-            scale: isDragging
-                ? (currentIconFocus == 5
-                    ? this.zoomIconChosen.value
-                    : (previousIconFocus == 5
-                        ? this.zoomIconNotChosen.value
-                        : isJustDragInside
-                            ? this.zoomIconWhenDragInside.value
-                            : 0.8))
-                : isDraggingOutside
-                    ? this.zoomIconWhenDragOutside.value
-                    : this.zoomIconSad.value,
           ),
 
           // icon angry
           Transform.scale(
+            scale: isDragging
+                ? (currentIconFocus == 6
+                    ? zoomIconChosen.value
+                    : (previousIconFocus == 6
+                        ? zoomIconNotChosen.value
+                        : isJustDragInside
+                            ? zoomIconWhenDragInside.value
+                            : 0.8))
+                : isDraggingOutside
+                    ? zoomIconWhenDragOutside.value
+                    : zoomIconAngry.value,
             child: Container(
+              margin: EdgeInsets.only(bottom: pushIconAngryUp.value),
+              width: 40.0,
+              height: currentIconFocus == 6 ? 70.0 : 40.0,
               child: Column(
                 children: <Widget>[
                   currentIconFocus == 6
                       ? Container(
-                          child: const Text(
-                            'Angry',
-                            style:
-                                TextStyle(fontSize: 8.0, color: Colors.white),
-                          ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.black.withOpacity(0.3),
@@ -835,6 +850,11 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                           padding: const EdgeInsets.only(
                               left: 7.0, right: 7.0, top: 2.0, bottom: 2.0),
                           margin: const EdgeInsets.only(bottom: 8.0),
+                          child: const Text(
+                            'Angry',
+                            style:
+                                TextStyle(fontSize: 8.0, color: Colors.white),
+                          ),
                         )
                       : Container(),
                   Image.asset(
@@ -845,25 +865,9 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(bottom: pushIconAngryUp.value),
-              width: 40.0,
-              height: currentIconFocus == 6 ? 70.0 : 40.0,
             ),
-            scale: isDragging
-                ? (currentIconFocus == 6
-                    ? this.zoomIconChosen.value
-                    : (previousIconFocus == 6
-                        ? this.zoomIconNotChosen.value
-                        : isJustDragInside
-                            ? this.zoomIconWhenDragInside.value
-                            : 0.8))
-                : isDraggingOutside
-                    ? this.zoomIconWhenDragOutside.value
-                    : this.zoomIconAngry.value,
           ),
         ],
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
       ),
       // uncomment here to see area of draggable
       // color: Colors.amber.withOpacity(0.5),
@@ -884,11 +888,20 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
         onTapUp: onTapUpBtn,
         onTap: onTapBtn,
         child: Container(
+          padding: const EdgeInsets.all(10.0),
+          color: Colors.transparent,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               // Icon like
               Transform.scale(
+                scale: !isLongPress
+                    ? handleOutputRangeZoomInIconLike(zoomIconLikeInBtn2.value)
+                    : zoomIconLikeInBtn.value,
                 child: Transform.rotate(
+                  angle: !isLongPress
+                      ? handleOutputRangeTiltIconLike(tiltIconLikeInBtn2.value)
+                      : tiltIconLikeInBtn.value,
                   child: Image.asset(
                     getImageIconBtn(),
                     width: 25.0,
@@ -896,17 +909,14 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     fit: BoxFit.contain,
                     color: getTintColorIconBtn(),
                   ),
-                  angle: !isLongPress
-                      ? handleOutputRangeTiltIconLike(tiltIconLikeInBtn2.value)
-                      : tiltIconLikeInBtn.value,
                 ),
-                scale: !isLongPress
-                    ? handleOutputRangeZoomInIconLike(zoomIconLikeInBtn2.value)
-                    : zoomIconLikeInBtn.value,
               ),
 
               // Text like
               Transform.scale(
+                scale: !isLongPress
+                    ? handleOutputRangeZoomInIconLike(zoomIconLikeInBtn2.value)
+                    : zoomTextLikeInBtn.value,
                 child: Text(
                   getTextBtn(),
                   style: TextStyle(
@@ -915,15 +925,9 @@ class FbReactionState extends State<FbReaction> with TickerProviderStateMixin {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                scale: !isLongPress
-                    ? handleOutputRangeZoomInIconLike(zoomIconLikeInBtn2.value)
-                    : zoomTextLikeInBtn.value,
               ),
             ],
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           ),
-          padding: const EdgeInsets.all(10.0),
-          color: Colors.transparent,
         ),
       ),
     );

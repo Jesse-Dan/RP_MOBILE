@@ -1,15 +1,16 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:navigation_system/go/go.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
+import 'package:recenth_posts/src/utils/style/app_assets.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
 import 'package:recenth_posts/src/view/auth/sign_up_view/sign_up_view.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:navigation_system/go/go.dart';
 
 import '../../../utils/components/app_divider.dart';
 
@@ -46,17 +47,17 @@ class LoginModeView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: (AppDimentions.k20 * 2) + 4),
+            const SizedBox(height: (AppDim.k20 * 2) + 4),
             Image.asset(
-              'assets/images/MainLogo.png',
+              AppAsset.mainGreenLogoNoBG,
               width: 180,
-              height: 70,
+              height: 100,
             ),
-            const SizedBox(height: AppDimentions.k20 * 3),
+            const SizedBox(height: AppDim.k20 * 3),
             Text('Let’s get you in your account!',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.subtitle2),
-            const SizedBox(height: AppDimentions.k20 + 13),
+                style: Theme.of(context).textTheme.bodyMedium),
+            const SizedBox(height: AppDim.k20 + 13),
             ListView.builder(
               shrinkWrap: true,
               itemCount: btns.length,
@@ -64,65 +65,73 @@ class LoginModeView extends StatelessWidget {
                 onTap: btns[i].voidCallback,
                 child: Container(
                   alignment: Alignment.center,
-                  margin: const EdgeInsets.only(bottom: AppDimentions.k20 + 4),
-                  height: (AppDimentions.k20 * 2) + 16,
+                  margin: const EdgeInsets.only(bottom: AppDim.k20 + 4),
+                  height: (AppDim.k20 * 2) + 16,
                   decoration: BoxDecoration(
                       color: AppColors.kbrandWhite,
                       border:
                           Border.all(color: AppColors.kgrayColor100, width: 1),
-                      borderRadius:
-                          BorderRadius.circular(AppDimentions.k20 + 8)),
-                  child: Row(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SvgPicture.asset(
-                        btns[i].icon,
-                        width: 23.99986,
-                        height: 24,
-                      ),
-                      const SizedBox(width: AppDimentions.k16),
-                      Text(
-                        btns[i].text,
-                        textAlign: TextAlign.start,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1!
-                            .copyWith(fontWeight: FontWeight.w500),
-                      )
-                    ],
+                      borderRadius: BorderRadius.circular(AppDim.k20 + 8)),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width / 6),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          btns[i].icon,
+                          width: 23.99986,
+                          height: 24,
+                        ),
+                        const Spacer(),
+                        Text(
+                          btns[i].text,
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  fontWeight: FontWeight.w500, fontSize: 14),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: AppDimentions.k20 + 12),
+            const SizedBox(height: AppDim.k20 + 12),
             SizedBox(
-              height: AppDimentions.k20 + 8,
+              height: AppDim.k20 + 8,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AppDivider.build(
-                      width: 166, height: 0.2, color: AppColors.kgrayColor700),
-                  const SizedBox(height: AppDimentions.k16),
+                      width: MediaQuery.of(context).size.width / 4,
+                      height: 0.2,
+                      color: AppColors.kgrayColor700),
+                  const SizedBox(height: AppDim.k16),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text('or',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontWeight: FontWeight.w400,
                             fontSize: 18,
                             color: AppColors.kgrayColor700)),
                   ),
-                  const SizedBox(height: AppDimentions.k16),
+                  const SizedBox(height: AppDim.k16),
                   AppDivider.build(
-                      width: 166, height: 0.2, color: AppColors.kgrayColor700),
+                      width: MediaQuery.of(context).size.width / 4,
+                      height: 0.2,
+                      color: AppColors.kgrayColor700),
                 ],
               ),
             ),
-            const SizedBox(height: AppDimentions.k20 + 12),
+            const SizedBox(height: AppDim.k20 + 12),
             AppButton(
               buttonType: ButtonType.LONG_BTN,
               btnText: 'Log in',
@@ -131,9 +140,9 @@ class LoginModeView extends StatelessWidget {
                 Go(context, routeName: LoginView.routeName).to();
               },
             ),
-            const SizedBox(height: AppDimentions.k20 + 4),
+            const SizedBox(height: AppDim.k20 + 4),
             Text.rich(TextSpan(
-                style: Theme.of(context).textTheme.subtitle1,
+                style: Theme.of(context).textTheme.bodyMedium,
                 children: [
                   const TextSpan(text: 'Don’t have an account?'),
                   TextSpan(
@@ -141,7 +150,7 @@ class LoginModeView extends StatelessWidget {
                           Go(context, routeName: RegistrationView.routeName)
                               .onTapRecognizeGesture(),
                       text: 'Sign up',
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: AppColors.kprimaryColor600,
                             fontWeight: FontWeight.w700,
                           ))

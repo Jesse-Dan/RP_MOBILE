@@ -47,8 +47,12 @@ class AppTheme extends AppColors {
 
   static lightThemeData(BuildContext context) {
     return ThemeData(
+      appBarTheme: AppBarTheme(
+          foregroundColor: AppColors.kprimaryColor400,
+          surfaceTintColor: AppColors.kprimaryColor400,
+          elevation: 0),
       useMaterial3: true,
-      primaryColorLight: AppColors.kprimaryColor400,
+      primaryColorLight: AppColors.kprimaryColor700,
       textTheme: getTextTheme(),
       primaryTextTheme: getTextTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -57,82 +61,111 @@ class AppTheme extends AppColors {
 
   static darkThemeData(BuildContext context) {
     return ThemeData(
+      appBarTheme: AppBarTheme(
+          foregroundColor: AppColors.kprimaryColor400,
+          surfaceTintColor: AppColors.kprimaryColor400,
+          elevation: 0),
       useMaterial3: true,
-      primaryColorLight: AppColors.kblackColor.withOpacity(0.6),
+      primaryColorLight: AppColors.kprimaryColor700.withOpacity(0.6),
       textTheme: getTextTheme(),
       primaryTextTheme: getTextTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }
-
   static TextTheme getTextTheme() {
     return const TextTheme(
-      bodyText1: TextStyle(
+      displayLarge: TextStyle(
         color: Color(0xFF232323),
-        fontSize: 14,
-        fontFamily: "DM Sans",
+        fontSize: 57,
+        fontFamily: "Poppins",
         fontWeight: FontWeight.w700,
       ),
-      bodyText2: TextStyle(
+      displayMedium: TextStyle(
         color: Color(0xFF232323),
-        fontSize: 14,
-        fontFamily: "DM Sans",
+        fontSize: 45,
+        fontFamily: "Poppins",
         fontWeight: FontWeight.w700,
       ),
-      headline2: TextStyle(
+      displaySmall: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 36,
+        fontFamily: "Poppins",
+        fontWeight: FontWeight.w700,
+      ),
+      headlineLarge: TextStyle(
         color: Color(0xFF232323),
         fontSize: 32,
         fontFamily: "Poppins",
         fontWeight: FontWeight.w700,
       ),
-      headline1: TextStyle(
+      headlineMedium: TextStyle(
         color: Color(0xFF232323),
-        fontSize: 32,
+        fontSize: 28,
         fontFamily: "Poppins",
         fontWeight: FontWeight.w700,
       ),
-      headline3: TextStyle(
+      headlineSmall: TextStyle(
         color: Color(0xFF232323),
-        fontSize: 32,
+        fontSize: 24,
         fontFamily: "Poppins",
         fontWeight: FontWeight.w700,
       ),
-      headline4: TextStyle(
+      titleLarge: TextStyle(
         color: Color(0xFF232323),
-        fontSize: 32,
+        fontSize: 22,
         fontFamily: "Poppins",
         fontWeight: FontWeight.w700,
       ),
-      headline5: TextStyle(
-        color: Color(0xFF232323),
-        fontSize: 32,
-        fontFamily: "Poppins",
-        fontWeight: FontWeight.w700,
-      ),
-      headline6: TextStyle(
-        color: Color(0xFF232323),
-        fontSize: 32,
-        fontFamily: "Poppins",
-        fontWeight: FontWeight.w700,
-      ),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
         color: Color(0xFF232323),
         fontSize: 16,
         fontFamily: "DM Sans",
         fontWeight: FontWeight.w400,
       ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         color: Color(0xFF232323),
-        fontSize: 15,
+        fontSize: 14,
         fontFamily: "DM Sans",
         fontWeight: FontWeight.w200,
       ),
-      button: TextStyle(fontFamily: "DM Sans"),
-      caption: TextStyle(fontFamily: "DM Sans"),
-      overline: TextStyle(fontFamily: "DM Sans"),
+      bodyLarge: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 16,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w700,
+      ),
+      bodyMedium: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 14,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w700,
+      ),
+      bodySmall: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 12,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w700,
+      ),
+      labelLarge: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 14,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w500,
+      ),
+      labelMedium: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 12,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w500,
+      ),
+      labelSmall: TextStyle(
+        color: Color(0xFF232323),
+        fontSize: 11,
+        fontFamily: "DM Sans",
+        fontWeight: FontWeight.w500,
+      ),
     );
   }
-
 //
 // const kDeepPurple = Color(0xffF76C6C);
 //

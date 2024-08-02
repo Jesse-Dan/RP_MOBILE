@@ -64,7 +64,7 @@ class SettingsTile extends StatelessWidget {
         ),
         contentPadding: const EdgeInsets.all(3),
         title: Padding(
-          padding: const EdgeInsets.only(left: AppDimentions.k16),
+          padding: const EdgeInsets.only(left: AppDim.k16),
           child: Text(settings.title,
               textAlign: TextAlign.left,
               style: settings.title == 'Log out'
@@ -75,7 +75,7 @@ class SettingsTile extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.02,
                     )
-                  : Theme.of(context).textTheme.subtitle1!),
+                  : Theme.of(context).textTheme.bodyMedium!),
         ),
         trailing: settings.title == 'Log out'
             ? null

@@ -124,10 +124,8 @@ class _ProfileDetailViewState extends State<ProfileDetailView> {
                       btnText: 'Save chances',
                       buttonType: ButtonType.LONG_BTN,
                       onTap: () {
-                        AppNotifier.notify(context,
-                            appNotifierType: AppNotifierType.SUCCESS,
-                            title: 'Profile update',
-                            message: 'Profile update successfully');
+                        AppNotifier.notifyAction(context,
+                            message: 'Profile update successful');
                         setState(() {
                           edit = false;
                         });

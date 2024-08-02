@@ -22,7 +22,7 @@ class BaseHandler {
   final BuildContext context;
 
   /// Callback function whenAlertTypeis dismissed
-  final dynamic callBack;
+  final dynamic callBackOne;
 
   /// Text for the action button in the alert
   final String btnText;
@@ -33,14 +33,24 @@ class BaseHandler {
 
   final String title;
 
+  final VoidCallback? callBackTwo;
+  final String? callBackTextOne;
+  final String? callBackTextTwo;
+  final HandlerBtnCount? handlerBtnCount;
+
   final Widget? child;
-  BaseHandler({this.child, 
+  BaseHandler({
+    this.callBackOne,
+    this.callBackTwo,
+    this.callBackTextOne,
+    this.callBackTextTwo,
+    this.handlerBtnCount,
+    this.child,
     required this.context,
     required this.tag,
     required this.message,
     this.title = 'Done',
     this.stackTrace,
-    this.callBack,
     this.btnText = '',
     this.barrierDismissible = false,
   }) {
@@ -52,13 +62,18 @@ class BaseHandler {
         context: context,
         builder: (_) => tag == Tag.LOADING
             ? AppLoadingIndicator()
-            :child?? AppDialogue(
-                title: title,
-                tag: tag,
-                message: message,
-                callBack: callBack,
-                btnText: btnText,
-              ));
+            : child ??
+                AppDialogue(
+                  callBackOne: callBackOne,
+                  callBackTwo: callBackTwo,
+                  callBackTextOne: callBackTextOne,
+                  callBackTextTwo: callBackTextTwo,
+                  handlerBtnCount: handlerBtnCount,
+                  title: title,
+                  tag: tag,
+                  message: message,
+                  btnText: btnText,
+                ));
 
     Logger.log(
         tag: tag,

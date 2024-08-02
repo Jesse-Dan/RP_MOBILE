@@ -1,12 +1,11 @@
 // ignore_for_file: deprecated_member_use
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/logic/services/handler/handlers/descion_handler.dart';
-import 'package:recenth_posts/src/logic/services/handler/handlers/redirect_handler.dart';
+import 'package:recenth_posts/src/logic/services/handler/base_handler.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/auth/sign_in_view/sign_in_view.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:navigation_system/go/go.dart';
 
 import '../../../../../utils/components/app_simple_app_bar.dart';
 import '../../../../base/base_scaffold.dart';
@@ -122,34 +121,30 @@ class SecurityModel {
           isSwitch: true,
           subTitle: 'Permanently remove your profile and data from RecentPost.',
           voidCallback: () {
-            DecisionHandler(
-                context: context,
-                tag: Tag.SERVICE_ACTION,
-                title: 'Delete Account',
-                message: 'Are you sure you want to delete your account?',
-                callBackTwo: () async {
-                  Go(context).pop();
-                  DecisionHandler(
-                      context: context,
-                      title: 'Deleting Account',
-                      message: 'Your Account is been deleted',
-                      appDialogue2Type: AppDialogue2Type.loading);
-                  await Future.delayed(const Duration(seconds: 2));
-                  Go(context).pop();
-                  RedirectHandler(
-                      context: context,
-                      title: 'Account deleted successfully',
-                      message:
-                          'Please wait...\nYou will be directed to the login screen.',
-                      tag: Tag.SUCCESS);
-                  await Future.delayed(const Duration(seconds: 2));
-                  Go(context).pop();
-                  Go(context, routeName: LoginView.routeName)
-                      .toAndReplaceAllNamedRoute();
-                },
-                callBackTextOne: 'cancel',
-                callBackTextTwo: 'proceed',
-                appDialogue2Type: AppDialogue2Type.two);
+            BaseHandler(
+              context: context,
+              tag: Tag.SERVICE_ACTION,
+              title: 'Delete Account',
+              message: 'Are you sure you want to delete your account?',
+              callBackTwo: () async {
+                Go(context).pop();
+                BaseHandler(
+                  tag: Tag.LOADING,
+                  context: context,
+                  title: 'Deleting Account',
+                  message: 'Your Account is been deleted',
+                );
+                await Future.delayed(const Duration(seconds: 2));
+                Go(context).pop();
+
+                await Future.delayed(const Duration(seconds: 2));
+                Go(context).pop();
+                Go(context, routeName: LoginView.routeName)
+                    .toAndReplaceAllNamedRoute();
+              },
+              callBackTextOne: 'cancel',
+              callBackTextTwo: 'proceed',
+            );
           },
         )
       ];

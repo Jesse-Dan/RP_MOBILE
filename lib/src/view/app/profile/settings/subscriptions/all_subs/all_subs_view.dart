@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/components/app_simple_app_bar.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
@@ -58,15 +60,15 @@ class _AllSubsViewState extends State<AllSubsView> {
                 SizedBox(
                   height: 339,
                   child: ListView.builder(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimentions.k16),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: AppDim.k16),
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,
                       shrinkWrap: true,
                       itemBuilder: (context, args) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: AppDimentions.k12),
+                              horizontal: AppDim.k12),
                           child: SubCard(
                               primaryColor: getPackageColor(
                                   SubType.values.elementAt(index).name)[0],
@@ -91,6 +93,8 @@ String getDuration(String packageName) {
       return '24-hours';
     case 'Essential':
       return '3-days';
+    case 'Flex':
+      return '7-days';
     case 'Pro':
       return '7-days';
     case 'Premium':
@@ -117,6 +121,8 @@ List<Color> getPackageColor(String packageName) {
       return [AppColors.kgrayColor100, AppColors.kgrayColor700];
     case 'Essential':
       return [AppColors.kprimaryColor300, AppColors.kprimaryColor700];
+    case 'Flex':
+      return [AppColors('#D7C3B1'), AppColors('#826F5E')];
     case 'Pro':
       return [AppColors('#D7C3B1'), AppColors('#826F5E')];
     case 'Premium':

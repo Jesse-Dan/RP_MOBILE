@@ -34,10 +34,9 @@ class _ReportedUsersViewState extends State<ReportedUsersView> {
             itemCount: 4,
             itemBuilder: (context, i) {
               return Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: AppDimentions.k16 / 2),
+                padding: const EdgeInsets.symmetric(vertical: AppDim.k16 / 2),
                 child: ListTile(
-                  contentPadding: const EdgeInsets.all(AppDimentions.k12),
+                  contentPadding: const EdgeInsets.all(AppDim.k12),
                   shape: RoundedRectangleBorder(
                     side: const BorderSide(
                       width: 1,

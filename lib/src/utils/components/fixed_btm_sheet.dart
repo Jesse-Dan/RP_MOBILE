@@ -8,17 +8,17 @@ class FixedBTMSheet {
   static Widget buildFixedSheet(
           {
           /// padding values
-          double left = AppDimentions.k16,
-          double right = AppDimentions.k16,
-          double top = AppDimentions.k0,
-          double bottom = AppDimentions.k0,
+          double left = AppDim.k16,
+          double right = AppDim.k16,
+          double top = AppDim.k0,
+          double bottom = AppDim.k0,
           EdgeInsetsGeometry? padding,
 
           /// margin values
-          double leftmargin = AppDimentions.k0,
-          double rightmargin = AppDimentions.k0,
-          double topmargin = AppDimentions.k0,
-          double bottommargin = AppDimentions.k0,
+          double leftmargin = AppDim.k0,
+          double rightmargin = AppDim.k0,
+          double topmargin = AppDim.k0,
+          double bottommargin = AppDim.k0,
           EdgeInsetsGeometry? margin,
 
           /// other values

@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable, deprecated_member_use
 
-import 'package:flutter/material.dart';
-import 'package:pin_code_text_field/pin_code_text_field.dart';
 import 'package:recenth_posts/src/utils/components/dropdown_button.dart';
 import 'package:recenth_posts/src/utils/enums/enums.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:pin_code_text_field/pin_code_text_field.dart';
 
 import '../style/app_dimentions.dart';
 
@@ -14,6 +14,7 @@ class AppTextField extends StatefulWidget {
   final bool obscureText;
   final bool isEnabled;
   final void Function(String)? onChanged;
+  final void Function(String)? onCompleted;
   final TextFieldType textFieldType;
   final String? labelText;
   final TextInputType? keyboardType;
@@ -23,25 +24,28 @@ class AppTextField extends StatefulWidget {
   final List<String> items;
   final Widget? prefix;
   final bool readOnly;
+  final double? height;
   String? value;
-  AppTextField({
-    Key? key,
-    required this.controller,
-    this.hintText = 'Enter Text',
-    this.obscureText = false,
-    this.isEnabled = true,
-    this.onChanged,
-    this.textFieldType = TextFieldType.TEXT,
-    this.labelText = '',
-    this.keyboardType,
-    this.onSufficIconClicked,
-    this.validator,
-    this.onTap,
-    this.items = const [],
-    this.value,
-    this.prefix,
-    this.readOnly = false,
-  }) : super(key: key);
+  AppTextField(
+      {Key? key,
+      required this.controller,
+      this.hintText = 'Enter Text',
+      this.obscureText = false,
+      this.isEnabled = true,
+      this.onChanged,
+      this.textFieldType = TextFieldType.TEXT,
+      this.labelText,
+      this.keyboardType,
+      this.onSufficIconClicked,
+      this.validator,
+      this.onTap,
+      this.items = const [],
+      this.value,
+      this.prefix,
+      this.readOnly = false,
+      this.onCompleted,
+      this.height})
+      : super(key: key);
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -57,17 +61,22 @@ class _AppTextFieldState<T> extends State<AppTextField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: AppDimentions.k12),
-          SizedBox(
-            width: 288,
-            child: Text(
-              widget.labelText ?? '',
-              style: myTextFieldLabelStyle(context),
+          const SizedBox(height: AppDim.k12),
+          Visibility(
+            visible: widget.labelText != null,
+            child: SizedBox(
+              width: 288,
+              child: Text(
+                widget.labelText ?? '',
+                style: myTextFieldLabelStyle(context),
+              ),
             ),
           ),
-          const SizedBox(height: AppDimentions.k12),
+          Visibility(
+              visible: widget.labelText != null,
+              child: const SizedBox(height: AppDim.k12)),
           SizedBox(
-            height: 56,
+            height: widget.height ?? 56,
             child: widget.textFieldType == TextFieldType.PASSWORD
                 ? SizedBox(
                     // height: 60,
@@ -80,8 +89,6 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                         labelStyle: myTextFieldHintStyle(context),
                         labelText: widget.hintText,
                         hintText: widget.hintText,
-                        contentPadding:
-                            const EdgeInsets.all(AppDimentions.k20 + 3),
                         floatingLabelBehavior: FloatingLabelBehavior.never,
                         suffixIcon: IconButton(
                           onPressed: widget.onSufficIconClicked,
@@ -106,10 +113,8 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                             borderSide:
                                 BorderSide(color: AppColors.kgrayColor200),
                             borderRadius: BorderRadius.circular(4)),
-                        errorBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: AppColors.kgrayColor200),
-                            borderRadius: BorderRadius.circular(4)),
+                        errorBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
                       ),
                       obscureText: widget.obscureText,
                       enabled: widget.isEnabled,
@@ -119,7 +124,7 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                   )
                 : widget.textFieldType == TextFieldType.DROPDOWN
                     ? Container(
-                        height: 70,
+                        height: widget.height ?? 70,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: AppColors.kbrandWhite,
@@ -145,7 +150,7 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                               ))),
                               SizedBox(
                                 width: 100,
-                                height: 60,
+                                height: widget.height ?? 60,
                                 child: appDropdownButton(
                                   controller: widget.controller,
                                   items: widget.items,
@@ -170,68 +175,69 @@ class _AppTextFieldState<T> extends State<AppTextField> {
                             autofocus: true,
                             controller: widget.controller,
                             hideCharacter: false,
-                            maxLength: 5,
+                            maxLength: 4,
                             hasError: false,
                             maskCharacter: "😎",
-                            onTextChanged: (text) {},
-                            onDone: (text) {},
+                            onTextChanged: widget.onChanged,
+                            onDone: widget.onCompleted,
                             pinBoxWidth: 56,
                             pinBoxHeight: 70,
                             hasUnderline: false,
                             wrapAlignment: WrapAlignment.spaceBetween,
                             pinBoxDecoration: myPinBoxDecoration,
                             pinTextStyle: TextStyle(
-                              color: AppColors.kwineColor.withOpacity(.7),
+                              color: AppColors.kprimaryColor700.withOpacity(.7),
                               fontSize: 24,
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w500,
                             ),
                             pinTextAnimatedSwitcherTransition:
                                 ProvidedPinBoxTextAnimation.scalingTransition,
-                            pinBoxColor: AppColors.kwineColor.withOpacity(0.09),
+                            pinBoxColor:
+                                AppColors.kprimaryColor700.withOpacity(0.09),
                             pinTextAnimatedSwitcherDuration:
                                 const Duration(milliseconds: 400),
                             keyboardType: TextInputType.number,
                           )
                         : TextFormField(
-                          onTap: widget.onTap,
-                          readOnly: widget.readOnly,
-                          keyboardType: widget.keyboardType,
-                          controller: widget.controller,
-                          validator: widget.validator,
-                          style: myTextFieldStyle(context),
-                          decoration: InputDecoration(
-                            labelStyle: myTextFieldHintStyle(context),
-                            labelText: widget.hintText,
-                            hintText: widget.hintText,
-                            prefixIcon: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: AppDimentions.k16,
-                                    bottom: AppDimentions.k16,
-                                    left: 10),
-                                child: widget.prefix),
-                            contentPadding:
-                                const EdgeInsets.all(AppDimentions.k20 + 3),
-                            floatingLabelBehavior:
-                                FloatingLabelBehavior.never,
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppColors.kgrayColor200),
-                                borderRadius: BorderRadius.circular(4)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppColors.kgrayColor200),
-                                borderRadius: BorderRadius.circular(4)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppColors.kgrayColor200),
-                                borderRadius: BorderRadius.circular(4)),
+                            onTap: widget.onTap,
+                            readOnly: widget.readOnly,
+                            keyboardType: widget.keyboardType,
+                            controller: widget.controller,
+                            validator: widget.validator,
+                            style: myTextFieldStyle(context),
+                            decoration: InputDecoration(
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.never,
+                              labelStyle: myTextFieldHintStyle(context),
+                              labelText: widget.hintText,
+                              hintText: widget.hintText,
+                              prefixIcon: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: AppDim.k16,
+                                      bottom: AppDim.k16,
+                                      left: 10),
+                                  child: widget.prefix),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppColors.kgrayColor200),
+                                  borderRadius: BorderRadius.circular(4)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppColors.kgrayColor200),
+                                  borderRadius: BorderRadius.circular(4)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: AppColors.kgrayColor200),
+                                  borderRadius: BorderRadius.circular(4)),
+                              errorBorder: InputBorder.none,
+                              focusedErrorBorder: InputBorder.none,
+                            ),
+                            obscureText: widget.obscureText,
+                            enabled: widget.isEnabled,
+                            onChanged: widget.onChanged,
+                            cursorColor: AppColors.kwineColor,
                           ),
-                          obscureText: widget.obscureText,
-                          enabled: widget.isEnabled,
-                          onChanged: widget.onChanged,
-                          cursorColor: AppColors.kwineColor,
-                        ),
           )
         ],
       ),
@@ -253,7 +259,7 @@ class _AppTextFieldState<T> extends State<AppTextField> {
 }
 
 TextStyle myTextFieldStyle(context, {color}) {
-  return Theme.of(context).textTheme.subtitle1!.copyWith(
+  return Theme.of(context).textTheme.titleSmall!.copyWith(
         color: AppColors.kgrayColor900,
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -261,7 +267,7 @@ TextStyle myTextFieldStyle(context, {color}) {
 }
 
 TextStyle myTextFieldHintStyle(context, {color}) {
-  return Theme.of(context).textTheme.subtitle1!.copyWith(
+  return Theme.of(context).textTheme.titleSmall!.copyWith(
         color: AppColors.kgrayColor300,
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -269,7 +275,7 @@ TextStyle myTextFieldHintStyle(context, {color}) {
 }
 
 TextStyle myTextFieldLabelStyle(context, {color}) {
-  return Theme.of(context).textTheme.bodyText1!.copyWith(
+  return Theme.of(context).textTheme.titleSmall!.copyWith(
         fontFamily: 'DM Sans',
         color: AppColors.kgrayColor800,
         fontSize: 14,

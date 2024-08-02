@@ -1,6 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
 class GlobalConstants {
+  /// USER CONSTANTS
+  static const USER = 'USERID';
+
   static const k20 = 20.0;
   static const k16 = 16.0;
   static const k12 = 12.0;
@@ -11,7 +14,7 @@ class GlobalConstants {
   static const String BEARER_TOKEN = 'BEARER-TOKEN';
 
   /// ENDPOINTS
-  static const String BASE_URL = 'http://192.168.0.3:8000/api/v1/';
+
   static const String POSTS_ENDPOINT = 'app/posts';
 
   /// MAIN PREFIXES

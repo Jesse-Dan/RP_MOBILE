@@ -1,27 +1,31 @@
 import '../../utils/enums/enums.dart';
-import '../models/app/post/payload/comment_payload.dart';
-import '../models/app/post/payload/react_payload.dart';
-import '../models/app/post/payload/view_payload.dart';
+import '../../view/app/posts/components/comment/model/comment_payload.dart';
+import '../../view/app/posts/components/star/model/star_payload.dart';
+import '../../view/app/posts/components/view/model/view_payload.dart';
+
 
 mixin AppInterface {
-  Future<(Map<String, dynamic>?, ResponseType)> getAllPosts(
+  Future<(Map<String, dynamic>?, ResponseType, String)> getAllPosts(
       {Map<String, dynamic>? queryParams});
 
-  Future<(Map<String, dynamic>?, ResponseType)> comment(
+  Future<(Map<String, dynamic>?, ResponseType, String)> comment(
       CommentPayload commentPayLoad);
 
-  Future<(Map<String, dynamic>?, ResponseType)> react(
-      ReactPayload reactPayload);
+  Future<(Map<String, dynamic>?, ResponseType, String)> star(
+      StarPayload reactPayload);
 
-  Future<(Map<String, dynamic>?, ResponseType)> view(ViewPayload viewPayload);
+  Future<(Map<String, dynamic>?, ResponseType, String)> view(
+      ViewPayload viewPayload);
 
-  Future<(Map<String, dynamic>?, ResponseType)> getCountries();
+  Future<(Map<String, dynamic>?, ResponseType, String)> getViews({int? id});
 
-  Future<(Map<String, dynamic>?, ResponseType)> getViews({int? id});
-
-  Future<(Map<String, dynamic>?, ResponseType)> getComment(
+  Future<(Map<String, dynamic>?, ResponseType, String)> getComment(
       {int? id, String? type});
 
-  Future<(Map<String, dynamic>?, ResponseType)> getReaction(
+  Future<(Map<String, dynamic>?, ResponseType, String)> getReaction(
       {int? id, String? type});
+
+  Future<(Map<String, dynamic>?, ResponseType, String)> getSchools();
+  Future<(Map<String, dynamic>?, ResponseType, String)> getFaculties();
+  Future<(Map<String, dynamic>?, ResponseType, String)> getDepartments();
 }

@@ -124,7 +124,7 @@ class _ChatsViewState extends State<ChatsView> {
                             margin: const EdgeInsets.only(top: 90.0),
                             child: ListView.separated(
                               padding: EdgeInsets.symmetric(
-                                horizontal: AppDimentions.k12,
+                                horizontal: AppDim.k12,
                               ),
                               shrinkWrap: true,
                               itemCount: 30,
@@ -132,7 +132,7 @@ class _ChatsViewState extends State<ChatsView> {
                               itemBuilder: (ctx, index) {
                                 return Padding(
                                   padding: EdgeInsets.symmetric(
-                                      vertical: AppDimentions.k12),
+                                      vertical: AppDim.k12),
                                   child: ListTile(
                                     tileColor: AppColors.kbrandWhite,
                                     leading: ProfileIcon(
@@ -291,7 +291,7 @@ class ChatListTile extends StatelessWidget {
               width: 24,
               height: 24,
               decoration: ShapeDecoration(
-                color: Color(0xFFD75B6B),
+                color: AppColors.kprimaryColor600,
                 shape: OvalBorder(),
               ),
               child: Text(

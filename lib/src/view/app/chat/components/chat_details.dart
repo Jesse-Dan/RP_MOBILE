@@ -147,8 +147,8 @@ class _ChatDetailsViewState extends State<ChatDetailsView> {
                     alignment: Alignment.center,
                     width: 60,
                     height: 27,
-                    margin: EdgeInsets.only(
-                        bottom: AppDimentions.k20, top: AppDimentions.k20),
+                    margin:
+                        EdgeInsets.only(bottom: AppDim.k20, top: AppDim.k20),
                     decoration: BoxDecoration(
                         color: Color(0xFFF7F7F7),
                         borderRadius: BorderRadius.circular(4)),
@@ -195,7 +195,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
       margin: EdgeInsets.symmetric(vertical: 25),
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(
-        horizontal: AppDimentions.k16,
+        horizontal: AppDim.k16,
       ),
       decoration: BoxDecoration(
           border: Border.symmetric(
@@ -226,7 +226,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
             ),
           ),
           const SizedBox(
-            width: AppDimentions.k16,
+            width: AppDim.k16,
           ),
           GestureDetector(
             onTap: widget.textEditingController.text.isEmpty
@@ -301,7 +301,7 @@ class MessageTile extends StatelessWidget {
               ? Alignment.centerRight
               : Alignment.centerLeft,
           child: Container(
-            padding: EdgeInsets.all(AppDimentions.k16),
+            padding: EdgeInsets.all(AppDim.k16),
             decoration: ShapeDecoration(
               color: chat.sender.id == 1
                   ? AppColors.kprimaryColor700
@@ -333,7 +333,7 @@ class MessageTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: AppDimentions.k16 / 2),
+                const SizedBox(height: AppDim.k16 / 2),
                 chat.sender.id == 1
                     ? Row(
                         mainAxisAlignment: chat.sender.id == 1

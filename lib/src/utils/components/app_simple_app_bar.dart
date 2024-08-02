@@ -17,7 +17,7 @@ AppBar AppSimpleAppBar(BuildContext context, {title, actions, void Function()? o
     title: Text(
       title,
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.headline2!.copyWith(
+      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),

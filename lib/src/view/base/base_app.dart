@@ -1,23 +1,24 @@
 // ignore_for_file: unnecessary_null_comparison, must_be_immutable, deprecated_member_use
+import 'package:recenth_posts/src/logic/services/location_service/local_storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/app/chat/chats_view.dart';
 import 'package:recenth_posts/src/view/app/notification/nootification_view.dart';
-import 'package:recenth_posts/src/view/app/posts/post_view.dart';
 import 'package:recenth_posts/src/view/app/search/search.dart';
 import 'package:recenth_posts/src/view/base/base_scaffold.dart';
 
-import '../../logic/models/app/post/res/get_all_post_response.dart';
 import '../../utils/components/app_nav_bar_icoons.dart';
+import '../app/posts/components/post/model/post_model.dart';
+import '../app/posts/post.dart';
 import '../app/profile/profile_view.dart';
 
 class BaseApp extends StatefulWidget {
   static const String routeName = 'app.app';
-  final int? currentIndex;
+  final int currentIndex;
   final Post? newPost;
   BaseApp({super.key, required this.currentIndex, this.newPost}) {
-    _currentIndex = currentIndex ?? 0;
+    _currentIndex = currentIndex;
   }
   late int _currentIndex;
 
@@ -93,12 +94,16 @@ class _BaseAppState extends State<BaseApp> {
                       )
                     ],
                   )
-                : SvgPicture.asset('assets/icons/${e.img}'),
+                : SvgPicture.asset(
+                    'assets/icons/${e.img}',
+                    color: AppColors.kprimaryColor700,
+                  ),
             activeIcon: e.addbadge
                 ? Stack(
                     children: [
                       SvgPicture.asset(
                         'assets/icons/${e.selectedImg}',
+                        color: AppColors.kprimaryColor700,
                       ),
                       Positioned(
                         top: 1.2,
@@ -116,6 +121,7 @@ class _BaseAppState extends State<BaseApp> {
                   )
                 : SvgPicture.asset(
                     'assets/icons/${e.selectedImg}',
+                    color: AppColors.kprimaryColor700,
                   ),
             label: e.label,
           ),
@@ -127,22 +133,26 @@ class _BaseAppState extends State<BaseApp> {
         bottomNavigationBar: BottomNavigationBar(
             enableFeedback: false,
             elevation: 2,
-            selectedLabelStyle: Theme.of(context).textTheme.headline1!.copyWith(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: AppColors.kprimaryColor700),
+            selectedLabelStyle: Theme.of(context)
+                .textTheme
+                .headlineMedium!
+                .copyWith(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.kprimaryColor700),
             unselectedLabelStyle: Theme.of(context)
                 .textTheme
-                .headline1!
+                .headlineMedium!
                 .copyWith(fontSize: 12, fontWeight: FontWeight.w500),
             currentIndex: widget._currentIndex,
             selectedItemColor: AppColors.kprimaryColor700,
             unselectedItemColor: const Color(0xff757575),
             type: _bottomNavType,
-            onTap: (value) {
+            onTap: (value) async {
               setState(() {
                 widget._currentIndex = value;
               });
+              await LocalStorageService.setInt('currentIndex', value);
             },
             items: navBarItems),
         backgroundColor: AppColors.kbrandWhite,

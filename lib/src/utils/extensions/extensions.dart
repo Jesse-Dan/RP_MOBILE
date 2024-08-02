@@ -4,12 +4,12 @@ class AppExtensions {}
 
 extension TruncateAndAddSeeMore on String {
   String truncateAndAddSeeMore(
-      {int maxLength = 20, String seeMoreText = '...see more'}) {
+      {int maxLength = 20, String trancatedText = '...see more'}) {
     if (length <= maxLength) return this;
 
     final truncatedString = substring(0, maxLength);
 
-    return "$truncatedString$seeMoreText";
+    return "$truncatedString$trancatedText";
   }
 }
 

@@ -1,4 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer' as developer;
+
+import 'package:flutter/foundation.dart';
 
 import '../../../utils/enums/enums.dart';
 
@@ -50,16 +53,34 @@ class Logger {
   }
 
   static void log({
-    required Tag tag,
+    Tag tag = Tag.DEBUG,
     required String message,
     dynamic error,
     StackTrace? stackTrace,
+    bool usePrint = false,
   }) {
+    if (usePrint) {
+      if (kDebugMode) {
+        print(
+          Logger(
+            tag: tag,
+            message: message,
+            error: error,
+            stackTrace: stackTrace,
+          ).toString(),
+        );
+      }
+    }
     Logger(
       tag: tag,
       message: message,
       error: error,
       stackTrace: stackTrace,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Logger(tag: $tag, message: $message, error: $error, stackTrace: $stackTrace)';
   }
 }

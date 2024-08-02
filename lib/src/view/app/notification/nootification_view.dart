@@ -1,11 +1,11 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, must_be_immutable
 
-import 'package:flutter/material.dart';
 import 'package:recenth_posts/src/utils/components/app_divider.dart';
 import 'package:recenth_posts/src/utils/components/app_notifier.dart';
 import 'package:recenth_posts/src/utils/components/profile_icon.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
+import 'package:flutter/material.dart';
 import 'package:sticky_grouped_list/sticky_grouped_list.dart';
 
 import '../../../logic/services/date_service/date_time_service.dart';
@@ -63,13 +63,14 @@ class _NotificationViewState extends State<NotificationView> {
         backgroundColor: AppColors.kbrandWhite,
         addAppBar: true,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           toolbarHeight: 80,
           backgroundColor: AppColors.kbrandWhite,
           title: Text(
             'Notification',
             textAlign: TextAlign.center,
             // ignore: deprecated_member_use
-            style: Theme.of(context).textTheme.headline2!.copyWith(
+            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                 ),
@@ -135,7 +136,7 @@ class _NotificationViewState extends State<NotificationView> {
                   groupSeparatorBuilder: (Notification element) => Container(
                       color: AppColors.kbrandWhite,
                       width: double.infinity,
-                      margin: EdgeInsets.only(bottom: AppDimentions.k16),
+                      margin: EdgeInsets.only(bottom: AppDim.k16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,7 +151,7 @@ class _NotificationViewState extends State<NotificationView> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          const SizedBox(width: AppDimentions.k16),
+                          const SizedBox(width: AppDim.k16),
                           AppDivider.build(
                               width: MediaQuery.of(context).size.width / 1.4,
                               height: 1.5)
@@ -214,7 +215,7 @@ class NotificationTile extends StatelessWidget {
                   height: 26,
                   child: Row(children: [
                     ActionBtn(imgUrl: 'user.svg'),
-                    const SizedBox(width: AppDimentions.k16),
+                    const SizedBox(width: AppDim.k16),
                     Text.rich(
                       TextSpan(
                         children: [
@@ -241,7 +242,7 @@ class NotificationTile extends StatelessWidget {
                     ),
                   ]),
                 ),
-                const SizedBox(height: AppDimentions.k16),
+                const SizedBox(height: AppDim.k16),
                 ListTile(
                     tileColor: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -284,11 +285,16 @@ class NotificationTile extends StatelessWidget {
                                 '${notification.user.firstName} added to Favorite');
                       },
                       child: Container(
-                        width: 130,
-                        height: 40,
                         alignment: Alignment.center,
+                        constraints: BoxConstraints.tight(Size(
+                          130,
+                          40,
+                        )),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: AppDim.k12 - 4,
+                            vertical: AppDim.k12 - 4),
                         decoration: ShapeDecoration(
-                          color: Color(0xFFD75B6B),
+                          color: AppColors.kprimaryColor700,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -301,6 +307,7 @@ class NotificationTile extends StatelessWidget {
                             fontFamily: 'DM Sans',
                             fontWeight: FontWeight.w700,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     )),

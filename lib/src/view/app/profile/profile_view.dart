@@ -2,20 +2,22 @@
 
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:navigation_system/go/go.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:recenth_posts/src/logic/models/app/user_model.dart';
 import 'package:recenth_posts/src/utils/components/action_btn.dart';
 import 'package:recenth_posts/src/utils/components/app_divider.dart';
 import 'package:recenth_posts/src/utils/components/profile_icon.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
 import 'package:recenth_posts/src/view/app/profile/settings/settings_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:navigation_system/go/go.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
-import '../../../logic/models/app/post/data.dart';
-import '../../../utils/enums/enums.dart';
 import '../../base/base_scaffold.dart';
-import '../posts/components/all_posts/all_post_widget.dart';
+import '../posts/components/post/bloc/get_post_bloc_bloc.dart';
+import '../posts/components/post/bloc/get_post_bloc_state.dart';
+import '../posts/components/post/post_widget.dart';
 
 class ProfileView extends StatefulWidget {
   static const String routeName = '/profile.view';
@@ -29,16 +31,16 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  @override
-  void initState() {
+  var user = User.getPresentUser();
+
+  _ProfileViewState() {
     if (!verified || verified) {
       Timer(const Duration(seconds: 4), () {
         setState(() {
           verified = false;
         });
       });
-    } else {}
-    super.initState();
+    }
   }
 
   bool verified = false;
@@ -68,7 +70,7 @@ class _ProfileViewState extends State<ProfileView> {
               ),
               (!verified) ? ProfileAppBar() : const SizedBox.shrink(),
               const SizedBox(height: 24),
-              const ProfileHead(),
+              ProfileHead(user: user),
               const SizedBox(height: 24),
               const Text(
                 'Passionate about technology, enjoys sharing insights about the digital world.',
@@ -80,18 +82,22 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
               ),
               const SizedBox(height: 24),
-              const CountAndRating(),
-              ListView.builder(
-                  itemCount: PostData.generate().length,
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (item, i) {
-                    return AllPostWidget(
-                      postCardType: PostCardType.fav,
-                      post: PostData.generate()[i],
-                      i: i,
-                    );
-                  }),
+              // const CountAndRating(),
+              BlocBuilder<GetPostBlocBloc, GetPostBlocState>(
+                builder: (context, state) {
+                  return ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (item, i) {
+                        return PostWidget(
+                          post: (state is GetPostSucessfulState)
+                              ? state.response.data![i]
+                              : null,
+                          i: i,
+                        );
+                      });
+                },
+              ),
             ],
           ),
         ));
@@ -99,6 +105,7 @@ class _ProfileViewState extends State<ProfileView> {
 
   AppBar ProfileAppBar() {
     return AppBar(
+      automaticallyImplyLeading: true,
       leadingWidth: 150,
       leading: const Padding(
         padding: EdgeInsets.only(left: 16.0),
@@ -117,14 +124,14 @@ class _ProfileViewState extends State<ProfileView> {
         ),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: ActionBtn(
-            addbadge: true,
-            imgUrl: 'notification-bing.svg',
-            onPressed: () {},
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(right: 16.0),
+        //   child: ActionBtn(
+        //     addbadge: true,
+        //     imgUrl: 'notification-bing.svg',
+        //     onPressed: () {},
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
           child: ActionBtn(
@@ -298,13 +305,15 @@ class CountBuild extends StatelessWidget {
 }
 
 class ProfileHead extends StatelessWidget {
+  final User user;
   const ProfileHead({
     super.key,
+    required this.user,
   });
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -321,7 +330,7 @@ class ProfileHead extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Marcel Ramos',
+              user.name ?? '${user.firstName} ${user.lastName}',
               style: TextStyle(
                 color: Color(0xFF0B0B0B),
                 fontSize: 20,
@@ -332,7 +341,7 @@ class ProfileHead extends StatelessWidget {
             Opacity(
               opacity: 0.80,
               child: Text(
-                '@MR12345678',
+                user.id.toString(),
                 style: TextStyle(
                   color: Color(0xFF464646),
                   fontSize: 16,
@@ -365,7 +374,7 @@ class VerifiedStatusBar extends StatelessWidget {
         children: [
           Container(
             height: 100,
-            padding: const EdgeInsets.all(AppDimentions.k12),
+            padding: const EdgeInsets.all(AppDim.k12),
             decoration: ShapeDecoration(
               color: AppColors.kprimaryColor700,
               shape: RoundedRectangleBorder(

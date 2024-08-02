@@ -23,7 +23,7 @@ class LoadingHandler {
       message: message,
       tag: Tag.LOADING,
       stackTrace: stackTrace,
-      callBack: callBack,
+      callBackOne: callBack,
       btnText: btnText,
       barrierDismissible: barrierDismissible,
     );

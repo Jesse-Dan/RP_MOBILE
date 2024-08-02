@@ -44,21 +44,21 @@ class _ButtomSectionState extends State<ButtomSection> {
         color: AppColors.kbrandWhite,
         width: double.infinity,
         padding: EdgeInsets.all(
-            AppDimentions.buildDimention(20, operation: "+", dimention: 4)),
+            AppDim.buildDimention(20, operation: "+", dimention: 4)),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Text(OnboardingViewModel.pages[widget.currentIndex].title,
-                  style: Theme.of(context).textTheme.headline1),
-              const SizedBox(height: AppDimentions.k16),
+                  style: Theme.of(context).textTheme.headlineMedium),
+              const SizedBox(height: AppDim.k16),
               Text(
                 OnboardingViewModel.pages[widget.currentIndex].subtitle,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle1!
+                    .bodyLarge!
                     .copyWith(color: AppColors.kbrandsubtitleGrey),
               ),
-              const SizedBox(height: AppDimentions.k20 + 10),
+              const SizedBox(height: AppDim.k20 + 10),
               Align(
                 alignment: Alignment.centerLeft,
                 child: SmoothPageIndicator(
@@ -74,9 +74,9 @@ class _ButtomSectionState extends State<ButtomSection> {
                   onDotClicked: widget.onDotClicked,
                 ),
               ),
-              const SizedBox(height: AppDimentions.k20),
+              const SizedBox(height: AppDim.k20),
               AppDivider.build(),
-              const SizedBox(height: AppDimentions.k12),
+              const SizedBox(height: AppDim.k12),
               OnboardingAppBtns(
                 onSkipTap: widget.onSkipTap,
                 onContinueTap: widget.onContinueTap,

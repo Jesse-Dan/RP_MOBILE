@@ -49,7 +49,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 100.h),
-                  SizedBox(height: (AppDimentions.k20 + 10).h),
+                  SizedBox(height: (AppDim.k20 + 10).h),
                   Align(
                     alignment: Alignment.topCenter,
                     child: Text(
@@ -62,7 +62,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                       ),
                     ),
                   ),
-                  SizedBox(height: AppDimentions.k16.h),
+                  SizedBox(height: AppDim.k16.h),
                   Align(
                     alignment: Alignment.topCenter,
                     child: Text.rich(
@@ -89,7 +89,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                       ),
                     ),
                   ),
-                  SizedBox(height: (AppDimentions.k20 + 10).h),
+                  SizedBox(height: (AppDim.k20 + 10).h),
                   AppTextField(
                     controller: _otpController,
                     labelText: 'One time Password',
@@ -104,7 +104,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                     },
                     // validator: (_) => validateTextField(_ ?? ''),
                   ),
-                  SizedBox(height: (AppDimentions.k20 + 10).h),
+                  SizedBox(height: (AppDim.k20 + 10).h),
                   AppButton(
                     btnText: 'Continue',
                     buttonType: ButtonType.LONG_BTN,
@@ -119,7 +119,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                       }
                     },
                   ),
-                  const SizedBox(height: (AppDimentions.k12 - 2) * 2),
+                  const SizedBox(height: (AppDim.k12 - 2) * 2),
                 ],
               ),
             ),

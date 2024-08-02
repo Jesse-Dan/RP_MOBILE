@@ -51,7 +51,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: AppDimentions.k20 - 20),
+                    padding: const EdgeInsets.only(top: AppDim.k20 - 20),
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height,
                       child: SizedBox(

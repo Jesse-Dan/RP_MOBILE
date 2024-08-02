@@ -40,7 +40,7 @@ class _PrivacyViewState extends State<PrivacyView> {
             Container(
                 color: AppColors.kbrandWhite,
                 width: double.infinity,
-                margin: const EdgeInsets.only(bottom: AppDimentions.k16),
+                margin: const EdgeInsets.only(bottom: AppDim.k16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,7 +55,7 @@ class _PrivacyViewState extends State<PrivacyView> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    const SizedBox(width: AppDimentions.k16),
+                    const SizedBox(width: AppDim.k16),
                     Expanded(child: AppDivider.build(height: 1.5))
                   ],
                 )),

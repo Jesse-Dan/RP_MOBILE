@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 enum Tag {
+  DEBUG,
   ERROR,
   SUCCESS,
   LOADING,
@@ -40,20 +41,20 @@ enum AppNotifierType { SUCCESS, ERROR }
 
 enum AppNotifierFormat { NEW_POST, USER_OPERATION, FAVORITE }
 
-enum PostCardType { fav, defaultt }
+enum PostCardType { favourite, all}
 
 enum CommentType { Comment, Reply }
 
 enum SubType {
   Basic,
   Essential,
-  Pro,
-  Premium,
-  Gold,
-  Platinum,
-  Ultimate,
-  Diamond,
-  Executive,
+  Flex,
+  // Premium,
+  // Gold,
+  // Platinum,
+  // Ultimate,
+  // Diamond,
+  // Executive,
 }
 
 enum NotificationType { FAVORITE, SECURITY, DEFAULT, ACTION }
@@ -66,4 +67,4 @@ enum PredefinedDateFormat {
   time24HourFormat
 }
 
-enum AppDialogue2Type { one, two, loading }
+enum HandlerBtnCount { one, two ,zero}

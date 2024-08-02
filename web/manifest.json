@@ -1,6 +1,6 @@
 {
-    "name": "recenth_posts",
-    "short_name": "recenth_posts",
+    "name": "rp_mobile",
+    "short_name": "rp_mobile",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

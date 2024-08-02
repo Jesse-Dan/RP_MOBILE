@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/logic/services/validator/validator.dart';
+import 'package:recenth_posts/src/logic/services/mixins/validator.dart';
 import 'package:recenth_posts/src/utils/components/app_button.dart';
 import 'package:recenth_posts/src/utils/components/app_text_field.dart';
 import 'package:recenth_posts/src/view/auth/otp_view/otp_view.dart';
@@ -39,7 +39,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView>
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(height: 100.h),
-                SizedBox(height: (AppDimentions.k20 + 10).h),
+                SizedBox(height: (AppDim.k20 + 10).h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
@@ -52,7 +52,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView>
                     ),
                   ),
                 ),
-                SizedBox(height: AppDimentions.k16.h),
+                SizedBox(height: AppDim.k16.h),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text.rich(
@@ -79,12 +79,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView>
                     ),
                   ),
                 ),
-                SizedBox(height: ((AppDimentions.k20 + 4) * 3).h),
+                SizedBox(height: ((AppDim.k20 + 4) * 3).h),
                 AppTextField(
                     controller: _emailController,
                     labelText: 'Email I’D/ Mobile Number',
                     hintText: 'Enter email linked to your account'),
-                SizedBox(height: (AppDimentions.k20 + 4).h),
+                SizedBox(height: (AppDim.k20 + 4).h),
                 AppButton(
                   btnText: 'Continue',
                   buttonType: ButtonType.LONG_BTN,

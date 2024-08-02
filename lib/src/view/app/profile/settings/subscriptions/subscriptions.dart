@@ -1,21 +1,20 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously, avoid_print
 import 'dart:async';
 
+import 'package:recenth_posts/src/logic/services/handler/handlers/loading_handler.dart';
+import 'package:recenth_posts/src/utils/components/action_btn.dart';
+import 'package:recenth_posts/src/utils/components/app_button.dart';
+import 'package:recenth_posts/src/utils/enums/enums.dart';
+import 'package:recenth_posts/src/utils/style/app_colors.dart';
+import 'package:recenth_posts/src/view/app/profile/settings/subscriptions/all_subs/all_subs_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:navigation_system/go/go.dart';
 import 'package:navigation_system/go/go_service.dart';
-import 'package:recenth_posts/src/logic/services/handler/handlers/descion_handler.dart';
-import 'package:recenth_posts/src/logic/services/handler/handlers/redirect_handler.dart';
-import 'package:recenth_posts/src/utils/components/action_btn.dart';
-import 'package:recenth_posts/src/utils/components/app_button.dart';
-import 'package:recenth_posts/src/utils/components/app_dialogue.dart';
-import 'package:recenth_posts/src/utils/enums/enums.dart';
-import 'package:recenth_posts/src/utils/style/app_colors.dart';
-import 'package:recenth_posts/src/view/app/profile/settings/subscriptions/all_subs/all_subs_view.dart';
 
+import '../../../../../logic/services/handler/base_handler.dart';
 import '../../../../../utils/components/app_divider.dart';
 import '../../../../../utils/components/app_simple_app_bar.dart';
 import '../../../../../utils/components/web_view.dart';
@@ -35,7 +34,7 @@ class SubscritionsView extends StatefulWidget {
 
 class _SubscritionsViewState extends State<SubscritionsView> {
   ScrollController scrollController = ScrollController();
-  int currentSubIndex = 7;
+  int currentSubIndex = 2;
   @override
   Widget build(BuildContext context) => BaseScaffold(
         addAppBar: true,
@@ -48,7 +47,7 @@ class _SubscritionsViewState extends State<SubscritionsView> {
           Container(
               color: AppColors.kbrandWhite,
               width: double.infinity,
-              margin: const EdgeInsets.only(bottom: AppDimentions.k16),
+              margin: const EdgeInsets.only(bottom: AppDim.k16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,16 +62,16 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(width: AppDimentions.k16),
+                  const SizedBox(width: AppDim.k16),
                   Expanded(child: AppDivider.build(height: 1.5)),
                 ],
               )),
-          const SizedBox(height: AppDimentions.k16 + 4),
+          const SizedBox(height: AppDim.k16 + 4),
           const PaymentMethodWidget(),
-          const SizedBox(height: AppDimentions.k20 + 4),
-          const SizedBox(height: AppDimentions.k12),
+          const SizedBox(height: AppDim.k20 + 4),
+          const SizedBox(height: AppDim.k12),
           AppDivider.build(height: 1.5, color: AppColors.kwarningColor100),
-          const SizedBox(height: AppDimentions.k12 - 6),
+          const SizedBox(height: AppDim.k12 - 6),
           Text.rich(
             TextSpan(children: [
               TextSpan(
@@ -94,20 +93,20 @@ class _SubscritionsViewState extends State<SubscritionsView> {
               fontWeight: FontWeight.w400,
             ),
           ),
-          const SizedBox(height: AppDimentions.k12 - 6),
+          const SizedBox(height: AppDim.k12 - 6),
           AppDivider.build(height: 1.5, color: AppColors.kwarningColor100),
-          const SizedBox(height: AppDimentions.k20 + 4),
+          const SizedBox(height: AppDim.k20 + 4),
           AppButton(
             disabled: true,
             buttonType: ButtonType.LONG_BTN,
             flex: false,
             btnText: 'Change payment method',
           ),
-          const SizedBox(height: AppDimentions.k20 + 4),
+          const SizedBox(height: AppDim.k20 + 4),
           Container(
               color: AppColors.kbrandWhite,
               width: double.infinity,
-              margin: const EdgeInsets.only(bottom: AppDimentions.k16),
+              margin: const EdgeInsets.only(bottom: AppDim.k16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -122,11 +121,11 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(width: AppDimentions.k16),
+                  const SizedBox(width: AppDim.k16),
                   Expanded(child: AppDivider.build(height: 1.5)),
                 ],
               )),
-          const SizedBox(height: AppDimentions.k20 + 4),
+          const SizedBox(height: AppDim.k20 + 4),
           Row(
             children: [
               SubCard(
@@ -169,11 +168,11 @@ class _SubscritionsViewState extends State<SubscritionsView> {
               )
             ],
           ),
-          const SizedBox(height: AppDimentions.k20 + 4),
+          const SizedBox(height: AppDim.k20 + 4),
           Container(
             color: AppColors.kbrandWhite,
             width: double.infinity,
-            margin: const EdgeInsets.only(bottom: AppDimentions.k16),
+            margin: const EdgeInsets.only(bottom: AppDim.k16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -188,7 +187,7 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const SizedBox(width: AppDimentions.k16),
+                const SizedBox(width: AppDim.k16),
                 const Spacer(),
                 CupertinoSwitch(
                     activeColor: AppColors.kprimaryColor700,
@@ -197,7 +196,7 @@ class _SubscritionsViewState extends State<SubscritionsView> {
               ],
             ),
           ),
-          const SizedBox(height: AppDimentions.k12),
+          const SizedBox(height: AppDim.k12),
           Row(
             children: [
               AppButton(
@@ -205,10 +204,10 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                 flex: true,
                 btnText: 'Renew',
                 onTap: () {
-                  DecisionHandler(
+                  BaseHandler(
                       context: context,
                       tag: Tag.SERVICE_ACTION,
-                      appDialogue2Type: AppDialogue2Type.two,
+                      handlerBtnCount: HandlerBtnCount.two,
                       title: 'Renew Plan',
                       message:
                           'Are you sure you want to renew your subscription?',
@@ -217,22 +216,16 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                       barrierDismissible: true,
                       callBackTwo: () {
                         Go(context).pop();
-                        DecisionHandler(
+                        BaseHandler(
                           context: context,
-                          tag: Tag.SERVICE_ACTION,
-                          appDialogue2Type: AppDialogue2Type.loading,
+                          tag: Tag.LOADING,
                           title: 'Renewing Subscription',
                           message: 'Please wait...',
                         );
                         Timer(const Duration(seconds: 2), () {
                           Go(context).pop();
-                          RedirectHandler(
-                              context: context,
-                              title: 'Plan renewed',
-                              message:
-                                  'You’ve now sucessfully reenewed Subscription.',
-                              tag: Tag.SUCCESS,
-                              callBack: () {});
+                          LoadingHandler(context: context);
+
                           Timer(const Duration(seconds: 2), () {
                             Go(context).pop();
                           });
@@ -240,7 +233,7 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                       });
                 },
               ),
-              const SizedBox(width: AppDimentions.k12),
+              const SizedBox(width: AppDim.k12),
               AppButton(
                 buttonType: ButtonType.LONG_BTN,
                 flex: true,
@@ -250,10 +243,10 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                 btnTextColor: AppColors.kprimaryColor700,
                 btnText: 'Cancel',
                 onTap: () {
-                  DecisionHandler(
+                  BaseHandler(
                       context: context,
                       tag: Tag.SERVICE_ACTION,
-                      appDialogue2Type: AppDialogue2Type.two,
+                      handlerBtnCount: HandlerBtnCount.two,
                       title: 'Cancel Plan',
                       message:
                           'Are you sure you want to cancel your subscription?',
@@ -262,22 +255,15 @@ class _SubscritionsViewState extends State<SubscritionsView> {
                       barrierDismissible: true,
                       callBackTwo: () {
                         Go(context).pop();
-                        DecisionHandler(
+                        BaseHandler(
                           context: context,
-                          tag: Tag.SERVICE_ACTION,
-                          appDialogue2Type: AppDialogue2Type.loading,
+                          tag: Tag.LOADING,
                           title: 'Cancelling Subscription',
                           message: 'Please wait...',
                         );
                         Timer(const Duration(seconds: 2), () {
                           Go(context).pop();
-                          RedirectHandler(
-                              context: context,
-                              title: 'Subscription Cancelled',
-                              message:
-                                  'You’ve now sucessfully cancelled Subscription.',
-                              tag: Tag.SUCCESS,
-                              callBack: () {});
+                          LoadingHandler(context: context);
                           Timer(const Duration(seconds: 2), () {
                             Go(context).pop();
                           });
@@ -287,7 +273,7 @@ class _SubscritionsViewState extends State<SubscritionsView> {
               ),
             ],
           ),
-          const SizedBox(height: AppDimentions.k20 + 9),
+          const SizedBox(height: AppDim.k20 + 9),
         ]),
       );
 }
@@ -300,7 +286,7 @@ class PaymentMethodWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.all(AppDimentions.k12),
+      contentPadding: const EdgeInsets.all(AppDim.k12),
       leading: Container(
         width: 50,
         height: 50,
@@ -391,7 +377,7 @@ class SubCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const SizedBox(height: AppDimentions.k20 + 4),
+          const SizedBox(height: AppDim.k20 + 4),
           Container(
             constraints: const BoxConstraints(maxWidth: 96, minWidth: 63),
             alignment: Alignment.center,
@@ -435,7 +421,7 @@ class SubCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: AppDimentions.k20 + 9),
+          const SizedBox(height: AppDim.k20 + 9),
           AppDivider.build(width: 202.w),
           Expanded(
             child: Row(
@@ -465,14 +451,14 @@ class SubCard extends StatelessWidget {
             ),
           ),
           AppDivider.build(width: 202.w),
-          const SizedBox(height: AppDimentions.k20 + 9),
+          const SizedBox(height: AppDim.k20 + 9),
           GestureDetector(
             onTap: isCurrentSub
                 ? () {
-                    DecisionHandler(
+                    BaseHandler(
                         context: context,
                         tag: Tag.SERVICE_ACTION,
-                        appDialogue2Type: AppDialogue2Type.two,
+                        handlerBtnCount: HandlerBtnCount.two,
                         title: 'Cancel Plan',
                         message:
                             'Are you sure you want to cancel your subscription?',
@@ -481,22 +467,15 @@ class SubCard extends StatelessWidget {
                         barrierDismissible: true,
                         callBackTwo: () {
                           Go(context).pop();
-                          DecisionHandler(
+                          BaseHandler(
                             context: context,
-                            tag: Tag.SERVICE_ACTION,
-                            appDialogue2Type: AppDialogue2Type.loading,
+                            tag: Tag.LOADING,
                             title: 'Cancelling Subscription',
                             message: 'Please wait...',
                           );
                           Timer(const Duration(seconds: 2), () {
                             Go(context).pop();
-                            RedirectHandler(
-                                context: context,
-                                title: 'Subscription Cancelled',
-                                message:
-                                    'You’ve now sucessfully cancelled Subscription.',
-                                tag: Tag.SUCCESS,
-                                callBack: () {});
+                            LoadingHandler(context: context);
                             Timer(const Duration(seconds: 2), () {
                               Go(context).pop();
                             });
@@ -504,10 +483,10 @@ class SubCard extends StatelessWidget {
                         });
                   }
                 : () {
-                    DecisionHandler(
+                    BaseHandler(
                         context: context,
                         tag: Tag.SERVICE_ACTION,
-                        appDialogue2Type: AppDialogue2Type.two,
+                        handlerBtnCount: HandlerBtnCount.two,
                         title: 'Subscribe to $subscribtionTitle',
                         message:
                             'You are subscribing to $subscribtionTitle, do you wish to proceed?',
@@ -515,21 +494,14 @@ class SubCard extends StatelessWidget {
                         callBackTextTwo: 'Proceed',
                         barrierDismissible: true,
                         callBackTwo: () async {
-                          Go(context).pop();
-                          DecisionHandler(context: context);
                           await Future.delayed(const Duration(seconds: 2));
                           Go(context).pop();
-                          RedirectHandler(
-                              context: context,
-                              title: 'Initilization Successfull',
-                              message:
-                                  'Please wait...\nYou will be directed to the proceed with transaction.',
-                              tag: Tag.PERSON_SUCCESS);
+                          LoadingHandler(context: context);
                           await Future.delayed(const Duration(seconds: 2));
                           Go(context).pop();
                           showTransactRefAndRunTransaction(context);
 
-                          /// reference_id: RecenthPosts_83jbusu3ubusb
+                          /// reference_id: RecenthPostss_83jbusu3ubusb
 
                           // DecisionHandler(
                           //   context: context,
@@ -589,7 +561,7 @@ class SubCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: AppDimentions.k20 + 9),
+          const SizedBox(height: AppDim.k20 + 9),
         ],
       ),
     );
@@ -647,8 +619,7 @@ class SubCard extends StatelessWidget {
                         Container(
                             color: AppColors.kbrandWhite,
                             width: double.infinity,
-                            margin: const EdgeInsets.only(
-                                bottom: AppDimentions.k16),
+                            margin: const EdgeInsets.only(bottom: AppDim.k16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -658,7 +629,7 @@ class SubCard extends StatelessWidget {
                                   TextSpan(children: [
                                     const TextSpan(text: 'Reference ID:'),
                                     TextSpan(
-                                      text: ' RecenthPosts_83jbusu3ubusb',
+                                      text: ' RecenthPostss_83jbusu3ubusb',
                                       style: TextStyle(
                                         color: AppColors.kprimaryColor700,
                                         fontSize: 14,
@@ -691,10 +662,10 @@ class SubCard extends StatelessWidget {
                                 )
                               ],
                             )),
-                        const SizedBox(height: AppDimentions.k20 + 4),
+                        const SizedBox(height: AppDim.k20 + 4),
                         AppDivider.build(
                             height: 1.5, color: AppColors.kwarningColor100),
-                        const SizedBox(height: AppDimentions.k12 - 6),
+                        const SizedBox(height: AppDim.k12 - 6),
                         Text.rich(
                           TextSpan(children: [
                             TextSpan(
@@ -716,10 +687,10 @@ class SubCard extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        const SizedBox(height: AppDimentions.k12 - 6),
+                        const SizedBox(height: AppDim.k12 - 6),
                         AppDivider.build(
                             height: 1.5, color: AppColors.kwarningColor100),
-                        const SizedBox(height: AppDimentions.k20 * 2),
+                        const SizedBox(height: AppDim.k20 * 2),
                         AppButton(
                           flex: false,
                           btnText:
@@ -728,22 +699,16 @@ class SubCard extends StatelessWidget {
                           onTap: isBackFromWebView
                               ? () async {
                                   /// use reference id to run check on status
-                                  DecisionHandler(
+                                  BaseHandler(
                                     context: context,
-                                    tag: Tag.SERVICE_ACTION,
-                                    appDialogue2Type: AppDialogue2Type.loading,
+                                    tag: Tag.LOADING,
                                     title: 'Verifying Subscription',
                                     message: 'Please wait...',
                                   );
                                   await Future.delayed(
                                       const Duration(seconds: 2));
                                   Go(context).pop();
-                                  RedirectHandler(
-                                      context: context,
-                                      title: "Subscription Successful",
-                                      message:
-                                          'Please wait...\nYou will be directed to the Subscription screen.',
-                                      tag: Tag.SUCCESS);
+                                  LoadingHandler(context: context);
                                   await Future.delayed(
                                       const Duration(seconds: 2));
                                   Go(context).pop();
@@ -775,11 +740,12 @@ class SubCard extends StatelessWidget {
                       child: ActionBtn(
                           onPressed: isBackFromWebView
                               ? () {
-                                  const AppDialogue2(
-                                    message:
-                                        'Verify transaction before leaving',
-                                    btnText: 'close',
-                                  );
+                                  BaseHandler(
+                                      message:
+                                          'Verify transaction before leaving',
+                                      btnText: 'close',
+                                      context: context,
+                                      tag: Tag.ERROR);
                                 }
                               : () {
                                   Go(context).pop();

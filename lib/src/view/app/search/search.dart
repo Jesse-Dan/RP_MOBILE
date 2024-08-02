@@ -1,14 +1,13 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, deprecated_member_use
 
+import 'package:recenth_posts/src/view/app/search/components/search_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:navigation_system/go/go.dart';
-import 'package:recenth_posts/src/utils/components/action_btn.dart';
 import 'package:recenth_posts/src/utils/components/app_text_field.dart';
 import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/view/app/search/components/search_more_view.dart';
 import 'package:recenth_posts/src/view/app/search/components/trending_view.dart';
-
 import '../../base/base_scaffold.dart';
 
 class SearchView extends StatefulWidget {
@@ -89,7 +88,7 @@ class _SearchViewState extends State<SearchView> {
                             Text(
                               'LK9812360',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: AppColors.kprimaryColor800,
                                 fontSize: 16,
                                 fontFamily: 'DM Sans',
                                 fontWeight: FontWeight.w700,
@@ -107,8 +106,9 @@ class _SearchViewState extends State<SearchView> {
                           ],
                         ),
                       ),
-                      SearchTileMoreOptionsDD(
-                          imgUrl: 'mingcute_more-2-line.svg'),
+                      SearchMoreDropDown(
+                        imgUrl: 'mingcute_more-2-line.svg',
+                      ),
                     ],
                   ),
                 ),
@@ -121,7 +121,7 @@ class _SearchViewState extends State<SearchView> {
               child: Text(
                 'See more',
                 style: TextStyle(
-                  color: Color(0xFFD75B6B),
+                  color: AppColors.kprimaryColor700,
                   fontSize: 16,
                   fontFamily: 'DM Sans',
                   fontWeight: FontWeight.w400,

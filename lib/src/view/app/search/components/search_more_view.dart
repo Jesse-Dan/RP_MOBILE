@@ -3,18 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:navigation_system/go/go.dart';
-
-import '../../../../utils/components/action_btn.dart';
 import '../../../../utils/components/app_text_field.dart';
 import '../../../../utils/style/app_colors.dart';
 import '../../../../utils/style/app_dimentions.dart';
 import '../../../base/base_scaffold.dart';
+import '../../posts/components/post/model/post_model.dart';
+import 'search_dropdown.dart';
 
+/// this is the bla bal bla
 class SearchMoreView extends StatefulWidget {
+  final Post post;
   static const String routeName = '/search.more.view';
 
+  // constructor
   const SearchMoreView({
-    super.key,
+    super.key, required this.post,
   });
 
   @override
@@ -68,11 +71,11 @@ class _SearchMoreViewState extends State<SearchMoreView> {
             helperStyle: myTextFieldHintStyle(context),
             prefixIcon: Padding(
               padding: const EdgeInsets.only(
-                  top: AppDimentions.k16, bottom: AppDimentions.k16, left: 10),
+                  top: AppDim.k16, bottom: AppDim.k16, left: 10),
               child: SvgPicture.asset('assets/icons/search-normal.svg',
                   color: AppColors.kgrayColor400, height: 20, width: 20),
             ),
-            contentPadding: const EdgeInsets.all(AppDimentions.k20 + 3),
+            contentPadding: const EdgeInsets.all(AppDim.k20 + 3),
             floatingLabelBehavior: FloatingLabelBehavior.never,
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.kgrayColor200),
@@ -139,10 +142,10 @@ class _SearchMoreViewState extends State<SearchMoreView> {
                 margin: const EdgeInsets.only(bottom: 31 / 2),
                 width: 382,
                 height: 78,
-                child: const Row(
+                child:  const Row(
                   children: [
                     Expanded(
-                      child: Column(
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -176,7 +179,9 @@ class _SearchMoreViewState extends State<SearchMoreView> {
                         ],
                       ),
                     ),
-                    SearchTileMoreOptionsDD(imgUrl: 'mingcute_more-2-line.svg'),
+                    SearchMoreDropDown(
+                      imgUrl: 'mingcute_more-2-line.svg',
+                    ),
                   ],
                 ),
               ),

@@ -25,7 +25,7 @@ class _OnboardingAppBtnsState extends State<OnboardingAppBtns> {
     return Container(
       // width: 430,
       // height: 112,
-      padding: const EdgeInsets.only(top: AppDimentions.k20 + 6),
+      padding: const EdgeInsets.only(top: AppDim.k20 + 6),
       decoration: BoxDecoration(
         color: AppColors.kwhiteColor,
       ),
@@ -42,7 +42,7 @@ class _OnboardingAppBtnsState extends State<OnboardingAppBtns> {
             btnTextColor: AppColors.kprimaryColor500,
             onTap: widget.onSkipTap,
           ),
-          const SizedBox(width: AppDimentions.k20 + 4),
+          const SizedBox(width: AppDim.k20 + 4),
           AppButton(
             applyInternalPadding: false,
             btnText: 'Continue',

@@ -16,7 +16,7 @@ class BaseBody extends StatelessWidget {
       height: MediaQuery.of(context).size.height - 84 - 90,
       width: double.infinity,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppDimentions.k16),
+        padding: const EdgeInsets.symmetric(horizontal: AppDim.k16),
         child: Padding(
             padding: const EdgeInsets.only(bottom: 70.0), child: _child),
       ),

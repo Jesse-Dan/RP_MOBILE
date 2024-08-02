@@ -40,29 +40,29 @@ class AppColors extends HexColor {
   static final kwarningColor800 = HexColor('#624108');
   static final kwarningColor900 = HexColor('#312004');
 
-  /// PRIMARY DESIGN COLORS
-  static final kprimaryColor50 = HexColor('#FEF8F8');
-  static final kprimaryColor100 = HexColor('#FDF0F2');
-  static final kprimaryColor200 = HexColor('#FADADE');
-  static final kprimaryColor300 = HexColor('#FFC3CB');
-  static final kprimaryColor400 = HexColor('#FFB6BF');
-  static final kprimaryColor500 = HexColor('#F9A7B2');
-  static final kprimaryColor600 = HexColor('#F48C99');
-  static final kprimaryColor700 = HexColor('#D85B6B');
-  static final kprimaryColor800 = HexColor('#C93B4D');
-  static final kprimaryColor900 = HexColor('#960618');
+  // /// PRIMARY DESIGN COLORS
+  static final ksecondaryolor50 = HexColor('#FEF8F8');
+  static final ksecondaryColor100 = HexColor('#FDF0F2');
+  static final ksecondaryColor200 = HexColor('#FADADE');
+  static final ksecondaryColor300 = HexColor('#FFC3CB');
+  static final ksecondaryColor400 = HexColor('#FFB6BF');
+  static final ksecondaryColor500 = HexColor('#F9A7B2');
+  static final ksecondaryColor600 = HexColor('#F48C99');
+  static final ksecondaryColor700 = HexColor('#D85B6B');
+  static final ksecondaryColor800 = HexColor('#C93B4D');
+  static final ksecondaryColor900 = HexColor('#960618');
 
-  /// SECONDARY DESIGN COLORS
-  static final ksecondaryColor50 = HexColor('#F5FFFF');
-  static final ksecondaryColor100 = HexColor('#DCF9FA');
-  static final ksecondaryColor200 = HexColor('#C4F3F5');
-  static final ksecondaryColor300 = HexColor('#93E7EB');
-  static final ksecondaryColor400 = HexColor('#62DCE0');
-  static final ksecondaryColor500 = HexColor('#00C4CC');
-  static final ksecondaryColor600 = HexColor('#00767A');
-  static final ksecondaryColor700 = HexColor('#004E52');
-  static final ksecondaryColor800 = HexColor('#003B3D');
-  static final ksecondaryColor900 = HexColor('#002325');
+  /// primary DESIGN COLORS
+  static final kprimaryColor50 = HexColor('#F5FFFF');
+  static final kprimaryColor100 = HexColor('#DCF9FA');
+  static final kprimaryColor200 = HexColor('#C4F3F5');
+  static final kprimaryColor300 = HexColor('#93E7EB');
+  static final kprimaryColor400 = HexColor('#62DCE0');
+  static final kprimaryColor500 = HexColor('#00C4CC');
+  static final kprimaryColor600 = HexColor('#00767A');
+  static final kprimaryColor700 = HexColor('#004E52');
+  static final kprimaryColor800 = HexColor('#003B3D');
+  static final kprimaryColor900 = HexColor('#002325');
 
   /// GRAY DESIGN COLORS
   static final kgrayColor50 = HexColor('#F7F7F7');

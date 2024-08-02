@@ -3,7 +3,7 @@ import 'package:recenth_posts/src/utils/style/app_colors.dart';
 import 'package:recenth_posts/src/utils/style/app_dimentions.dart';
 
 class BTMSheet {
-   List<Widget> widgets = [];
+  List<Widget> widgets = [];
   final BuildContext context;
   final AnimationController? animationController;
   final bool enableDrag = true;
@@ -35,11 +35,11 @@ class BTMSheet {
       this.constraints,
       required this.onClosing});
 
-   void init(List<Widget> initialWidgets) {
+  void init(List<Widget> initialWidgets) {
     widgets.addAll(initialWidgets);
   }
 
-   void addWidget(Widget widget) {
+  void addWidget(Widget widget) {
     widgets.add(widget);
   }
 
@@ -52,7 +52,7 @@ class BTMSheet {
           shape: shape ??
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
-                  AppDimentions.buildDimention(AppDimentions.k20,
+                  AppDim.buildDimention(AppDim.k20,
                       dimention: 4, operation: '+'),
                 ),
               ),

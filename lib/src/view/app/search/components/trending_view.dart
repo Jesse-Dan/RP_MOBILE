@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/components/action_btn.dart';
 import '../../../../utils/components/app_simple_app_bar.dart';
 import '../../../../utils/style/app_colors.dart';
 import '../../../base/base_scaffold.dart';
+import 'search_dropdown.dart';
 
 class TrendingView extends StatefulWidget {
   static const String routeName = '/trending.view';
@@ -73,7 +73,7 @@ class _TrendingViewState extends State<TrendingView> {
                   ],
                 ),
               ),
-              SearchTileMoreOptionsDD(imgUrl: 'mingcute_more-2-line.svg'),
+              SearchMoreDropDown(imgUrl: 'mingcute_more-2-line.svg' ),
             ],
           ),
         ),

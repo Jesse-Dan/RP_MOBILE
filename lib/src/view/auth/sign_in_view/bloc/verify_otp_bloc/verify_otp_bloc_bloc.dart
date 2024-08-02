@@ -1,0 +1,24 @@
+// ignore_for_file: depend_on_referenced_packages
+
+import 'dart:developer' as developer;
+
+import 'package:bloc/bloc.dart';
+
+import 'verify_otp_bloc_event.dart';
+import 'verify_otp_bloc_state.dart';
+
+class VerifyOtpBlocBloc extends Bloc<VerifyOtpBlocEvent, VerifyOtpBlocState> {
+
+  VerifyOtpBlocBloc(VerifyOtpBlocState initialState) : super(initialState){
+   on<VerifyOtpBlocEvent>((event, emit) {
+      return emit.forEach<VerifyOtpBlocState>(
+        event.applyAsync(currentState: state, bloc: this),
+        onData: (state) => state,
+        onError: (error, stackTrace) {
+          developer.log('$error', name: 'VerifyOtpBlocBloc', error: error, stackTrace: stackTrace);
+          return ErrorVerifyOtpBlocState(error.toString());
+        },
+      );
+    });
+  }
+}

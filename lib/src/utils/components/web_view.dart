@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:navigation_system/go/go.dart';
@@ -11,7 +11,7 @@ class AppWebView extends StatefulWidget {
 
   final String url;
 
-  AppWebView({Key? key, required this.url}) : super(key: key);
+  const AppWebView({Key? key, required this.url}) : super(key: key);
 
   @override
   State<AppWebView> createState() => _AppWebViewState();
